@@ -12,5 +12,5 @@ Module(will be included in cloudexchange):
  - Multiple Cloud Heat Manager
  - VTN Orchestration REST API for multiple cloud 
  
-Reference Site: https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_%28VTN%29:VTN_Manager
+Reference Site: https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_%28VTN%29:Hydrogen_Release_Review
 
