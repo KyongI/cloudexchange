@@ -1,0 +1,22 @@
+기능 : 다중 클라우드 VTN 오케스트레이션 인터페이싱 
+
+멀티클라우드 가상네트워크 연결및 가상머신 배치를 위한 API를 명세한다. 
+
+* 클라우드간 연결 네트워크 조회/생성/삭제 API : 두 클라우드간 가상네트워크를 조회/생성/삭제하는 기능, 각 클라우드의 SDN 제어를 통해 구현
+- VTN
+- vBridge
+- vBridge  Interface
+- logical port 
+- mapping 
+
+* 멀티클라우드 가상네트워크 연결 및 가상머신 배치 기능 API:
+- Network
+- Subnet
+- Port
+- Router
+- Security groups and rules (security-groups)
+- stack
+- template
+
+* 멀티 클라우드 오픈스택 관리 API: 단일 클라우드 오픈스택 API 와 유사. 멀티 클라우드 VTN 오케스트레이션 API 호출이 개별 오픈스택 API 호출로 이어지도록 하는 오픈스택 API 호출 분배기에 의해 이용됨. (인스턴스부분)
+- instance
