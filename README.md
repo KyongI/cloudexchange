@@ -12,9 +12,11 @@ Module(will be included in cloudexchange):
  - Multiple Cloud Heat Manager
  - VTN Orchestration REST API for multiple cloud
  
-Current state
- - User requirements
- - Design(due 9/15)
- 
+Process
+ - Requirements definition(due 8/20)
+ - Architecture and Design(due 9/15)
+ - Implementation(due 11/05)
+ - Testing(due 11/15)
+  
 Reference Site: https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_%28VTN%29:Overview
 
