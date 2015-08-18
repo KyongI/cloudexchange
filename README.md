@@ -10,7 +10,11 @@ Function:
 Module(will be included in cloudexchange): 
  - Multiple SDN Controller Coordinator
  - Multiple Cloud Heat Manager
- - VTN Orchestration REST API for multiple cloud 
+ - VTN Orchestration REST API for multiple cloud
+ 
+Current state
+ - User requirements
+ - Design
  
 Reference Site: https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_%28VTN%29:Overview
 
