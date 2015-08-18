@@ -14,7 +14,7 @@ Module(will be included in cloudexchange):
  
 Current state
  - User requirements
- - Design
+ - Design(due 9/15)
  
 Reference Site: https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_%28VTN%29:Overview
 
