@@ -10,7 +10,11 @@ Function:
 Module(will be included in cloudexchange): 
  - Multiple SDN Controller Coordinator
  - Multiple Cloud Heat Manager
+<<<<<<< HEAD
  - VTN Orchestration REST API for multiple cloud
+=======
+ - VTN Orchestration API for multi cloud
+>>>>>>> 57a910a56417eb55abb8b3a7b2533a4386aac4eb
  
 Process
  - Requirements definition(due 8/20)
