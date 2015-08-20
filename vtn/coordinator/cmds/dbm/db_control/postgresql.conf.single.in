@@ -1,0 +1,67 @@
+#
+# Copyright (c) 2012-2014 NEC Corporation
+# All rights reserved.
+#
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Public License v1.0 which accompanies this
+# distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+#
+
+##
+## PostgreSQL configuration for VTN Coordinator.
+##
+
+#
+# Connection Settings
+#
+
+# Listen 12730/tcp on loopback interface.
+listen_addresses  	= 'localhost'
+port			= 12730
+
+# Number of connections
+max_connections			= 100
+superuser_reserved_connections	= 4
+
+# Directory to store UNIX domain socket file.
+%unix_socket_directory%	= '%INST_LOCALSTATEDIR%/run/dbm'
+
+#
+# Resource Settings
+#
+
+# Size of shared buffer.
+shared_buffers	= 32MB
+
+#
+# Logging Settings
+#
+
+# Use stderr logging with logging collector.
+log_destination		= 'stderr'
+logging_collector	= on
+
+# Directory to store log file.
+log_directory			= '%INST_UNCWORKDIR%/db/pg_log'
+
+# Rotate log files per a day.
+log_filename			= 'postgresql-%d.log'
+log_truncate_on_rotation	= on
+log_rotation_age		= 1d
+log_rotation_size		= 0
+
+# Prefix of log record.
+log_line_prefix			= '[%t, %d, %u, %p] '
+
+#
+# Locale and Formatting Settings
+#
+
+# Define style of date.
+datestyle	= 'iso, mdy'
+
+# Use C locale.
+lc_messages	= 'C'
+lc_monetary	= 'C'
+lc_numeric	= 'C'
+lc_time		= 'C'

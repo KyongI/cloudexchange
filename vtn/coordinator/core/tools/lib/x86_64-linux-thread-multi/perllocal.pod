@@ -1,0 +1,44 @@
+=head2 Thu Aug 20 14:58:40 2015: C<Module> L<PFC::Conf|PFC::Conf>
+
+=over 4
+
+=item *
+
+C<installed into: /usr/local/vtn/vtn/coordinator/core/tools/lib>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: bin/cfdefc>
+
+=back
+
+=head2 Thu Aug 20 14:58:41 2015: C<Module> L<PFC::IPC|PFC::IPC>
+
+=over 4
+
+=item *
+
+C<installed into: /usr/local/vtn/vtn/coordinator/core/tools/lib>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.01>
+
+=item *
+
+C<EXE_FILES: bin/ipctc bin/ipcsdump>
+
+=back
+

@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+#
+# Copyright (c) 2012-2013 NEC Corporation
+# All rights reserved.
+# 
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Public License v1.0 which accompanies this
+# distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+#
+
+##
+## Apache Ant wrapper.
+##
+
+$ENV{ANT_HOME} = "/usr/share/ant";
+$ENV{JAVA_HOME} = "/usr/lib/jvm/java-openjdk";
+my $java_mode = "-d64";
+
+my $maxheap = $ENV{ANT_MAXHEAP};
+my $opts = $ENV{ANT_OPTS};
+$opts = ($opts) ? "$opts $java_mode" : $java_mode;
+if ($maxheap) {
+	my $xopts = "-Xmx$maxheap";
+	$opts .= " $xopts";
+}
+$ENV{ANT_OPTS} = $opts;
+
+umask(022);
+
+exec("/usr/bin/ant", @ARGV);

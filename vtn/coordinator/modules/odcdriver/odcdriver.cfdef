@@ -1,0 +1,23 @@
+%
+% Copyright (c) 2013 NEC Corporation
+% All rights reserved.
+%
+% This program and the accompanying materials are made available under the
+% terms of the Eclipse Public License v1.0 which accompanies this
+% distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+
+%%
+%% Configuration file format for odcdriver.conf
+%%
+
+%IPC related parameters
+
+defblock param {
+  odcdrv_ping_interval = UINT32;
+  odc_port = UINT32;
+  connect_time_out = UINT32;
+  request_time_out = UINT32;
+  user_name = STRING: max=31;
+  password = STRING: max=256;
+}
+
