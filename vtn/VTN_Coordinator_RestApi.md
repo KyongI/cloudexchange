@@ -8,8 +8,7 @@ VTN Coodinator의 REST API를 분석 한다.
 요청(Request) 메세지
 --------------------
 
-|    Header   | Required for | Required for | Required for | Required for |
-| field name  |    POST      |    PUT       |    GET       |    DELETE    |
+| 필드 이름   |    POST      |    PUT       |    GET       |    DELETE    |
 |-------------|--------------|--------------|--------------|--------------|
 | username    |     yes      |    yes       |     yes      |    yes       |
 |-------------|--------------|--------------|--------------|--------------| 
