@@ -684,6 +684,93 @@ VTN 코디네이터 REST API
       - packets :Number of frames. 
       - octets :Number of octets in the frames.  
 
+### vBridge Functions
+##### Create vBridge :vBridge를 생성한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vbridges
+- Request 
+```javascript 
+{
+       "vbridge": {
+           "vbr_name": "{vbr_name}",
+           "controller_id":
+         "{controller_id}",
+           "description":
+         "{description}",
+           "domain_id": "{domain_id}"
+            }
+ }
+```
+- Request Elements
+      - vbr_name :vBridge name. (31 char)
+      - controller_id :Identifier of the Controller. (31 char)
+      - domain_id :Domain identifier. (31 char)
+- Response :Response codes
+
+##### Delete vBridge :vBridge를 삭재한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}
+- Response :Response codes
+
+##### Update  vBridge :vBridge를 업데이트한다.
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}
+- Request 
+```javascript 
+{
+   "vbridge": {
+       "description": "{description}"
+   }
+ }
+```
+- Response :Response codes
+
+##### List vBridge :vBridge의 정보의 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges, /vtns/{vtn_name}/vbridges/detail, /vtns/{vtn_name}/vbridges/count
+- QueryString : ?index={vbr_name}&max_repetition={max_repetition}
+- Response (/vtns/{vtn_name}/vbridges/detail의 경우)
+```javascript 
+{
+"vbridges": [
+    {
+     "vbr_name": "{vbr_name}",
+     "controller_id": "{controller_id}",
+     "domain_id": "{domain_id}",
+     "description": "{description}",
+     "status": "{status}"
+     }
+ ]
+}
+```
+- Response Elements  (Create vBridge 참조)
+
+##### Show vBridge :vBridge의 정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}
+- Response 
+```javascript 
+{
+  "vbridge": {
+     "vbr_name": "{vbr_name}",
+     "controller_id": "{controller_id}",
+     "domain_id": "{domain_id}",
+     "description": "{description}",
+     "status": "{status}"
+   }
+ }
+```
+- Response Elements  (Create vBridge 참조)
+
+### Host Address Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
+### L2 Domain Function
+***현재 버전에서 지원하지 않음 (생략)***
+
+### MAC Entry Function
+***현재 버전에서 지원하지 않음 (생략)***
+
 
 
  
