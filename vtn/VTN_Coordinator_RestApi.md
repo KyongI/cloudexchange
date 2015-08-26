@@ -128,6 +128,102 @@ VTN 코디네이터 REST API
 }
 ```
 
+#### Flow List Entry Functions
+##### Create Flow List Entries: Flow리스트 항목을 생성한다. 
+- Method : POST
+- Request URI : /flowlists/{fl_name}/flowlistentries
+- Request
+```javascript
+{
+ "flowlistentry": {
+ "seqnum": "{seqnum}",
+ "macdstaddr": "{macdstaddr}",
+ "macsrcaddr": "{macsrcaddr}",
+ "macethertype": "{macethertype}",
+ "macvlanpriority": "{macvlanpriority}",
+ "ipdstaddr": "{ipdstaddr}",
+ "ipdstaddrprefix": "{ipdstaddrprefix}",
+ "ipsrcaddr": "{ipsrcaddr}",
+ "ipsrcaddrprefix": "{ipsrcaddrprefix}",
+ "ipv6dstaddr": "{ipv6dstaddr}",
+ "ipv6dstaddrprefix": "{ipv6dstaddrprefix}",
+ "ipv6srcaddr": "{ipv6srcaddr}",
+ "ipv6srcaddrprefix": "{ipv6srcaddrprefix}",
+ "ipproto": "{ipproto}",
+ "ipdscp": "{ipdscp}",
+ "l4dstport": "{l4dstport}",
+ "l4dstendport": "{l4dstendport}",
+ "l4srcport": "{l4srcport}",
+ "l4srcendport": "{l4srcendport}",
+ "icmptypenum": "{icmptypenum}",
+ "icmpcodenum": "{icmpcodenum}",
+ "ipv6icmptypenum": "{ipv6icmptypenum}",
+ "ipv6icmpcodenum": "{ipv6icmpcodenum}"
+ }
+}
+```
+- Request Elements (요청 항목들은 SDN flow를 구성하는 22 tuple 항목이다.)
+     - seqnum  :일련 번호 
+     - macdstaddr :도착지 MAC 주소
+     - macsrcaddr :송신지 MAC 주소
+     - macethertype :이더넷 프레임 타입
+     - macvlanpriority :VLAN priority 태그 번호
+     - ipdstaddr :목적지 IP 주소
+     - ipdstaddrprefix :목적지 IP 주소의 prefix 길이
+     - ipsrcaddr :송신지 IP 주소 
+     - ipsrcaddrprefix :송신지 IP 주소의 prefix 길이
+     - ipv6dstaddr :목적지 IPv6 주소
+     - ipv6dstaddrprefix :목적지 IPv6 주소의 prefix 길이
+     - ipv6srcaddr :송신지 IPv6 주소
+     - ipv6srcaddrprefix :송신지 IPv6 주소의 prefix 길이
+     - ipproto :IP 프로토콜 번호
+     - ipdscp :DSCP 값
+     - l4dstport :대상 포트 번호
+     - l4dstendport :대상end 포트 번호
+     - l4srcport :소스 포트 번호
+     - l4srcendport :소스end 포트 번호
+     - icmptypenum :ICMP 타입 값
+     - icmpcodenum :ICMP 코드 값
+     - ipv6icmptypenum :IPv6 ICMP 타입 값
+     - ipv6icmpcodenum :IPv6 ICMP 코드 값
 
+##### Delete Flow List Entry: Flow리스트 항목을 삭제한다. 
+- Method : DELETE
+- Request URI : /flowlists/{fl_name}/flowlistentries/{seqnum}
+- Request Elements
+     - fl_name :플로우리스트 이름
+     - seqnum :일련 번호
+- Response :없음
 
+##### Update Flow List Entry: Flow리스트 항목을 업데이트 한다.
+- Method : PUT
+- Request URI : /flowlists/{fl_name}/flowlistentries/{seqnum}.json
+- Request
+```javascript
+{
+ "flowlistentry": {
+ "macdstaddr": "{macdstaddr}",
+ ...생략...
+ "ipv6icmpcodenum": "{ipv6icmpcodenum}"
+ }
+}
+```
+- Request Elements (Create Flow List Entries 참조)
+- Response :없음
+
+##### List Flow List Entries: Flow리스트 항목 정보의 목록을 보여준다. 
+- Method : GET
+- Request URI : /flowlists/{fl_name}/flowlistentries, /flowlists/{fl_name}/flowlistentries/detail, /flowlists/{fl_name}/flowlistentries/count
+- QueryString : ?index={seqnum}&max_repetition={max_repetition}
+- Request Elements
+     - fl_name :플로우리스트 이름
+     - seqnum :일련 번호
+     - max_repetetion :리소스의 개수(확인이 필요)
+- Response :(/flowlists/{fl_name}/flowlistentries/detail의 경우 Create Flow List Entries의 Request 참조)
+
+##### Show Flow List Entry: Flow리스트 항목을 보여준다. 
+- Method : GET
+- Request URI : /flowlists/{fl_name}/flowlistentries/{seqnum}.json
+- Request Elements (List Flow List Entrie 참조)
+- Response :(Create Flow List Entries의 Request 참조)
 
