@@ -30,7 +30,7 @@ VTN 코디네이터 REST API
 #### Show API Version 
 - Method : GET
 - Request URI : /api_version
-- Element : VTN API의 버젼. Vn.n (n은 양의 정수)
+- Element :version :VTN API의 버젼. Vn.n (n은 양의 정수)
 - Response 
 ```javascript
 {
@@ -42,7 +42,8 @@ VTN 코디네이터 REST API
 #### Show Coordinator Version
 - Method : GET
 - Request URI : /coordinator_version
-- Element : VTN 코디네이터의 버젼. Va.b.c.d (a - major, b - minor, c - revision, d - patch level.)
+- Element :version :VTN 코디네이터의 버젼. Va.b.c.d (a - major, b - minor, c - revision, d - patch level.)
+          :patch_no :코디네이터에 적용된 패치번호 
 - Response 
 ```javascript
 {
@@ -53,6 +54,22 @@ VTN 코디네이터 REST API
             "patch_no": "{patch_no}"
         }
     ]
+}
+```
+#### Flow List Functions
+##### Request
+- Method : POST
+- Request URI : /flowlists
+- Element :fl_name :플로우리스트 이름
+          :ip_version :ip 버전(default: IP)
+- Response 
+```javascript
+{
+    "flowlist": {
+        "fl_name": "{fl_name}",
+        "ip_version":
+        "{ip_version}"
+    }
 }
 ```
 
