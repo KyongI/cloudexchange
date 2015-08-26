@@ -28,7 +28,7 @@ Response 메세지는 XML과 JSON 을 지원.
 VTN 코디네이터 REST API 
 -----------------------
 #### Show API Version 
-* 현재 버전에서 지원하지 않음 *
+***현재 버전에서 지원하지 않음***
 - Method : GET
 - Request URI : /api_version
 - Response Elements 
@@ -229,7 +229,7 @@ VTN 코디네이터 REST API
 - Response :(Create Flow List Entries의 Request 참조)
 
 #### VTN Station Functions
-* 현재 버전에서 지원하지 않음 (생략) *
+***현재 버전에서 지원하지 않음 (생략)***
 
 #### VTN Functions
 ##### Create VTN: VTN을 생성한다. 
@@ -326,6 +326,188 @@ VTN 코디네이터 REST API
 ```
 - Request Elements (List VTNs 참조)
 
+#### VTN Mapping Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
+#### Controller Data Flow function
+***현재 버전에서 지원하지 않음 (생략)***
+
+#### Data Flow function
+##### Show Data Flows : 데이터플로우를 보여줌.
+- Method : GET
+- Request URI : /dataflows
+- QueryString : ?controller_id={controller_id}&switch_id={switch_id}&port_name={port_name}&vlan_id={vlan_id}&no_vlan_id={no_vlan_id}&srcmacaddr={srcmacaddr}
+- Request Elements
+      - controller_id  :Controller ID. (31 char)
+      - switch_id  :Switch ID. 
+      - port_name  :Port name. 
+      - vlan_id  :VLAN ID. 
+      - no_vlan_id  :No VLAN ID. 
+      - srcmacaddr  :Source MAC address.  
+- Response
+```javascript
+{
+ "dataflows": [
+    {
+       "reason": "{reason}",
+       "controller_dataflows": [
+              {
+               "controller_id": "{controller_id}",
+               "controller_type": "{controller_type}",
+               "flow_id": "{flow_id}",
+               "status": "{status}",
+               "type": "{type}",
+               "policy_index": "{policy_index}",
+               "vtn_id": "{vtn_id}",
+               "ingress_switch_id": "{ingress_switch_id}",
+               "ingress_port_name": "{ingress_port_name}",
+               "ingress_station_id": "{ingress_station_id}",
+               "ingress_domain_id": "{ingress_domain_id}",
+               "egress_switch_id": "{egress_switch_id}",
+               "egress_port_name": "{egress_port_name}",
+               "egress_station_id": "{egress_station_id}",
+               "egress_domain_id": "{egress_domain_id}",
+          "match": {
+             "inport": [
+                    "{inport}"
+              ],
+             "macdstaddr": [
+                    "{macdstaddr}"
+              ],
+             "macdstaddr_mask": [
+                    "{macdstaddr_mask}"
+              ],
+             "macsrcaddr": [
+                    "{macsrcaddr}"
+              ],
+             "macsrcaddr_mask": [
+                    "{macsrcaddr_mask}"
+              ],
+             "macethertype": [
+                    "{macethertype}"
+              ],
+              "vlan_id": [
+                     "{vlan_id}"
+              ],
+              "vlan_priority": [
+                     "{vlan_priority}"
+              ],
+             "iptos": [
+                     "{iptos}"
+              ],
+             "ipproto": [
+                     "{ipproto}"
+              ],
+             "ipdstaddr": [
+                     "{ipdstaddr}"
+              ],
+             "ipdstaddr_mask": [
+                     "{ipdstaddr_mask}"
+              ],
+             "ipsrcaddr": [
+                     "{ipsrcaddr}"
+              ],
+             "ipsrcaddr_mask": [
+                     "{ipsrcaddr_mask}"
+              ],
+             "l4dstport_icmptype": [
+                     "{l4dstport_icmptype}"
+             ],
+             "l4dstport_icmptype_mask": [
+                     "{l4dstport_icmptype_mask}"
+             ],
+             "l4srcport_icmptype": [
+                     "{l4srcport_icmptype}"
+             ],
+             "l4srcport_icmptype_mask": [
+                     "{l4srcport_icmptype_mask}"
+             ],
+             "ipv6dstaddr": [
+                     "{ipv6dstaddr}"
+             ],
+            "ipv6dstaddr_mask": [
+                     "{ipv6dstaddr_mask}"
+             ],
+            "ipv6srcaddr": [
+                     "{ipv6srcaddr}"
+             ],
+            "ipv6srcaddr_mask": [
+                     "{ipv6srcaddr_mask}"
+             ]
+          },
+       "action": {
+           "outputport": [
+                   "{outputport}"
+            ],
+           "enqueueport": [
+                   "{enqueueport}"
+            ],
+           "queue_id": [
+                   "{queue_id}"
+            ],
+           "setmacdstaddr": [
+                    "{setmacdstaddr}"
+            ], 
+           "setmacsrcaddr": [
+                    "{setmacsrcaddr}"
+            ],
+           "setvlan_id": [
+                    "{setvlan_id}"
+            ],
+           "setvlan_priority": [
+                    "{setvlan_priority}"
+            ],
+           "setipdstaddr": [
+                    "{setipdstaddr}"
+            ],
+           "setipsrcaddr": [
+                    "{setipsrcaddr}"
+            ],
+           "setiptos": [
+                    "{setiptos}"
+            ],
+           "setl4dstport_icmptype": [
+                    "{setl4dstport_icmptype}"
+            ],
+           "setl4srcport_icmptype": [
+                    "{setl4srcport_icmptype}"
+            ],
+            "setipv6dstaddr": [
+                    "{setipv6dstaddr}"
+            ],
+            "setipv6srcaddr": [
+                    "{setipv6srcaddr}"
+            ],
+            "stripvlan": "{stripvlan}"
+         },
+      "pathinfos": [
+      {
+        "switch_id": "{switch_id}",
+        "in_port_name": "{in_port_name}",
+        "out_port_name": "{out_port_name}"
+       }
+    ]
+   }
+  ]
+ }
+]
+}
+```
+- Response Elements
+      - reason :Data flows traversal status. 
+           - Valid value: 
+                - success 
+                - exceeds_flow_limit 
+                - exceeds_hop_limit 
+                - dst_not_reached 
+                - controller_disconnected 
+                - operation_not_supported 
+                - flow_not_found 
+                - system_error 
+           - controller_dataflows Controller Data Flows information
+
+#### VTN Data Flows Functions
+***현재 버전에서 지원하지 않음 (생략)***
 
 
 
