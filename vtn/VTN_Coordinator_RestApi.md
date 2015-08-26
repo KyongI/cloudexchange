@@ -1,13 +1,13 @@
 VTN Coodinator API
 ===================
-___
+
 개요
 ----
-VTN Coodinator의 REST API를 분석 한다.
+### VTN Coodinator의 REST API를 분석 한다.
 
 요청(Request) 메세지
 --------------------
-
+######
 | 필드 이름   |    POST      |    PUT       |    GET       |    DELETE    |
 |-------------|--------------|--------------|--------------|--------------|
 | username    |     yes      |    yes       |     yes      |    yes       |
@@ -16,5 +16,18 @@ VTN Coodinator의 REST API를 분석 한다.
 | content-type|     yes      |    yes       |     no       |    no        |
 | content-len |     yes      |    yes       |     no       |    no        |
 | host        |     yes      |    yes       |     yes      |    yes       |
+
+1. username/password: VTN 코디네이터의 리소스에 접근하는데 필요한 사용자 이름 및 암호.
+2. accept: 응답 메세지 포맷의 accept 
+3. content type/len: POST/PUT 메세지에서 요청 메세지의 type 및 length 
+4. host: VTN 코디네이터 호스트 이름 또는 IP 주소
+
+응답(Response) 메세지
+--------------------
+###### Response 메세지는 XML과 JSON 을 지원.
+
+
+
+
 
 
