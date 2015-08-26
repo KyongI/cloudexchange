@@ -23,7 +23,7 @@ VTN Coodinator의 REST API를 분석 한다.
 
 응답(Response) 메세지
 ---------------------
-####### Response 메세지는 XML과 JSON 을 지원.
+Response 메세지는 XML과 JSON 을 지원.
 
 VTN 코디네이터 REST API 
 -----------------------
@@ -32,27 +32,29 @@ VTN 코디네이터 REST API
 - Request URI : /api_version
 - Element : VTN API의 버젼. Vn.n (n은 양의 정수)
 - Response 
-    {
-        "api_version": {
-            "version": "{version}"
-        }
+```javascript
+{
+    "api_version": {
+        "version": "{version}"
     }
-
+}
+```
 #### Show Coordinator Version
 - Method : GET
 - Request URI : /coordinator_version
 - Element : VTN 코디네이터의 버젼. Va.b.c.d (a - major, b - minor, c - revision, d - patch level.)
 - Response 
-    {
-        "coordinator_version": {
-        "version": "{version}",
-        "patches": [
-          {
+```javascript
+{
+    "coordinator_version": {
+    "version": "{version}",
+    "patches": [
+        {
             "patch_no": "{patch_no}"
-          }
-        ]
-    }
-
+        }
+    ]
+}
+```
 
 
 
