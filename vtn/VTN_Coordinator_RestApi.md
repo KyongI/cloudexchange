@@ -27,7 +27,7 @@ Response 메세지는 XML과 JSON 을 지원.
 
 VTN 코디네이터 REST API 
 -----------------------
-#### Show API Version 
+### Show API Version 
 ***현재 버전에서 지원하지 않음***
 - Method : GET
 - Request URI : /api_version
@@ -41,7 +41,7 @@ VTN 코디네이터 REST API
     }
 }
 ```
-#### Show Coordinator Version
+### Show Coordinator Version
 - Method : GET
 - Request URI : /coordinator_version
 - Response Elements
@@ -59,7 +59,7 @@ VTN 코디네이터 REST API
     ]
 }
 ```
-#### Flow List Functions
+### Flow List Functions
 ##### Create Flow List : Flow 리스트를 생성한다. 
 - Method : POST
 - Request URI : /flowlists
@@ -129,7 +129,7 @@ VTN 코디네이터 REST API
 }
 ```
 
-#### Flow List Entry Functions
+### Flow List Entry Functions
 ##### Create Flow List Entries: Flow리스트 항목을 생성한다. 
 - Method : POST
 - Request URI : /flowlists/{fl_name}/flowlistentries
@@ -228,10 +228,10 @@ VTN 코디네이터 REST API
 - Request Elements (List Flow List Entrie 참조)
 - Response :(Create Flow List Entries의 Request 참조)
 
-#### VTN Station Functions
+### VTN Station Functions
 ***현재 버전에서 지원하지 않음 (생략)***
 
-#### VTN Functions
+### VTN Functions
 ##### Create VTN: VTN을 생성한다. 
 - Method : POST
 - Request URI : /vtns
@@ -326,13 +326,13 @@ VTN 코디네이터 REST API
 ```
 - Request Elements (List VTNs 참조)
 
-#### VTN Mapping Functions
+### VTN Mapping Functions
 ***현재 버전에서 지원하지 않음 (생략)***
 
-#### Controller Data Flow function
+### Controller Data Flow function
 ***현재 버전에서 지원하지 않음 (생략)***
 
-#### Data Flow function
+### Data Flow function
 ##### Show Data Flows : 데이터플로우를 보여줌.
 - Method : GET
 - Request URI : /dataflows
@@ -495,23 +495,197 @@ VTN 코디네이터 REST API
 ```
 - Response Elements
       - reason :Data flows traversal status. 
-           - Valid value: 
-                - success 
-                - exceeds_flow_limit 
-                - exceeds_hop_limit 
-                - dst_not_reached 
-                - controller_disconnected 
-                - operation_not_supported 
-                - flow_not_found 
-                - system_error 
+           - Valid value: success / exceeds_flow_limit / exceeds_hop_limit / dst_not_reached / controller_disconnected / operation_not_supported / flow_not_found / system_error 
            - controller_dataflows Controller Data Flows information
 
-#### VTN Data Flows Functions
+### VTN Data Flows Functions
 ***현재 버전에서 지원하지 않음 (생략)***
 
+### VTN Flow Filter Functions
+##### Create VTN Flow Filter :VTN 플로우 필터를 생성한다. 
+- Method : POST
+- Request URI : /vtns/{vtn_name}/flowfilters
+- Request
+```javascript
+{
+ "flowfilter": {
+    "ff_type": "{ff_type}"
+  }
+}
+```
+- Request Elements
+      - ff_type :입/출력 필터
+- Response : 없음
+
+##### Delete VTN Flow Filter :VTN 플로우 필터를 삭재한다. 
+- Method : POST
+- Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}
+- Response : 없음
+
+##### Show VTN Flow Filter :VTN 플로우 필터를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}
+- Response
+```javascript
+{
+ "flowfilter": {
+    "ff_type": "{ff_type}"
+  }
+}
+```
+
+### VTN Flow Filter Entry functions
+##### Create VTN Flow Filter Entry :VTN 플로우 필터 항목을 생성한다. 
+- Method : POST
+- Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries
+- Request
+```javascript
+{
+"flowfilterentry": {
+     "seqnum": "{seqnum}",
+     "fl_name": "{fl_name}",
+     "action_type": "{action_type}",
+     "nmg_name": "{nmg_name}",
+     "priority": "{priority}",
+     "dscp": "{dscp}"
+     }
+}
+```
+- Request Elements
+      - action_type :Action type.
+      - nmg_name :Network monitor group name. (31 char)
+      - priority :The packet transfer priority order
+      - dscp :The DSCP value. 
+- Response : 없음
+
+##### Delete VTN Flow Filter Entry :VTN 플로우 필터 항목을 삭재한다. 
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Response : 없음
+
+##### Update VTN Flow Filter Entry :VTN 플로우 필터 항목을 업데이트한다. 
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Request
+```javascript
+{
+ "flowfilterentry": {
+    "fl_name": "{fl_name}",
+    "action_type": "{action_type}",
+    "nmg_name": "{nmg_name}",
+    "priority": "{priority}",
+    "dscp": "{dscp}"
+    }
+}
+```
+- Request Elements (Create VTN Flow Filter Entry 참고)
+- Response : 없음
+
+##### List VTN Flow Filter Entries :VTN 플로우 필터 항목 정보 목록을 보여준다. 
+- Method : GET
+- Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries, /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/detail, /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/count
+- QueryString :?index={seqnum}&max_repetition={max_repetition}
+- Response (/vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/detail의 경우)
+```javascript 
+{
+  "flowfilterentries": [
+   {
+    "seqnum": "{seqnum}",
+    "fl_name": "{fl_name}",
+    "action_type": "{action_type}",
+    "nmg_name": "{nmg_name}",
+    "priority": "{priority}",
+    "dscp": "{dscp}"
+    }
+   ]
+}
+```
+- Response Elements (Create VTN Flow Filter Entry 참고)
+
+##### Show VTN Flow Filter Entry :VTN 플로우 필터 항목 정보를 보여준다. 
+- Method : GET
+- Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}, /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail
+- QueryString :?controller_id={controller_id}&domain_id={domain_id}
+- Request Elements
+      - controller_id :Controller identifier. (31 char)
+      - domain_id :Domain identifier. (31 char)
+- Response (/vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail의 경우)
+```javascript 
+{
+  "flowfilterentry": {
+  "seqnum": "{seqnum}",
+  "fl_name": "{fl_name}",
+  "action_type": "{action_type}",
+  "nmg_name ": "{nmg_name}",
+  "priority": "{priority}",
+  "dscp": "{dscp}",
+  "nmg_status": "{nmg_status}",
+  "statistics": {
+       "software": {
+          "packets": "{packets}",
+          "octets": "{octets}"
+         },
+       "existingflow": {
+          "packets": "{packets}",
+          "octets": "{octets}"
+         },
+       "expiredflow": {
+          "packets": "{packets}",
+          "octets": "{octets}"
+         },
+        "total": {
+          "packets": "{packets}",
+          "octets": "{octets}"
+        }
+      },
+      "flowlist": {
+        "flowlistentries": [
+           {
+         "seqnum": "{seqnum}",
+         "statistics": {
+               "software": {
+                      "packets":
+                "{packets}",
+                      "octets":
+                "{octets}"
+                 },
+               "existingflow": {
+                       "packets":
+                "{packets}",
+                       "octets":
+                "{octets}"
+                },
+               "expiredflow": {
+                       "packets":
+                "{packets}",
+                       "octets":
+                "{octets}"
+                },
+               "total": {
+                       "packets":
+               "{packets}",
+                       "octets":
+                "{octets}"
+                }
+            }
+         }
+       ]
+    }
+  }
+}
+```
+- Response Elements
+      - nmg_status :Status of monitored host.
+      - statistics :Statistical information.
+      - software :VTN을 통해 지나가는 플로우중 플로우 필터와 일치하는 패킷의 개수 또는 바이트 수
+      - existingflow :OFS에 설정된 현재 플로우 엔트리에 의해 hard-transferred된 플로우중 플로우 필터 항목과 일치하는 패킷의 개수 또는 바이트수 
+      - expiredflow :OFS에 설정된 이전의 플로우 엔트리에 의해 hard-transferred된 플로우중 플로우 필터 항목과 일치하는 패킷의 개수 또는 바이트수 
+      - total :플로우 필터 엔트리와 일치하는 플로우의 전체 패킷의 개수 또는 바이트수. 이것은 Software, ExistingFlow, ExpiredFlow의 합과 같다. 
+      - packets :Number of frames. 
+      - octets :Number of octets in the frames.  
 
 
 
-
+ 
 
 
