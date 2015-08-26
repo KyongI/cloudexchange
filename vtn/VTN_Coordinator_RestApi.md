@@ -28,6 +28,7 @@ Response 메세지는 XML과 JSON 을 지원.
 VTN 코디네이터 REST API 
 -----------------------
 #### Show API Version 
+* 현재 버전에서 지원하지 않음 *
 - Method : GET
 - Request URI : /api_version
 - Response Elements 
@@ -226,4 +227,109 @@ VTN 코디네이터 REST API
 - Request URI : /flowlists/{fl_name}/flowlistentries/{seqnum}.json
 - Request Elements (List Flow List Entrie 참조)
 - Response :(Create Flow List Entries의 Request 참조)
+
+#### VTN Station Functions
+* 현재 버전에서 지원하지 않음 (생략) *
+
+#### VTN Functions
+##### Create VTN: VTN을 생성한다. 
+- Method : POST
+- Request URI : /vtns
+- Request
+```javascript
+{
+  "vtn": {
+  "vtn_name": "{vtn_name}",
+  "description":
+  "{description}"
+  }
+}
+```
+- Request Elements
+      - vtn_name :VTN의 이름(31 char)
+      - description :VTN 설명(127 char)
+- Response :Response codes
+ 
+##### Delete VTN: VTN을 삭재한다. 
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}
+- Response :Response codes
+
+##### Update VTN: VTN을 업데이트한다. 
+- Method : PUT
+- Request URI : /vtns/{vtn_name}
+- Request
+```javascript
+{
+  "vtn": {
+  "description":
+  "{description}"
+  }
+}
+```
+- Response :Response codes
+ 
+##### List VTNs: 지정한 VTN 정보 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns, /vtns/detail, /vtns/count
+- QueryString : ?index={vtn_name}&max_repetition={max_repetition}
+- Response (/vtns/detail의 경우)
+```javascript
+{
+  "vtns": [
+    {
+              "vtn_name":
+   "{vtn_name}",
+              "description":
+   "{description}",
+              "operstatus":
+   "{operstatus}",
+              "createdtime":
+   "{createdtime}",
+              "lastcommittedtime":
+   "{lastcommittedtime}",
+              "alarmstatus":
+   "{alarmstatus}"
+      }
+  ]
+}
+```
+- Request Elements
+      - vtn_name :VTN의 이름(31 char)
+      - description :VTN 설명(127 char)
+      - operstatus :VTN 작동 상태
+      - createdtime :생성 후 경과 시간(초)
+      - lastcommittedtime :마지막 commit후 경과 시간(초)
+      - alarmstatus :알람 상태값
+      - count :VTN 개수
+
+##### Show VTNs :지정된 VTN 정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}
+- Response
+```javascript
+{
+   "vtn": {
+       "vtn_name": "{vtn_name}",
+       "description":
+  "{description}",
+       "operstatus":
+  "{operstatus}",
+       "createdtime":
+  "{createdtime}",
+       "lastcommittedtime":
+  "{lastcommittedtime}",
+       "alarmstatus":
+  "{alarmstatus}"
+     }
+}
+```
+- Request Elements (List VTNs 참조)
+
+
+
+
+
+
+
 
