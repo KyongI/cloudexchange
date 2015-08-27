@@ -1849,6 +1849,62 @@ VTN 코디네이터 REST API
 }
 ```
 
+### Switch Functions
+##### List Physical Switches :Physical Switches 정보 목록을 보여준다. 
+- Method : GET
+- Request URI :/controllers/{controller_id}/switches, /controllers/{controller_id}/switches/detail, /controllers/{controller_id}/switches/count
+- QueryString : ?index={switch_id}&max_repetition={max_repetition}
+- Request Elements
+      - switch_id  Identifier of the Switch. (255 char)
+- Response (If detail is specified in URI )
+```javascript 
+{
+ "switches": [
+   {
+   "switch_id": "{switch_id}",
+   "description": "{description}",
+   "model": "{model}",
+   "adminstatus": "{adminstatus}",
+   "ipaddr": "{ipaddr}",
+   "ipv6addr": "{ipv6addr}",
+   "domain_id": "{domain_id}",
+   "operstatus": "{operstatus}",
+   "manufacturer": "{manufacturer}",
+   "hardware": "{hardware}",
+   "software": "{software}",
+  "alarmsstatus": "{alarmsstatus}"
+  }
+ ]
+}
+```
+
+##### Show Physical Switches :Physical Switches 정보를 보여준다. 
+- Method : GET
+- Request URI :/controllers/{controller_id}/switches/{switch_id}, /controllers/{controller_id}/switches/{switch_id}/detail
+- Response (If detail is specified in URI )
+```javascript 
+{ 
+  "switch": {
+   "switch_id": "{switch_id}",
+   "description": "{description}",
+   "model": "{model}",
+   "adminstatus": "{adminstatus}",
+   "ipaddr": "{ipaddr}",
+   "ipv6addr": "{ipv6addr}",
+   "domain_id": "{domain_id}",
+   "operstatus": "{operstatus}",
+   "manufacturer": "{manufacturer}",
+   "hardware": "{hardware}",
+   "software": "{software}",
+   "alarmsstatus": "{alarmsstatus}"
+   "statistics": {
+       "flowcount" : "{flowcount}"
+   }
+  }
+}
+```
+
+
 
 
 
