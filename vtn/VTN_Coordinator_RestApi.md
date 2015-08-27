@@ -1280,7 +1280,324 @@ VTN 코디네이터 REST API
 }
 ```
 
+### vBridge Interface Flow Filter Entry Functions
+##### Create vBridge Interface Flow Filter Entry :vBridge Interface Flow Filter Entry을 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries
+- Request
+```javascript 
+{
+  "flowfilterentry": {
+        "seqnum": "{seqnum}",
+        "fl_name": "{fl_name}", 
+        "action_type": "{action_type}",
+        "nmg_name": "{nmg_name}",
+        "priority": "{priority}",
+        "dscp": "{dscp}",
+        "redirectdst": {
+              "vnode_name": "{vnode_name}",
+              "if_name": "{if_name}",
+              "direction": "{direction}",
+              "macdstaddr": "{macdstaddr}",
+              "macsrcaddr": "{macsrcaddr}"
+         }
+   }
+}
+```
+- Response :없음
  
+##### Delete vBridge Interface Flow Filter Entry :vBridge Interface Flow Filter Entry을 삭제 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Response :없음
+ 
+##### Update vBridge Interface Flow Filter Entry :vBridge Interface Flow Filter Entry을 Update 한다.
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Request
+```javascript 
+{
+  "flowfilterentry": {
+        "fl_name": "{fl_name}",
+        "action_type": "{action_type}",
+        "nmg_name": "{nmg_name}",
+        "priority": "{priority}",
+        "dscp": "{dscp}",
+        "redirectdst": {
+           "vnode_name": "{vnode_name}",
+           "if_name": "{if_name}",
+           "direction": "{direction}",
+           "macdstaddr": "{macdstaddr}",
+           "macsrcaddr": "{macsrcaddr}"
+        }
+   }
+}
+```
+- Response :없음
 
+##### List vBridge Interface Flow Filter Entry :vBridge Interface Flow Filter Entry 정보 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries, /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/detail, /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/count
+- QueryString : ?index={seqnum}&max_repetition={max_repetition} 
+- Response (If detail is specified in URI )
+```javascript 
+{
+   "flowfilterentries": [
+       {
+        "seqnum": "{seqnum}",
+        "fl_name": "{fl_name}",
+        "action_type": "{action_type}",
+        "nmg_name": "{nmg_name}",
+        "priority": "{priority}",
+        "dscp": "{dscp}",
+        "redirectdst": {
+           "vnode_name": "{vnode_name}",
+           "if_name": "{if_name}",
+           "direction": "{direction}",
+           "macdstaddr": "{macdstaddr}",
+           "macsrcaddr": "{macsrcaddr}"
+         }
+      }
+    ]
+}
+```
+
+##### Show vBridge Interface Flow Filter Entry :vBridge Interface Flow Filter Entry 정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}, /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail
+- Response (If detail is specified in URI )
+```javascript 
+{
+ "flowfilterentry": {
+         "seqnum": "{seqnum}",
+         "fl_name": "{fl_name}",
+         "action_type": "{action_type}",
+         "nmg_name ": "{nmg_name}",
+         "priority": "{priority}",
+         "dscp": "{dscp}",
+         "nmg_status": "{nmg_status}",
+         "redirectdst": {
+               "vnode_name": "{vnode_name}",
+               "if_name": "{if_name}",
+               "direction": "{direction}",
+               "macdstaddr": "{macdstaddr}",
+               "macsrcaddr": "{macsrcaddr}"
+           },
+         "statistics": {
+               "software": {
+                   "packets": "{packets}",
+                   "octets": "{octets}"
+                },
+               "existingflow": {
+                   "packets": "{packets}",
+                   "octets": "{octets}"
+                },
+                "expiredflow": {
+                   "packets": "{packets}",
+                   "octets": "{octets}"
+                },
+                "total": {
+                   "packets": "{packets}",
+                   "octets": "{octets}"
+                 }
+               },
+       "flowlist": {
+         "flowlistentries": [
+                 {
+              "seqnum": "{seqnum}",
+              "statistics": {
+                      "software": {
+                          "packets": "{packets}",
+                          "octets": "{octets}"
+                        },
+                      "existingflow": {
+                          "packets": "{packets}",
+                          "octets": "{octets}"
+                        },
+                      "expiredflow": {
+                          "packets": "{packets}",
+                          "octets": "{octets}"
+                        },
+                      "total": {
+                         "packets": "{packets}",
+                         "octets": "{octets}"
+                      }
+                 }
+             }
+          ]
+    }
+  }
+}
+```
+
+### vTerminal Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
+### vTerminal Interface Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
+### vTerminal Interface Port Map Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
+### vTerminal Interface Flow Filter Functions
+##### Create vTerminal Interface Flow Filter :vTerminal Interface Flow Filter을 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters
+- Request
+```javascript 
+{
+"flowfilter": {
+   "ff_type": "{ff_type}"
+  }
+}
+```
+- Request Elements
+      - vtn_name :VTN name.  (31 char)
+      - vterminal_name :vTerminal name.  (31 char)
+- Response :Response codes
+
+##### Show vTerminal Interface Flow Filter :vTerminal Interface Flow Filter정보를 보여준다.
+- Method : GET
+- Request URI :/vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}
+- Response 
+```javascript 
+{
+ "flowfilter": {
+   "ff_type": "{ff_type}"
+  }
+}
+```
+
+##### Delete vTerminal Interface Flow Filter :vTerminal Interface Flow Filter를 삭제 한다. 
+- Method : DELETE
+- Request URI :/vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}
+- Response :Response codes
+
+### vTerminal Interface Flow Filter Entry Functions
+##### Create vTerminal Interface Flow Filter Entry :vTerminal Interface Flow Filter Entry 을 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries
+- Request
+```javascript 
+{
+  "flowfilterentry": {
+      "seqnum": "{seqnum}",
+      "fl_name": "{fl_name}",
+      "action_type": "{action_type}",
+      "nmg_name": "{nmg_name}",
+      "priority": "{priority}",
+      "dscp": "{dscp}",
+      "redirectdst": {
+      "vnode_name": "{vnode_name}",
+      "if_name": "{if_name}",
+      "direction": "{direction}",
+      "macdstaddr": "{macdstaddr}",
+      "macsrcaddr": "{macsrcaddr}"
+   }
+ }
+}
+```
+- Response :Response codes
+ 
+##### Update vTerminal Interface Flow Filter Entry :vTerminal Interface Flow Filter Entry 을 Update 한다.
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Request
+```javascript 
+{
+ "flowfilterentry": {
+      "fl_name": "{fl_name}",
+      "action_type": "{action_type}",
+      "nmg_name": "{nmg_name}",
+      "priority": "{priority}",
+      "dscp": "{dscp}",
+      "redirectdst": {
+          "vnode_name": "{vnode_name}",
+          "if_name": "{if_name}",
+          "direction": "{direction}",
+          "macdstaddr": "{macdstaddr}",
+          "macsrcaddr": "{macsrcaddr}"
+        }
+  }
+}
+```
+- Response :Response codes
+ 
+##### List vTerminal Interface Flow Filter Entry :vTerminal Interface Flow Filter Entry정보 목록을 보여 준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries, /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/detail, /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/count 
+- QueryString : ?index={seqnum}&max_repetition={max_repetition}
+- Response (If detail is specified in URI )
+```javascript 
+{
+  "flowfilterentries": [ 
+  {
+    "seqnum": "{seqnum}",
+    "fl_name": "{fl_name}",
+    "action_type": "{action_type}",
+    "nmg_name": "{nmg_name}",
+    "priority": "{priority}",
+    "dscp": "{dscp}",
+    "redirectdst": {
+       "vnode_name": "{vnode_name}",
+       "if_name": "{if_name}",
+       "direction": "{direction}",
+       "macdstaddr": "{macdstaddr}",
+       "macsrcaddr": "{macsrcaddr}"
+     }
+   }
+ ]
+} 
+```
+
+##### Show vTerminal Interface Flow Filter Entry :vTerminal Interface Flow Filter Entry정보를 보여 준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}, /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail 
+- Response (If detail is not specified in URI )
+```javascript 
+{
+ "flowfilterentry": {
+     "seqnum": "{seqnum}",
+     "fl_name": "{fl_name}",
+     "action_type": "{action_type}",
+     "nmg_name": "{nmg_name}",
+     "priority": "{priority}",
+     "dscp": "{dscp}",
+     "redirectdst": {
+        "vnode_name": "{vnode_name}",
+        "if_name": "{if_name}",
+        "direction": "{direction}",
+        "macdstaddr": "{macdstaddr}",
+        "macsrcaddr": "{macsrcaddr}"
+      }
+  }
+}
+```
+
+##### Delete vTerminal Interface Flow Filter Entry :vTerminal Interface Flow Filter Entry를 삭제 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Response :Response codes
+ 
+***다음의 API들은 현재 버전에서 지원하지 않음 (생략)***
+### vRouter functions
+### Static IP Route Functions
+### IP Routes Function
+### ARP Entry Functions
+### DHCP Relay Status Functions
+### DHCP Relay Interface Functions
+### DHCP Relay Server Functions
+### vRouter Interface Functions
+### vRouter Interface Flow Filter functions
+### vRouter Interface Flow Filter Entry functions
+### vBypass Functions
+### vBypass Interface Functions
+### vTep Functions
+### vTep Interface Functions
+### vTep Interface Port Map Functions
+### vTep Group Functions
+### vTunnel Functions
+### vTunnel Interface Functions 
+### vTunnel Interface Port Map functions 
 
 
