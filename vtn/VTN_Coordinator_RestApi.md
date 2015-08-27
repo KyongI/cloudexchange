@@ -1579,25 +1579,283 @@ VTN 코디네이터 REST API
 - Request URI : /vtns/{vtn_name}/vterminals/{vterminal_name}/interfaces/{if_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
 - Response :Response codes
  
-***다음의 API들은 현재 버전에서 지원하지 않음 (생략)***
 ### vRouter functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### Static IP Route Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### IP Routes Function
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### ARP Entry Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### DHCP Relay Status Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### DHCP Relay Interface Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### DHCP Relay Server Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vRouter Interface Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vRouter Interface Flow Filter functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vRouter Interface Flow Filter Entry functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vBypass Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vBypass Interface Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vTep Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vTep Interface Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vTep Interface Port Map Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vTep Group Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vTunnel Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vTunnel Interface Functions 
+***현재 버전에서 지원하지 않음 (생략)***
+
 ### vTunnel Interface Port Map functions 
+***현재 버전에서 지원하지 않음 (생략)***
+
+### vLink Functions
+##### Create vLink :vLink를 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vlinks
+- Request
+```javascript 
+{
+ "vlink": {
+  "vlk_name": "{vlk_name}",
+  "vnode1_name": "{vnode1_name}",
+  "if1_name": "{if1_name}",
+  "vnode2_name": "{vnode2_name}",
+  "if2_name": "{if2_name}",
+  "description": "{description}",
+  "adminstatus": "{adminstatus}",
+  "boundary_map": {
+       "boundary_id": "{boundary_id}",
+       "vlan_id": "{vlan_id}",
+       "no_vlan_id": "{no_vlan_id}"
+    }
+  }
+}
+```
+- Request Elements
+      - vlk_name :Virtual link name. (31 char)
+      - vnode1_name :The name of one of the two virtual nodes linked through the virtual link. (31 char)
+      - if1_name :The name of the virtual interface of VTN node1 linked through the virtual link. (31 char)
+      - vnode2_name :The name of the virtual node that is not VTN node 1 of the two virtual nodes linked through the virtual link. 
+      - if2_name :The name of the virtual interface of VTN node 2 linked through the virtual link.
+      - boundary_map :Boundary map.  
+      - boundary_id :Boundary identifier.  (31 char)
+      - vlan_id :VLAN identifier.  
+      - no_vlan_id :No VLAN ID.  
+- Response :없음
+
+##### Delete vLink :vLink를 삭제 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vlinks/{vlk_name}
+- Response :없음 
+
+##### Update vLink :vLink를 Update 한다.
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/vlinks/{vlk_name}
+- Request
+```javascript 
+{
+ "vlink": {
+   "description": "{description}",
+   "adminstatus": "{adminstatus}",
+   "boundary_map": {
+        "boundary_id": "{boundary_id}",
+        "vlan_id": "{vlan_id}",
+        "no_vlan_id": "{no_vlan_id}"
+     }
+   }
+ }
+```
+- Response :없음 
+
+##### List vLink :vLink정보 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vlinks, /vtns/{vtn_name}/vlinks/detail, /vtns/{vtn_name}/vlinks/count
+- QueryString : ?index={vlk_name}&max_repetition={max_repetition}&vnode1_name={vnode1_name}&vnode2_name={vnode2_name}
+- Response (If detail is specified in URI )
+```javascript 
+{
+"vlinks": [
+  {
+  "vlk_name": "{vlk_name}",
+  "vnode1_name": "{vnode1_name}",
+  "if1_name": "{if1_name}",
+  "vnode2_name": "{vnode2_name}",
+  "if2_name": "{if2_name}",
+  "description": "{description}",
+  adminstatus="{adminstatus}"
+  operstatus="{operstatus}">
+  "boundary_map": {
+       "boundary_id": "{boundary_id}",
+       "vlan_id": "{vlan_id}",
+       "no_vlan_id": "{no_vlan_id}"
+      }
+   }
+ ]
+}
+```
+
+##### Show vLink :vLink정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vlinks/{vlk_name}
+- Response 
+```javascript 
+{
+  "vlink": {
+   "vlk_name": "{vlk_name}",
+   "vnode1_name": "{vnode1_name}",
+   "if1_name": "{if1_name}",
+   "vnode2_name": "{vnode2_name}",
+   "if2_name": "{if2_name}",
+   "description": "{description}",
+   adminstatus="{adminstatus}" 
+   operstatus= "{operstatus}"
+   "boundary_map": {
+          "boundary_id": "{boundary_id}",
+          "vlan_id": "{vlan_id}",
+          "no_vlan_id": "{no_vlan_id}"
+    }
+  }
+}
+```
+
+### Controller Functions
+##### Create Physical Controller :Physical Controller를 생성 한다.
+- Method : POST
+- Request URI : /controllers
+- Request
+```javascript 
+{
+   "controller": {
+   "controller_id":
+   "{controller_id}",
+   "description":
+   "{description}",
+   "ipaddr": "{ipaddr}",
+   "type": "{type}",
+   "auditstatus":
+   "{auditstatus}",
+   "username": "{username}",
+   "password": "{password}",
+   "version": "{version}"
+   }
+}
+```
+- Request Elements
+      - controller_id :Identifier of the Controller. (31 char)
+      - type :Controller type.  
+      - auditstatus :Audit status.  
+      - usename :The user name you want to specify.  (31 char)
+      - password :The password that corresponds to the specified user name.  (256 char)
+      - version :Version of Controller.  (31 char)
+- Response :Response codes
+ 
+##### Delete Physical Controller :Physical Controller를 삭제 한다.
+- Method : DELETE
+- Request URI : /controllers/{controller_id}
+- Response :Response codes
+ 
+##### Update Physical Controller :Physical Controller를 Update 한다.
+- Method : PUT
+- Request URI : /controllers/{controller_id}
+- Request
+```javascript 
+{
+   "controller": {
+     "description":
+     "{description}",
+     "ipaddr": "{ipaddr}",
+     "auditstatus":
+     "{auditstatus}",
+     "username": "{username}",
+     "password": "{password}",
+     "version": "{version}"
+   }
+ }
+```
+- Response :Response codes
+ 
+##### List Physical Controller :Physical Controller 정보 목록을 보여준다.
+- Method : GET
+- Request URI : /controllers, /controllers/detail, /controllers/count
+- QueryString : ?index={controller_id}&max_repetition={max_repetition}
+- Response (If detail is specified in URI )
+```javascript 
+{
+  "controllers": [
+    {
+    "controller_id": "{controller_id}",
+    "description": "{description}",
+    "ipaddr": "{ipaddr}",
+    "type": "{type}",
+    "auditstatus": "{auditstatus}",
+    "username": "{username}",
+    "password": "{password}",
+    "version": "{version}",
+    "actual_version": "{actual_version}",
+    "operstatus": "{operstatus}"
+    }
+  ]
+}
+```
+
+##### Show Physical Controller :Physical Controller 정보를 보여준다.
+- Method : GET
+- Request URI : /controllers/{controller_id}
+- Response
+```javascript 
+{
+  "controllers": [
+    {
+    "controller_id": "{controller_id}",
+    "description": "{description}",
+    "ipaddr": "{ipaddr}",
+    "type": "{type}",
+    "auditstatus": "{auditstatus}",
+    "username": "{username}",
+    "password": "{password}",
+    "version": "{version}",
+    "actual_version": "{actual_version}",
+    "operstatus": "{operstatus}"
+    }
+  ]
+}
+```
+
+
+
+
+
+
+ 
+ 
+
 
 
