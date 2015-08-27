@@ -7,7 +7,6 @@ VTN Coodinator의 REST API를 분석 한다.
 
 요청(Request) 메세지
 --------------------
-<small>
 | 필드 이름   |    POST      |    PUT       |    GET       |    DELETE    |
 |-------------|--------------|--------------|--------------|--------------|
 | username    |     yes      |    yes       |     yes      |    yes       |
@@ -16,7 +15,7 @@ VTN Coodinator의 REST API를 분석 한다.
 | content-type|     yes      |    yes       |     no       |    no        |
 | content-len |     yes      |    yes       |     no       |    no        |
 | host        |     yes      |    yes       |     yes      |    yes       |
-</small>
+
 1. username/password: VTN 코디네이터의 리소스에 접근하는데 필요한 사용자 이름 및 암호.
 2. accept: 응답 메세지 포맷의 accept 
 3. content type/len: POST/PUT 메세지에서 요청 메세지의 type 및 length 
@@ -251,7 +250,7 @@ VTN 코디네이터 REST API
       - description :VTN 설명(127 char)
 - Response :Response codes
  
-##### Delete VTN: VTN을 삭재한다. 
+##### Delete VTN: VTN을 삭제한다. 
 - Method : DELETE
 - Request URI : /vtns/{vtn_name}
 - Response :Response codes
@@ -518,7 +517,7 @@ VTN 코디네이터 REST API
       - ff_type :입/출력 필터
 - Response : 없음
 
-##### Delete VTN Flow Filter :VTN 플로우 필터를 삭재한다. 
+##### Delete VTN Flow Filter :VTN 플로우 필터를 삭제한다. 
 - Method : POST
 - Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}
 - Response : 없음
@@ -559,7 +558,7 @@ VTN 코디네이터 REST API
       - dscp :The DSCP value. 
 - Response : 없음
 
-##### Delete VTN Flow Filter Entry :VTN 플로우 필터 항목을 삭재한다. 
+##### Delete VTN Flow Filter Entry :VTN 플로우 필터 항목을 삭제한다. 
 - Method : DELETE
 - Request URI : /vtns/{vtn_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
 - Response : 없음
@@ -708,7 +707,7 @@ VTN 코디네이터 REST API
       - domain_id :Domain identifier. (31 char)
 - Response :Response codes
 
-##### Delete vBridge :vBridge를 삭재한다.
+##### Delete vBridge :vBridge를 삭제한다.
 - Method : DELETE
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}
 - Response :Response codes
@@ -805,7 +804,7 @@ VTN 코디네이터 REST API
 - Request Elements
       - vlanmap_id :VLAN Map identifier. If logical_port_id is specified at creation time, vlanmap_id is "lpid-{logical_port_id}". 
 
-##### Delete VLAN Map :VLAN map을 삭재 한다.
+##### Delete VLAN Map :VLAN map을 삭제 한다.
 - Method : DELETE
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps/{vlanmap_id}.json
 - Request Elements (Create VLAN Map 참조)
@@ -885,7 +884,7 @@ VTN 코디네이터 REST API
       - ff_type :Direction to which the Flow Filter is applied Valid value.
 - Response :없음
 
-##### Delete vBridge Flow Filter :vBridge Flow Filter를 삭재 한다.
+##### Delete vBridge Flow Filter :vBridge Flow Filter를 삭제 한다.
 - Method : DELETE
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}
 - Response :없음
@@ -946,13 +945,13 @@ VTN 코디네이터 REST API
       - macsrcaddr :Source MAC address.  
 - Response :없음
 
-##### Delete vBridge Flow Filter Entry:vBridge Flow Filter Entry를 삭재 한다.
+##### Delete vBridge Flow Filter Entry:vBridge Flow Filter Entry를 삭제 한다.
 - Method : DELETE
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
 - Request Elements (Create vBridge Flow Filter Entry 참조)
 - Response :없음
  
-##### Update vBridge Flow Filter Entry:vBridge Flow Filter Entry를 삭재 한다.
+##### Update vBridge Flow Filter Entry:vBridge Flow Filter Entry를 Update 한다.
 - Method : PUT
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
 - Request 
@@ -1018,7 +1017,6 @@ VTN 코디네이터 REST API
 - Method : GET
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}, /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail
 - Response (If detail is specified in URI )
-<small>
 ```javascript 
 {
   "flowfilterentry": {
@@ -1099,7 +1097,6 @@ VTN 코디네이터 REST API
  }
 }
 ```
-</small>
 - Response Elements
       - nmg_status :Status of monitored host.  
       - redirectdst :Redirect information. statistics Statistical information. 
@@ -1121,15 +1118,167 @@ VTN 코디네이터 REST API
      "{adminstatus}"
    }
 }
-
-
+```
+- Response :Response codes
  
+##### Delete vBridge Interface :vBridge Interface를 삭제 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}
+- Response :Response codes
+
+##### Update vBridge Interface :vBridge Interface를 Update 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}
+- Request
+```javascript 
+{
+  "interface": {
+        "description":
+  "{description}",
+  "adminstatus":
+  "{adminstatus}"
+  }
+}
+```
+- Request Elements
+      - description :Additional information. (127 char)
+      - adminstatus :Admin status.  
+- Response :Response codes
  
-
-
+##### List vBridge Interface :vBridge Interface정보 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces, /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/detail, /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/count
+- Response (If detail is specified in URI )
+```javascript 
+{
+   "interfaces": [
+         {
+         "if_name":
+     "{if_name}",
+         "description":
+     "{description}",
+         "adminstatus":
+     "{adminstatus}",
+         "operstatus":
+     "{operstatus}",
+         "neighbor": {
+             "vnode_name":
+        "{vnode_name}",
+                "if_name":
+        "{if_name}",
+                "vlk_name":
+        "{vlk_name}"
+          }
+       }
+     ]
+}
+```
+- Response Elements
+      - operstatus :Operational status.  
+      - neighbor :Information about the neighbor.  
+      - count :The number of vBridge Interface.
+      - if_name :vBridge Interface name.  (31 char)
+      - vnode_name :Virtual node name.  (31 char)
+      - vlk_name :vLink name.  (31 char)
  
+##### Show vBridge Interface :vBridge Interface 정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}
+- Response 
+```javascript 
+{ 
+    "interfaces": {
+         "if_name": "{if_name}",
+         "description":
+      "{description}",
+         "adminstatus":
+      "{adminstatus}",
+         "operstatus":
+      "{operstatus}",
+         "neighbor": {
+                 "vnode_name":
+            "{vnode_name}",
+                 "if_name":
+            "{if_name}",
+                 "vlk_name":
+            "{vlk_name}" 
+                }
+          }
+}
+```
+- Response Elements (List vBridge Interface 참조)
 
+### vBridge Interface Port Map Functions
+##### Create vBridge Interface Port Map :vBridge Interface Port Map을 생성 한다.
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/portmap
+- Request
+```javascript 
+{
+   "portmap": {
+   "logical_port_id":
+   "{logical_port_id}",
+   "vlan_id": "{vlan_id}",
+   "tagged": "{tagged}"
+   }
+}
+```
+- Request Elements
+      - logical_port_id :Logical port identifier.  (319 char)
+      - vlan_id :Identifier of the mapped VLAN.  
+      - tagged :Displays whether VLAN tags are sent and received in the Physical network.  
+- Response :Response codes
 
+##### Delete vBridge Interface Port Map :vBridge Interface Port Map을 삭제 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/portmap
+- Response :Response codes
+ 
+##### Show vBridge Interface Port Map :vBridge Interface Port Map정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/portmap
+- Response 
+```javascript 
+{
+   "portmap": {
+   "logical_port_id":
+   "{logical_port_id}",
+   "vlan_id": "{vlan_id}",
+   "tagged": "{tagged}"
+   }
+}
+```
+
+### vBridge Interface Flow Filter Functions
+##### Create vBridge Interface Flow Filter :vBridge Interface Flow Filter을 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters
+- Request
+```javascript 
+{
+ "flowfilter": {
+      "ff_type": "{ff_type}"
+  }
+}
+```
+- Response :없음
+
+##### Delete vBridge Interface Flow Filter :vBridge Interface Flow Filter을 삭제 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type} 
+- Response :없음
+
+##### Show vBridge Interface Flow Filter :vBridge Interface Flow Filter정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces/{if_name}/flowfilters/{ff_type}
+- Response 
+```javascript 
+{
+ "flowfilter": {
+     "ff_type": "{ff_type}"
+  }
+}
+```
 
  
 
