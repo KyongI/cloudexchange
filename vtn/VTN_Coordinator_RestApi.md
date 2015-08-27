@@ -771,8 +771,348 @@ VTN 코디네이터 REST API
 ### MAC Entry Function
 ***현재 버전에서 지원하지 않음 (생략)***
 
+### VLAN Map Functions
+##### Create VLAN Map :VLAN map을 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps.json
+- Request 
+```javascript 
+{
+    "vlanmap": {
+       "logical_port_id":
+     "{logical_port_id}",
+       "vlan_id": "{vlan_id}",
+       "no_vlan_id":
+     "{no_vlan_id}"
+        }
+}
+```
+- Request Elements
+      - vbr_name :vBridge name. (31 char)
+      - logical_port_id :Logical port identifier. (319 char)
+      - vlan_id :Identifier of the mapped VLAN.
+      - no_vlan_id :Indicates that no vlan_id is used.
+- Response 
+```javascript 
+{
+   "vlanmap": {
+       "vlanmap_id":
+    "{vlanmap_id}"
+     }
+}
+```
+- Request Elements
+      - vlanmap_id :VLAN Map identifier. If logical_port_id is specified at creation time, vlanmap_id is "lpid-{logical_port_id}". 
+
+##### Delete VLAN Map :VLAN map을 삭재 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps/{vlanmap_id}.json
+- Request Elements (Create VLAN Map 참조)
+- Response :Response codes
+ 
+##### Update VLAN Map :VLAN map을 Update 한다.
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps/{vlanmap_id}.json
+- Request 
+```javascript 
+{
+    "vlanmap": {
+        "vlan_id": "{vlan_id}",
+     "no_vlan_id":
+  "{no_vlan_id}"
+        }
+}
+```
+- Request Elements (Create VLAN Map 참조)
+- Response :Response codes
+
+##### List VLAN Map :VLAN map 정보 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps.json, /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps/detail.json, /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps/count.json
+- QueryString : ?index={vlanmap_id}&max_repetition={max_repetition}
+- Response 
+```javascript 
+{
+   "vlanmaps": [
+        {
+      "vlanmap_id":
+   "{vlanmap_id}",
+      "logical_port_id":
+   "{logical_port_id}",
+      "vlan_id":
+   "{vlan_id}",
+      "no_vlan_id":
+   "{no_vlan_id}"
+        }
+    ]
+}
+```
+- Response Elements (Create VLAN Map 참조)
+
+##### Show VLAN Map :VLAN map 정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/vlanmaps/{vlanmap_id}.json
+- Response 
+```javascript 
+{
+     "vlanmap": {
+          "vlanmap_id":
+    "{vlanmap_id}",
+          "logical_port_id":
+    "{logical_port_id}",
+          "vlan_id": "{vlan_id}",
+    "no_vlan_id":
+          "{no_vlan_id}"
+      }
+ }
+```
+- Response Elements (Create VLAN Map 참조)
+
+### vBridge Flow Filter Functions
+##### Create vBridge Flow Filter :vBridge Flow Filter를 생성 한다.
+- Method : POST
+- Request URI :/vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters
+- Request 
+```javascript 
+{
+ "flowfilter": {
+    "ff_type": "{ff_type}"
+ }
+}
+```
+- Request Elements
+      - ff_type :Direction to which the Flow Filter is applied Valid value.
+- Response :없음
+
+##### Delete vBridge Flow Filter :vBridge Flow Filter를 삭재 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}
+- Response :없음
+
+##### Show vBridge Flow Filter :vBridge Flow Filter 정보 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}
+- Response 
+```javascript 
+{
+ "flowfilter": {
+     "ff_type": "{ff_type}"
+  }
+}
+```
+
+### vBridge Flow Filter Entry Functions
+##### Create vBridge Flow Filter Entry:vBridge Flow Filter Entry를 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries
+- Request 
+```javascript 
+{
+ "flowfilterentry": {
+        "seqnum": "{seqnum}",
+        "fl_name": "{fl_name}",
+        "action_type": "{action_type}",
+        "nmg_name": "{nmg_name}",
+        "priority": "{priority}",
+        "dscp": "{dscp}",
+        "redirectdst": {
+             "vnode_name": "{vnode_name}",
+             "if_name": "{if_name}",
+             "direction": "{direction}",
+             "macdstaddr": "{macdstaddr}",
+             "macsrcaddr": "{macsrcaddr}"
+        }
+  }
+}
+```
+- Request Elements
+      - seqnum :The sequence number.  
+      - fl_name :Flow List name. (31 char)
+      - action_type :Action that is registered in the Flow Filter entry.
+           - pass: Passes the frame. 
+           - drop: Discards the frame. 
+           - redirect: Transfers a frame to the virtual interface of the virtual node in which the frame is specified. 
+      - nmg_name :Network monitor group name.
+      - priority :Priority value registered to the Flow Filter entry.
+      - dscp :The DSCP value.  
+      - vnode_name :Redirect destination virtual node name. 
+      - if_name :A virtual interface of a redirect destination virtual node. 
+      - direction :Direction. The value that can be specified differ depending on the Interface type specified in vnode_n ame and if_name. 
+           - vBridge Interface: in, out ("out" can be specified when the vBridge Interface is set to vLink with boundary map or it has Port Map.) 
+           - vTerminal Interface: out 
+           - vRouter Interface: in 
+      - macdstaddr :Destination MAC address.
+      - macsrcaddr :Source MAC address.  
+- Response :없음
+
+##### Delete vBridge Flow Filter Entry:vBridge Flow Filter Entry를 삭재 한다.
+- Method : DELETE
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Request Elements (Create vBridge Flow Filter Entry 참조)
+- Response :없음
+ 
+##### Update vBridge Flow Filter Entry:vBridge Flow Filter Entry를 삭재 한다.
+- Method : PUT
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}
+- Request 
+```javascript 
+{
+  "flowfilterentry": {
+        "fl_name": "{fl_name}",
+        "action_type": "{action_type}",
+        "nmg_name": "{nmg_name}",
+        "priority": "{priority}",
+        "dscp": "{dscp}",
+        "redirectdst": {
+             "vnode_name": "{vnode_name}",
+             "if_name": "{if_name}",
+             "direction": "{direction}",
+             "macdstaddr": "{macdstaddr}",
+             "macsrcaddr": "{macsrcaddr}"
+         }
+   }
+}
+```
+- Request Elements (Create vBridge Flow Filter Entry 참조)
+- Response :없음
+
+##### List vBridge Flow Filter Entry:vBridge Flow Filter Entry 정보 목록을 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries, /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/detail, /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/count
+- QueryString : ?index={seqnum}&max_repetition={max_repetition} 
+- Response (If detail is specified in URI )
+```javascript 
+{
+    "flowfilterentries": [
+         {
+             "seqnum": "{seqnum}",
+             "fl_name":
+             "{fl_name}",
+             "action_type":
+             "{action_type}",
+             "nmg_name":
+          "{nmg_name}",
+             "priority":
+          "{priority}",
+             "dscp": "{dscp}",
+             "redirectdst": {
+                      "vnode_name":
+                 "{vnode_name}",
+                      "if_name":
+                 "{if_name}",
+                      "direction":
+                 "{direction}",
+                      "macdstaddr":
+                 "{macdstaddr}",
+                      "macsrcaddr":
+                 "{macsrcaddr}"
+         }
+    }
+  ]
+}
+```
+- Response Elements (Create vBridge Flow Filter Entry 참조)
+ 
+ ##### Show vBridge Flow Filter Entry:vBridge Flow Filter Entry 정보를 보여준다.
+- Method : GET
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}, /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail
+- Response (If detail is specified in URI )
+```javascript 
+{
+  "flowfilterentry": {
+        "seqnum": "{seqnum}",
+        "fl_name": "{fl_name}",
+        "action_type":
+     "{action_type}",
+        "nmg_name ": "{nmg_name}",
+     "priority": "{priority}",
+        "dscp": "{dscp}",
+     "nmg_status":
+        "{nmg_status}",
+     "redirectdst": {
+        "vnode_name":
+     "{vnode_name}",
+        "if_name":
+     "{if_name}",
+        "direction":
+     "{direction}",
+        "macdstaddr":
+     "{macdstaddr}",
+        "macsrcaddr":
+     "{macsrcaddr}"
+   },
+"statistics": {
+        "software": {
+               "packets":
+          "{packets}",
+               "octets":
+          "{octets}"
+ },
+"existingflow": {
+        "packets":
+     "{packets}",
+        "octets":
+     "{octets}"
+ },
+"expiredflow": {
+       "packets":
+     "{packets}",
+       "octets":
+     "{octets}"
+ },
+"total": {
+      "packets":
+    "{packets}",
+      "octets":
+    "{octets}"
+ }
+},
+"flowlist": {
+    "flowlistentries": [
+        {
+          "seqnum":
+       "{seqnum}",
+          "statistics":
+                {
+                "software": {
+                     "packets": "{packets}",
+                     "octets": "{octets}"
+                 },
+                "existingflow": {
+                     "packets": "{packets}",
+                     "octets": "{octets}"
+                 },
+                "expiredflow": {
+                     "packets": "{packets}",
+                     "octets": "{octets}"
+                 },
+                 "total": {
+                     "packets": "{packets}",
+                     "octets": "{octets}"
+                 }
+         }
+      }
+    ]
+  }
+ }
+}
+```
+- Response Elements
+      - nmg_status :Status of monitored host.  
+      - redirectdst :Redirect information. statistics Statistical information. 
+      - flowlist :Flow List information.  
+      - flowlistentries :Flow List entry list.  
 
 
  
+ 
+
+
+ 
+
+
+
+ 
+
 
 
