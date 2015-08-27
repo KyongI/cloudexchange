@@ -7,6 +7,7 @@ VTN Coodinator의 REST API를 분석 한다.
 
 요청(Request) 메세지
 --------------------
+<small>
 | 필드 이름   |    POST      |    PUT       |    GET       |    DELETE    |
 |-------------|--------------|--------------|--------------|--------------|
 | username    |     yes      |    yes       |     yes      |    yes       |
@@ -1017,6 +1018,7 @@ VTN 코디네이터 REST API
 - Method : GET
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}, /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail
 - Response (If detail is specified in URI )
+<small>
 ```javascript 
 {
   "flowfilterentry": {
@@ -1097,6 +1099,7 @@ VTN 코디네이터 REST API
  }
 }
 ```
+</small>
 - Response Elements
       - nmg_status :Status of monitored host.  
       - redirectdst :Redirect information. statistics Statistical information. 
