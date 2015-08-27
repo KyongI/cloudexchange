@@ -15,7 +15,7 @@ VTN Coodinator의 REST API를 분석 한다.
 | content-type|     yes      |    yes       |     no       |    no        |
 | content-len |     yes      |    yes       |     no       |    no        |
 | host        |     yes      |    yes       |     yes      |    yes       |
-
+</small>
 1. username/password: VTN 코디네이터의 리소스에 접근하는데 필요한 사용자 이름 및 암호.
 2. accept: 응답 메세지 포맷의 accept 
 3. content type/len: POST/PUT 메세지에서 요청 메세지의 type 및 length 
@@ -1102,6 +1102,22 @@ VTN 코디네이터 REST API
       - redirectdst :Redirect information. statistics Statistical information. 
       - flowlist :Flow List information.  
       - flowlistentries :Flow List entry list.  
+
+### vBridge Interface Functions
+##### Create vBridge Interface :vBridge Interface를 생성 한다.
+- Method : POST
+- Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/interfaces
+- Request
+```javascript 
+{
+   "interface": {
+     "if_name": "{if_name}",
+     "description":
+     "{description}",
+     "adminstatus":
+     "{adminstatus}"
+   }
+}
 
 
  
