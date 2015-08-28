@@ -1,9 +1,9 @@
-VTN Coodinator API
+VTN Coordinator API
 ===================
 
 개요
 ----
-VTN Coodinator의 REST API를 분석 한다.
+VTN Coordinator의 REST API를 분석 한다.
 
 요청(Request) 메세지
 --------------------
