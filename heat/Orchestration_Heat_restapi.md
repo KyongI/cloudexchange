@@ -216,34 +216,24 @@ OpenStack Orchestration REST API
 }
 ```
 - Request Elements
-         - id (Optional) :Filters the stack list by a specified stack ID. 
-         - status (Optional) :Filters the stack list by a specified status. 
-         - name (Optional) :Filters the stack list by a specified name. 
-         - action (Optional) :Filters the stack list by a specified action. 
-         - tenant (Optional) :Filters the stack list by a specified tenant. 
-         - username (Optional) :Filters the stack list by a specified user name. 
-         - owner_id (Optional) :Filters the stack list by a specified owner ID, which is the ID of the parent stack of listed stack. 
-         - limit (Optional) :Requests a specified page size of returned items from the query. 
-         - marker (Optional) :Specifies the ID of the last-seen item. 
-         - show_deleted (Optional) :Specifies whether to include deleted stacks in the list. 
-         - show_nested (Optional) :Specifies whether to include nested stacks in the list. 
-         - sort_keys (Optional) :Sorts the stack list by name, status, created_at, or updated_at key. 
-         - tags (Optional) :Lists stacks that contain one or more simple string tags. 
-         - tags_any (Optional) :Lists stacks that contain one or more simple string tags. 
-         - not_tags (Optional) :Lists stacks that do not contain one or more simple string tags. 
-         - not_tags_any (Optional) :Lists stacks that do not contain one or more simple string tags. 
-         - sort_dir (Optional) :The sort direction of the list. A valid value is asc (ascending) or desc (descending). 
-         - global_tenant (Optional) :Specifies whether to include stacks from all tenants in the stack list. Policy requirements are specified in the Orchestration policy.json file. 
-         - with_count (Optional) Specifies whether to include a count key in the response. The count key value is the number of stacks that match the query criteria.
+     - id (Optional) :Filters the stack list by a specified stack ID. 
+     - status (Optional) :Filters the stack list by a specified status. 
+     - name (Optional) :Filters the stack list by a specified name. 
+     - action (Optional) :Filters the stack list by a specified action. 
+     - tenant (Optional) :Filters the stack list by a specified tenant. 
+     - username (Optional) :Filters the stack list by a specified user name. 
+     - owner_id (Optional) :Filters the stack list by a specified owner ID, which is the ID of the parent stack of listed stack. 
+     - limit (Optional) :Requests a specified page size of returned items from the query. 
+     - marker (Optional) :Specifies the ID of the last-seen item. 
+     - show_deleted (Optional) :Specifies whether to include deleted stacks in the list. 
+     - show_nested (Optional) :Specifies whether to include nested stacks in the list. 
+     - sort_keys (Optional) :Sorts the stack list by name, status, created_at, or updated_at key. 
+     - tags (Optional) :Lists stacks that contain one or more simple string tags. 
+     - tags_any (Optional) :Lists stacks that contain one or more simple string tags. 
+     - not_tags (Optional) :Lists stacks that do not contain one or more simple string tags. 
+     - not_tags_any (Optional) :Lists stacks that do not contain one or more simple string tags. 
+     - sort_dir (Optional) :The sort direction of the list. A valid value is asc (ascending) or desc (descending). 
+     - global_tenant (Optional) :Specifies whether to include stacks from all tenants in the stack list. Policy requirements are specified in the Orchestration policy.json file. 
+     - with_count (Optional) Specifies whether to include a count key in the response. The count key value is the number of stacks that match the query criteria.
 
 
- 
-
- 
-
- 
-
- 
- 
- 
- 
