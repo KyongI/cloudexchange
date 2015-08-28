@@ -1904,14 +1904,134 @@ VTN 코디네이터 REST API
 }
 ```
 
+### Physical Port Function
+##### List Physical Ports :Physical Ports 정보 목록을 보여준다. 
+- Method : GET
+- Request URI : /controllers/{controller_id}/switches/{switch_id}/ports, /controllers/{controller_id}/switches/{switch_id}/ports/info, /controllers/{controller_id}/switches/{switch_id}/ports/detail, /controllers/{controller_id}/switches/{switch_id}/ports/count
+- QueryString : ?index={port_name}&max_repetition={max_repetition}&port_name={port_name}&port_id={port_id}
+- Response (If detail is specified in URI )
+```javascript 
+{
+ "ports": [
+{
+   "port_name": "{port_name}",
+   "description": "{description}",
+   "adminstatus": "{adminstatus}",
+   "direction": "{direction}",
+   "trunk_allowed_vlan": "{trunk_allowed_vlan}",
+   "port_id": "{port_id}",
+   "operstatus": "{operstatus}",
+   "macaddr": "{macaddr}",
+   "speed": "{speed}",
+   "duplex": "{duplex}",
+   "alarmsstatus": "{alarmsstatus}",
+   "logical_port_id": "{logical_port_id}",
+   "neighbor": {
+     "switch_id": "{switch_id}",
+     "port_name": "{port_name}"
+    },
+   "statistics": {
+     "rx_packets": "{rx_packets}",
+     "rx_bytes": "{rx_bytes}",
+     "rx_dropped": "{rx_dropped}",
+     "rx_errors": "{rx_errors}",
+     "rx_frameerr": "{rx_frameerr}",
+     "rx_crcerr": "{rx_crcerr}",
+     "rx_overerr": "{rx_overerr}",
+     "tx_packets": "{tx_packets}",
+     "tx_bytes": "{tx_bytes}",
+     "tx_dropped": "{tx_dropped}",
+     "tx_errors": "{tx_errors}",
+     "collisions": "{collisions}"
+   }
+  }
+ ]
+}
+```
+- Response Elements
+      - port_name :Port name of a Switch.  
+      - trunk_allowed_vlan :Valid value: A positive integer.  
+      - port_id :Identifier of the Port.  
+      - operstatus :Operational status of Port.  
+      - speed :The communication speed of the port.  
+      - duplex :The communication method of the port.  
+      - alarmsstatus :Alarm information.  
+      - Logical_port_id :Identifier of the logical Port.  
+      - neighbor :Neighbor.
 
+### Physical Link Function
+##### List Physical Links :Physical Links 정보 목록을 보여준다. 
+- Method : GET
+- Request URI : /controllers/{controller_id}/links, /controllers/{controller_id}/links/detail, /controllers/{controller_id}/links/count
+- QueryString : ?index={link_name}&max_repetition={max_repetition}&switch1_id={switch1_id}&switch2_id={switch2_id}&link_name={link_name}
+- Response Elements
+      - link_name  Physical Link name.  
+      - max_repetition  Number of resources that are returned.  
+      - switch1_id  Returns links that have the specified parameter.  (255 char)
+      - switch2_id  Returns links that have the specified parameter.  (255 char)
+- Response (If detail is specified in URI )
+```javascript 
+{
+"links": [
+  {
+   "link_name": "{link_name}",
+   "switch1_id": "{switch1_id}",
+   "port1_name": "{port1_name}",
+   "switch2_id": "{switch2_id}",
+   "port2_name": "{port2_name}",
+   "description": "{description}",
+   "operstatus": "{operstatus}"
+   }
+  ]
+}
+```
 
+### Domain Functions
+***현재 버전에서 지원하지 않음 (생략)***
 
+### Logical Port Function
+##### List Logical Ports :Logical Port 정보 목록을 보여준다. 
+- Method : GET
+- Request URI : /controllers/{controller_id}/domains/{domain_id}/logical_ports, /controllers/{controller_id}/domains/{domain_id}/logical_ports/detail, /controllers/{controller_id}/domains/{domain_id}/logical_ports/count
+- QueryString : ? index={logical_port_id}&max_repetition={max_repetition}&logical_port_id={logical_port_id} 
+- Response (If detail is specified in URI )
+```javascript 
+{
+"logical_ports": [
+ {
+ "logical_port_id": "{logical_port_id}",
+ "description": "{description}",
+ "type": "{type}",
+ "switch_id": "{switch_id}",
+ "port_name": "{port_name}",
+ "operdown_criteria": "{operdown_criteria}",
+ "operstatus": "{operstatus}",
+ "member_ports": [
+  {
+  "switch_id": "{switch_id}",
+  "port_name": "{port_name}" 
+  }
+  ]
+ }
+ ]
+}
+```
+- Response Elements
+      - operdown_criteria :Operation down criteria.  
 
+### Boundary Functions
+***현재 버전에서 지원하지 않음 (생략)***
 
+### Alarm Functions
+***현재 버전에서 지원하지 않음 (생략)***
 
- 
- 
+### Configuration Functions
+***현재 버전에서 지원하지 않음 (생략)***
 
+### Session Functions
+***현재 버전에서 지원하지 않음 (생략)***
+
+### User Functions
+***현재 버전에서 지원하지 않음 (생략)***
 
 
