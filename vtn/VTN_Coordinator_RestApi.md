@@ -43,7 +43,7 @@ VTN 코디네이터 REST API
 }
 ```
 
-### Show Coordinator Version
+##### Show Coordinator Version
 - Method : GET
 - Request URI : /coordinator_version
 - Response Elements
