@@ -27,8 +27,9 @@ Response 메세지는 XML과 JSON 을 지원.
 
 VTN 코디네이터 REST API 
 -----------------------
-### Show API Version 
+### API Version Function
 ***현재 버전에서 지원하지 않음***
+##### Show API Version 
 - Method : GET
 - Request URI : /api_version
 - Response Elements 
@@ -41,6 +42,7 @@ VTN 코디네이터 REST API
     }
 }
 ```
+
 ### Show Coordinator Version
 - Method : GET
 - Request URI : /coordinator_version
@@ -59,6 +61,7 @@ VTN 코디네이터 REST API
     ]
 }
 ```
+
 ### Flow List Functions
 ##### Create Flow List : Flow 리스트를 생성한다. 
 - Method : POST
