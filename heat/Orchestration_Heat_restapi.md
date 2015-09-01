@@ -430,6 +430,7 @@ OpenStack Orchestration REST API
 - Response Elements
 - Response :Response codes
 
+***
 ### Stacks actions
 ##### Suspend stack : 
 - Method : POST
@@ -459,7 +460,7 @@ OpenStack Orchestration REST API
 
 ##### Cancel stack update : 
 - Method : POST
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/actions
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
 ```javascript
 {
@@ -472,7 +473,7 @@ OpenStack Orchestration REST API
 
 ##### Check stack resources : 
 - Method : POST
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/actions
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
 ```javascript
 {
@@ -483,59 +484,99 @@ OpenStack Orchestration REST API
      - check :Specify the check action in the request body. 
 - Response :Response codes
 
+***
 ### Stacks resources
-##### List resources : 
+##### List resources : stack의 리소스 목록을 보여준다. 
 - Method : GET
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/resources
-- Request
-```javascript
-```
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources
+- QueryString : ?nested_depth={nested_depth}&with_detail={with_detail}
 - Request Elements
+     - nested_depth (Optional) :Includes resources from nested stacks up to the nested_depth levels of recursion. 
+     - with_detail (Optional) :Enables detailed resource information for each resource in list of resources. 
 - Response 
 ```javascript
+{
+    "resources": [
+        {
+            "creation_time": "2015-06-25T14:59:53",
+            "links": [
+                {
+                    "href": "http://hostname/v1/1234/stacks/mystack/629a32d0-ac4f-4f63-b58d-f0d047b1ba4c/resources/random_key_name",
+                    "rel": "self"
+                },
+                {
+                    "href": "http://hostname/v1/1234/stacks/mystack/629a32d0-ac4f-4f63-b58d-f0d047b1ba4c",
+                    "rel": "stack"
+                }
+            ],
+            "logical_resource_id": "random_key_name",
+            "physical_resource_id": "mystack-random_key_name-pmjmy5pks735",
+            "required_by": [],
+            "resource_name": "random_key_name",
+            "resource_status": "CREATE_COMPLETE",
+            "resource_status_reason": "state changed",
+            "resource_type": "OS::Heat::RandomString",
+            "updated_time": "2015-06-25T14:59:53"
+        }
+    ]
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Show resource data : 
+##### Show resource data : 지정된 리소스의 데이터를 보여준다. 
 - Method : GET
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/resources/​{resource_name}​
-- Request
-```javascript
-```
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}
 - Request Elements
+     - resource_name :The name of a resource in the stack. 
 - Response 
 ```javascript
+{
+    "resource": {
+        "attributes": {
+            "value": "I9S20uIp"
+        },
+        "creation_time": "2015-06-25T14:59:53",
+        "description": "",
+        "links": [
+            {
+                "href": "http://hostname/v1/1234/stacks/mystack/629a32d0-ac4f-4f63-b58d-f0d047b1ba4c/resources/random_key_name",
+                "rel": "self"
+            },
+            {
+                "href": "http://hostname/v1/1234/stacks/mystack/629a32d0-ac4f-4f63-b58d-f0d047b1ba4c",
+                "rel": "stack"
+            }
+        ],
+        "logical_resource_id": "random_key_name",
+        "physical_resource_id": "mystack-random_key_name-pmjmy5pks735",
+        "required_by": [],
+        "resource_name": "random_key_name",
+        "resource_status": "CREATE_COMPLETE",
+        "resource_status_reason": "state changed",
+        "resource_type": "OS::Heat::RandomString",
+        "updated_time": "2015-06-25T14:59:53"
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Show resource metadata : 
+##### Show resource metadata : 지정된 리소스의 metadata를 보여 준다. 
 - Method : GET
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/resources/​{resource_name}​/metadata
-- Request
-```javascript
-```
-- Request Elements
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/metadata
 - Response 
 ```javascript
+{
+    "metadata": {
+        "some_key": "some_value",
+        "some_other_key": "some_other_value"
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Send a signal to a resource : 
+##### Send a signal to a resource : 지정된 리소스에 시그널을 보낸다. 
 - Method : POST
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/resources/​{resource_name}​/signal
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/signal
 - Response :Response codes
 
+***
 ### Stacks events
 ##### Find stack events : 
 - Method : GET
@@ -589,6 +630,7 @@ OpenStack Orchestration REST API
 - Response Elements
 - Response :Response codes
 
+***
 ### Templates
 ##### Get stack template : 
 - Method : GET
@@ -642,6 +684,7 @@ OpenStack Orchestration REST API
 - Response Elements
 - Response :Response codes
 
+***
 ### Build info
 ##### Show build information : 
 - Method : GET
@@ -656,6 +699,7 @@ OpenStack Orchestration REST API
 - Response Elements
 - Response :Response codes
 
+***
 ### Software configuration
 ##### Create configuration : 
 - Method : POST
@@ -774,6 +818,7 @@ OpenStack Orchestration REST API
 - Response Elements
 - Response :Response codes
 
+***
 ### Manage service
 ##### Show orchestration engine status : 
 - Method : GET
