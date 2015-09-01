@@ -288,97 +288,183 @@ OpenStack Orchestration REST API
      - parameters :List of parameters defined for the stack. 
      - resources :List of stack resources. 
 
-##### Find stack : 
+##### Find stack : 지정된 스택에서 표준 URL을 찾는다. 
 - Method : GET
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}
 - Request
 ```javascript
+{
+    "stack": {
+        "capabilities": [],
+        "creation_time": "2014-06-04T20:36:12Z",
+        "description": "sample stack",
+        "disable_rollback": true,
+        "id": "5333af0c-cc26-47ee-ac3d-8784cefafbd7",
+        "links": [
+            {
+                ...
+            }
+        ],
+        "notification_topics": [],
+        "outputs": [],
+        "parameters": {
+            ...
+        },
+        "stack_name": "simple_stack",
+        "stack_status": "CREATE_COMPLETE",
+        "stack_status_reason": "Stack CREATE completed successfully",
+        "template_description": "sample stack",
+        "timeout_mins": null,
+        "updated_time": null
+    }
+}
 ```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
 
-##### Find stack resources : 
+##### Find stack resources : 지정된 스택의 리소스 목록을 위한 표준 URL을 찾는다. 
 - Method : GET
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/resources
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
 
-##### Show stack details : 
+##### Show stack details : 지정된 스택을 자세히 보여 준다. 
 - Method : GET
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "stack": {
+        "capabilities": [],
+        "creation_time": "2014-06-03T20:59:46Z",
+        "description": "sample stack",
+        "disable_rollback": "True",
+        "id": "3095aefc-09fb-4bc7-b1f0-f21a304e864c",
+        "links": [
+            {
+                ...
+            }
+        ],
+        "notification_topics": [],
+        "outputs": [],
+        "parameters": {
+            ...
+        },
+        "stack_name": "simple_stack",
+        "stack_status": "CREATE_COMPLETE",
+        "stack_status_reason": "Stack CREATE completed successfully",
+        "template_description": "sample stack",
+        "timeout_mins": "",
+        "updated_time": "",
+        "tags": ""
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
- 
-##### Update stack : 
+
+##### Update stack : 지정된 스택을 업데이트 한다. 
 - Method : PUT
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}
 - Request
 ```javascript
+{
+    "template": {
+        "heat_template_version": "2013-05-23",
+        "description": "Create a simple stack",
+        "parameters": {
+            "flavor": {
+                "default": "m1.tiny",
+                "type": "string"
+            }
+        },
+        "resources": {
+            ...
+        }
+    },
+    "parameters": {
+        "flavor": "m1.small"
+    }
+}
 ```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
  
-##### Delete stack : 
+##### Delete stack : 지정된 스택과 그 스택에 모든 snapshot들을 삭제한다. 
 - Method : DELETE
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
  
-##### Abandon stack : 
+##### Abandon stack : 지정된 스택을 삭제는 하지만, 스텍과 리소스를 표현하는 반환 데이터와 리소스를 그대로 남겨둔다. 
 - Method : DELETE
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/abandon
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "status": "COMPLETE",
+    "name": "g",
+    "dry_run": true,
+    "template": {
+        "outputs": {
+            "instance_ip": {
+                "value": {
+                    "str_replace": {
+                        "params": {
+                            "username": "ec2-user",
+                            "hostname": {
+                                "get_attr": [
+                                    "server",
+                                    "first_address"
+                                ]
+                            }
+                        },
+                        "template": "ssh username@hostname"
+                    }
+                }
+            }
+        },
+        "heat_template_version": "2013-05-23",
+        "resources": {
+            ...
+        },
+        "parameters": {
+            "key_name": {
+                "default": "heat_key",
+                "type": "string"
+            },
+            "image": {
+                "default": "fedora-amd64",
+                "type": "string"
+            },
+            "flavor": {
+                "default": "m1.small",
+                "type": "string"
+            }
+        }
+    },
+    "action": "CREATE",
+    "id": "16934ca3-40e0-4fb2-a289-a700662ec05a",
+    "resources": {
+        ...
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
- 
-##### Snapshot stack : 
+
+##### Snapshot stack : 스택에있는 모든 리소스의 스냅 샷을 얻는다. 모든 스냅 샷은 스택의 삭제시 삭제된다.
 - Method : POST
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots
 - Request
 ```javascript
+{
+    "name": "vol_snapshot"
+}
 ```
-- Request Elements
 - Response 
 ```javascript
+{
+    "id": "13c3a4b5-0585-440e-85a4-6f96b20e7a78",
+    "name": "vol_snapshot",
+    "status": "IN_PROGRESS",
+    "status_reason": null,
+    "data": null
+}
 ```
-- Response Elements
-- Response :Response codes
- 
+
 ##### List snapshots : 
 - Method : GET
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots
