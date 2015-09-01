@@ -433,7 +433,7 @@ OpenStack Orchestration REST API
 
 ***
 ### Stacks actions
-##### Suspend stack : 
+##### Suspend stack : stack을 보류 시킨다. (suspend)
 - Method : POST
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
@@ -446,7 +446,7 @@ OpenStack Orchestration REST API
      - suspend :Specify the suspend action in the request body. 
 - Response :Response codes
 
-##### Resume stack: 
+##### Resume stack: 보류되었던 stack을 재개한다.(resume)
 - Method : POST
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
@@ -455,11 +455,11 @@ OpenStack Orchestration REST API
     "resume": null
 }
 ```
-- Request Elements
+- Request Elements: 
      - resume :Specify the resume action in the request body. 
 - Response :Response codes
 
-##### Cancel stack update : 
+##### Cancel stack update : 스택의 현재 실행중인 업데이트를 취소한다.
 - Method : POST
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
@@ -472,7 +472,7 @@ OpenStack Orchestration REST API
      - cancel_update :Specify the cancel_update action in the request body. 
 - Response :Response codes
 
-##### Check stack resources : 
+##### Check stack resources : 지정된 스택의 상태에서 요청된 리소스인지 확인한다. 
 - Method : POST
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
