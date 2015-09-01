@@ -436,12 +436,12 @@ OpenStack Orchestration REST API
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
 ```javascript
+{
+    "suspend": null
+}
 ```
 - Request Elements
-- Response 
-```javascript
-```
-- Response Elements
+     - suspend :Specify the suspend action in the request body. 
 - Response :Response codes
 
 ##### Resume stack: 
@@ -449,12 +449,12 @@ OpenStack Orchestration REST API
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions
 - Request
 ```javascript
+{
+    "resume": null
+}
 ```
 - Request Elements
-- Response 
-```javascript
-```
-- Response Elements
+     - resume :Specify the resume action in the request body. 
 - Response :Response codes
 
 ##### Cancel stack update : 
@@ -462,12 +462,12 @@ OpenStack Orchestration REST API
 - Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/actions
 - Request
 ```javascript
+{
+    "cancel_update": null
+}
 ```
 - Request Elements
-- Response 
-```javascript
-```
-- Response Elements
+     - cancel_update :Specify the cancel_update action in the request body. 
 - Response :Response codes
 
 ##### Check stack resources : 
@@ -475,12 +475,12 @@ OpenStack Orchestration REST API
 - Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/actions
 - Request
 ```javascript
+{
+    "check": null
+}
 ```
 - Request Elements
-- Response 
-```javascript
-```
-- Response Elements
+     - check :Specify the check action in the request body. 
 - Response :Response codes
 
 ### Stacks resources
