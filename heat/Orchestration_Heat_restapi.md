@@ -30,6 +30,7 @@ OpenStack Orchestration REST API
 }
 ```
 
+***
 ### Stacks
 ##### Create stack :stack 을 생성 한다. 
 - Method : POST
