@@ -679,56 +679,60 @@ OpenStack Orchestration REST API
 
 ***
 ### Stacks events
-##### Find stack events : 
+##### Find stack events : 지정된 스택의 이벤트 목록에 대한 표준 URL을 찾는다.
 - Method : GET
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/events
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/events
 - Response :Response codes
 
-##### List stack events : 
+##### List stack events : 지정된 스택의 이벤트 목록을 보여준다. 
 - Method : GET
-- Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/events
-- Request
-```javascript
-```
+- Request URI : /v1/{tenant_id}/stacks/{stack_name}/events
+- QueryString : ?resource_action={resource_action}&resource_status={resource_status}&resource_name={resource_name}&resource_type={resource_type}&limit={limit}&marker={marker}&sort_keys={sort_keys}&sort_dir={sort_dir}
 - Request Elements
+     - resource_action (Optional) :지정된 리소스 동작에 의한 이벤트 목록을 필터링 한다. 다중 리소스 작업에 대해 필터링을 여러번 필터링 할 수 있다.
+     - resource_status (Optional) :지정된 리소스 상태에 의한 이벤트 목록을 필터링 한다. 다중 리소스 작업에 대해 필터링을 여러번 필터링 할 수 있다.
+     - resource_name (Optional) :지정된 리소스 이름에 의한 이벤트 목록을 필터링 한다. 다중 리소스 작업에 대해 필터링을 여러번 필터링 할 수 있다.
+     - resource_type (Optional) :지정된 리소스 타입에 의한 이벤트 목록을 필터링 한다. 다중 리소스 작업에 대해 필터링을 여러번 필터링 할 수 있다.
+     - limit (Optional) :쿼리에 응답 항목의 지정된 페이지 크기를 요청한다.  지정된 한계 값까지 항목의 수를 알려준다. 처음 limit 요청 이후 marker 파라미터의 응답으로부터 마지막 항목 ID를 사용하도록 limit 파라미터를 사용한다. 
+     - marker (Optional) :마지막 항목 ID를 지정 한다. 
+     - sort_keys (Optional) :Sorts the list by the resource_type or created_at key. 
+     - sort_dir (Optional) :The sort direction of the list. 
 - Response 
 ```javascript
+{
+    "events": [
+        {
+            ...
+        },
+        {
+            ...
+        }
+    ]
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### List resource events : 
+##### List resource events : 지정된 스택의 리소스에 대한 이벤트 목록을 보여준다. 
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/resources/​{resource_name}​/events
-- Request
-```javascript
-```
-- Request Elements
+- QueryString : ?resource_action={resource_action}&resource_status={resource_status}&resource_name={resource_name}&resource_type={resource_type}&limit={limit}&marker={marker}&sort_keys={sort_keys}&sort_dir={sort_dir}
 - Response 
 ```javascript
+{
+    "events": [
+        {
+            ...
+        },
+        {
+            ...
+        }
+    ]
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Show event details: 
+##### Show event details: 지정된 이벤트를 자세하게 보여준다. 
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/resources/​{resource_name}​/events/​{event_id}​
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
+- Response (누락되어 있음. 확인이 필요.)
 - Response :Response codes
 
 ***
