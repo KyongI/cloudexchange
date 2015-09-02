@@ -465,56 +465,70 @@ OpenStack Orchestration REST API
 }
 ```
 
-##### List snapshots : 
+##### List snapshots : 스택 스냅 샷 목록을 보여 준다.
 - Method : GET
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "snapshots": [
+        {
+            "id": "7c4e1ef4-bf1b-41ab-a0c8-ce01f4ffdfa1",
+            "name": "vol_snapshot",
+            "status": "IN_PROGRESS",
+            "status_reason": null,
+            "data": null
+        }
+    ]
+}
 ```
-- Response Elements
-- Response :Response codes
- 
-##### Show snapshot : 
+
+##### Show snapshot : 지정된 스냅 샷을 자세히 보여 준다. 
 - Method : GET
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots/{snapshot_id}
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "snapshot": {
+        "id": "7c4e1ef4-bf1b-41ab-a0c8-ce01f4ffdfa1",
+        "name": "vol_snapshot",
+        "status": "COMPLETE",
+        "status_reason": "Stack SNAPSHOT completed successfully",
+        "data": {
+            "status": "COMPLETE",
+            "name": "stack_vol1",
+            "stack_user_project_id": "fffa11067b1c48129ddfb78fba2bf09f",
+            "environment": {
+                "parameters": {},
+                "resource_registry": {
+                    "resources": {}
+                }
+            },
+            "template": {
+                "heat_template_version": "2013-05-23",
+                "resources": {
+                    ...
+                }
+            },
+            "action": "SNAPSHOT",
+            "project_id": "ecdb08032cd042179692a1b148f6565e",
+            "id": "656452c2-e151-40da-8704-c844e69b485c",
+            "resources": {
+                ...
+            }
+        }
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
- 
-##### Delete snapshot : 
+
+##### Delete snapshot : 스냅 샷을 삭제 한다. 
 - Method : DELETE
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots/{snapshot_id}
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
  
-##### Restore snapshot : 
+##### Restore snapshot : 스냅 샷을 복원 한다. 스냅 샷에서 활성화된 스택만 복원 가능하다. 삭제된 스택은 다시 생성해야만 한다. 
 - Method : POST
 - Request URI : /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots/{snapshot_id}/restore
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
 
 ***
