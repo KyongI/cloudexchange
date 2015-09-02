@@ -915,134 +915,306 @@ OpenStack Orchestration REST API
 
 ***
 ### Software configuration
-##### Create configuration : 
+##### Create configuration : 소프트웨어 설정을 생성한다. 
 - Method : POST
 - Request URI : /v1/​{tenant_id}​/software_configs
 - Request
 ```javascript
+{
+    "inputs": [
+        {
+            ...
+        },
+        {
+            ...
+        }
+    ],
+    "group": "script",
+    "name": "a-config-we5zpvyu7b5o",
+    "outputs": [
+        {
+            ...
+        }
+    ],
+    "config": "#!/bin/sh -x\necho \"Writing to /tmp/$bar\"\necho $foo > /tmp/$bar\necho -n \"The file /tmp/$bar contains `cat /tmp/$bar` for server $deploy_server_id during $deploy_action\" > $heat_outputs_path.result\necho \"Written to /tmp/$bar\"\necho \"Output to stderr\" 1>&2",
+    "options": null
+}
 ```
 - Request Elements
+     - config (Optional) :Configuration script or manifest that defines which configuration is performed. 
+     - group (Optional) :Namespace that groups this software configuration by when it is delivered to a server. This setting might simply define which configuration tool performs the configuration. 
+     - name (Optional) :The name of the configuration to create. 
+     - inputs (Optional) :Schema that represents the inputs that this software configuration expects. 
+     - outputs (Optional) :Schema that represents the outputs that this software configuration produces. 
+     - options (Optional) :Map that contains options that are specific to the configuration management tool that this resource uses. 
 - Response 
 ```javascript
+{
+    "software_config": {
+        "creation_time": "2015-01-31T15:12:36Z",
+        "inputs": [
+            {
+                ...
+            },
+            {
+                ...
+            }
+        ],
+        "group": "script",
+        "name": "a-config-we5zpvyu7b5o",
+        "outputs": [
+            {
+                ...
+            }
+        ],
+        "options": null,
+        "config": "#!/bin/sh -x\necho \"Writing to /tmp/$bar\"\necho $foo > /tmp/$bar\necho -n \"The file /tmp/$bar contains `cat /tmp/$bar` for server $deploy_server_id during $deploy_action\" > $heat_outputs_path.result\necho \"Written to /tmp/$bar\"\necho \"Output to stderr\" 1>&2",
+        "id": "ddee7aca-aa32-4335-8265-d436b20db4f1"
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Show configuration details : 
+##### Show configuration details : 소프트웨어 설정을 자세하게 보여준다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/software_configs/​{config_id}​
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "software_config": {
+        "inputs": [
+            {
+                ...
+            },
+            {
+                ...
+            }
+        ],
+        "group": "script",
+        "name": "a-config-we5zpvyu7b5o",
+        "outputs": [
+            {
+                ...
+            }
+        ],
+        "creation_time": "2015-01-31T15:12:36Z",
+        "id": "ddee7aca-aa32-4335-8265-d436b20db4f1",
+        "config": "#!/bin/sh -x\necho \"Writing to /tmp/$bar\"\necho $foo > /tmp/$bar\necho -n \"The file /tmp/$bar contains `cat /tmp/$bar` for server $deploy_server_id during $deploy_action\" > $heat_outputs_path.result\necho \"Written to /tmp/$bar\"\necho \"Output to stderr\" 1>&2",
+        "options": null
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Delete config : 
+##### Delete config : 소프트웨어 설정을 삭제 한다.
 - Method : DELETE
 - Request URI : /v1/​{tenant_id}​/software_configs/​{config_id}​
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
 
-##### List deployments : 
+##### List deployments : 사용가능한 모든 소프트웨어 배포 목록을 보여준다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/software_deployments
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "software_deployments": [
+        {
+            "status": "COMPLETE",
+            "server_id": "ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5",
+            "config_id": "8da95794-2ad9-4979-8ae5-739ce314c5cd",
+            "output_values": {
+                "deploy_stdout": "Writing to /tmp/barmy\nWritten to /tmp/barmy\n",
+                "deploy_stderr": "+ echo Writing to /tmp/barmy\n+ echo fu\n+ cat /tmp/barmy\n+ echo -n The file /tmp/barmy contains fu for server ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5 during CREATE\n+ echo Written to /tmp/barmy\n+ echo Output to stderr\nOutput to stderr\n",
+                "deploy_status_code": 0,
+                "result": "The file /tmp/barmy contains fu for server ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5 during CREATE"
+            },
+            "input_values": null,
+            "action": "CREATE",
+            "status_reason": "Outputs received",
+            "id": "ef422fa5-719a-419e-a10c-72e3a367b0b8",
+            "creation_time": "2015-01-31T15:12:36Z",
+            "updated_time": "2015-01-31T15:18:21Z"
+        }
+    ]
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Create deployment : 
+##### Create deployment : 소프트웨어 배포를 생성한다.
 - Method : POST
 - Request URI : /v1/​{tenant_id}​/software_deployments
 - Request
 ```javascript
+{
+    "status": "IN_PROGRESS",
+    "server_id": "ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5",
+    "config_id": "8da95794-2ad9-4979-8ae5-739ce314c5cd",
+    "stack_user_project_id": "c024bfada67845ddb17d2b0c0be8cd79",
+    "action": "CREATE",
+    "status_reason": "Deploy data available"
+}
 ```
 - Request Elements
+     - config_id :The ID of the software configuration resource that runs when applying to the server. 
+     - server_id :The ID of the compute server to which the configuration applies. 
+     - action :The current stack action that triggers this deployment resource. 
+     - stack_user_project_id (Optional) :Authentication project ID, which can also perform operations on this deployment. 
+     - status (Optional) :Current status of the deployment. 
+     - status_reason (Optional) :Error description for the last status change, which is FAILED status. 
 - Response 
 ```javascript
+{
+    "software_deployment": {
+        "status": "IN_PROGRESS",
+        "server_id": "ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5",
+        "config_id": "8da95794-2ad9-4979-8ae5-739ce314c5cd",
+        "output_values": null,
+        "input_values": null,
+        "action": "CREATE",
+        "status_reason": "Deploy data available",
+        "id": "ef422fa5-719a-419e-a10c-72e3a367b0b8",
+        "creation_time": "2015-01-31T15:12:36Z",
+        "updated_time": "2015-01-31T15:18:21Z"
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Show server configuration metadata : 
+##### Show server configuration metadata : 지정된 서버에 대한 배포 구성 메타 데이터를 표시한다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/software_deployments/metadata/​{server_id}​
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "metadata": [
+        {
+            "inputs": [
+                ...
+            ],
+            "group": "script",
+            "name": "a-config-we5zpvyu7b5o",
+            "outputs": [
+                ...
+            ],
+            "options": null,
+            "creation_time": "2015-01-31T15:12:36Z",
+            "updated_time": "2015-01-31T15:18:21Z",
+            "config": "#!/bin/sh -x\necho \"Writing to /tmp/$bar\"\necho $foo > /tmp/$bar\necho -n \"The file /tmp/$bar contains `cat /tmp/$bar` for server $deploy_server_id during $deploy_action\" > $heat_outputs_path.result\necho \"Written to /tmp/$bar\"\necho \"Output to stderr\" 1>&2",
+            "id": "3d5ec2a8-7004-43b6-a7f6-542bdbe9d434"
+        },
+        {
+            "inputs": [
+                ...
+            ],
+            "group": "script",
+            "name": "a-config-we5zpvyu7b5o",
+            "outputs": [
+                ...
+            ],
+            "options": null,
+            "creation_time": "2015-01-31T16:14:13Z",
+            "updated_time": "2015-01-31T16:18:19Z",
+            "config": "#!/bin/sh -x\necho \"Writing to /tmp/$bar\"\necho $foo > /tmp/$bar\necho -n \"The file /tmp/$bar contains `cat /tmp/$bar` for server $deploy_server_id during $deploy_action\" > $heat_outputs_path.result\necho \"Written to /tmp/$bar\"\necho \"Output to stderr\" 1>&2",
+            "id": "8da95794-2ad9-4979-8ae5-739ce314c5cd"
+        }
+    ]
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Show deployment details : 
+##### Show deployment details : 지정된 소프트웨어 배포를 자세하게 보여준다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/software_deployments/​{deployment_id}​
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "software_deployment": {
+        "status": "IN_PROGRESS",
+        "server_id": "ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5",
+        "config_id": "3d5ec2a8-7004-43b6-a7f6-542bdbe9d434",
+        "output_values": null,
+        "input_values": null,
+        "action": "CREATE",
+        "status_reason": "Deploy data available",
+        "id": "06e87bcc-33a2-4bce-aebd-533e698282d3",
+        "creation_time": "2015-01-31T15:12:36Z",
+        "updated_time": "2015-01-31T15:18:21Z"
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Update deployment : 
+##### Update deployment : 지정된 소프트웨어 배포를 업데이트 한다.
 - Method : PUT
 - Request URI : /v1/​{tenant_id}​/software_deployments/​{deployment_id}​
 - Request
 ```javascript
+{
+    "status": "COMPLETE",
+    "output_values": {
+        "deploy_stdout": "Writing to /tmp/baaaaa\nWritten to /tmp/baaaaa\n",
+        "deploy_stderr": "+ echo Writing to /tmp/baaaaa\n+ echo fooooo\n+ cat /tmp/baaaaa\n+ echo -n The file /tmp/baaaaa contains fooooo for server ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5 during CREATE\n+ echo Written to /tmp/baaaaa\n+ echo Output to stderr\nOutput to stderr\n",
+        "deploy_status_code": 0,
+        "result": "The file /tmp/baaaaa contains fooooo for server ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5 during CREATE"
+    },
+    "status_reason": "Outputs received"
+}
 ```
-- Request Elements
 - Response 
 ```javascript
+{
+    "software_deployment": {
+        "status": "COMPLETE",
+        "server_id": "ec14c864-096e-4e27-bb8a-2c2b4dc6f3f5",
+        "config_id": "3d5ec2a8-7004-43b6-a7f6-542bdbe9d434",
+        "output_values": {
+            ...
+        },
+        "input_values": null,
+        "action": "CREATE",
+        "status_reason": "Outputs received",
+        "id": "06e87bcc-33a2-4bce-aebd-533e698282d3",
+        "creation_time": "2015-01-31T15:12:36Z",
+        "updated_time": "2015-01-31T15:18:21Z"
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### Delete deployment : 
+##### Delete deployment : 지정된 소프트웨어 배포를 삭제한다.
 - Method : DELETE
 - Request URI : /v1/​{tenant_id}​/software_deployments/​{deployment_id}​
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
 
 ***
 ### Manage service
-##### Show orchestration engine status : 
+##### Show orchestration engine status : 모든 오케스트레이션 엔진에 대한 세부 정보를 볼 수 관리 사용자를 활성화한다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/services
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "services": [
+        {
+            "status": "up",
+            "binary": "heat-engine",
+            "report_interval": 60,
+            "engine_id": "9d9242c3-4b9e-45e1-9e74-7615fbf20e5d",
+            "created_at": "2015-02-03T05:55:59.000000",
+            "hostname": "mrkanag",
+            "updated_at": "2015-02-03T05:57:59.000000",
+            "topic": "engine",
+            "host": "engine-1",
+            "deleted_at": null,
+            "id": "e1908f44-42f9-483f-b778-bc814072c33d"
+        },
+        {
+            "status": "down",
+            "binary": "heat-engine",
+            "report_interval": 60,
+            "engine_id": "2d2434bf-adb6-4453-9c6b-b22fb8bd2306",
+            "created_at": "2015-02-03T06:03:14.000000",
+            "hostname": "mrkanag",
+            "updated_at": "2015-02-03T06:09:55.000000",
+            "topic": "engine",
+            "host": "engine",
+            "deleted_at": null,
+            "id": "582b5657-6db7-48ad-8483-0096350faa21"
+        }
+    ]
+}
 ```
-- Response Elements
-- Response :Response codes
+
