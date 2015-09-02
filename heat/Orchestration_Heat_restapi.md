@@ -737,72 +737,181 @@ OpenStack Orchestration REST API
 
 ***
 ### Templates
-##### Get stack template : 
+##### Get stack template : 지정된 스택의 탬플릿을 얻어 온다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/template
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "description": "Hello world HOT template that just defines a single server. Contains just base features to verify base HOT support.\n",
+    "heat_template_version": "2013-05-23",
+    "outputs": {
+        ...
+    },
+    "parameters": {
+        ...
+    },
+    "resources": {
+        ...
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
-##### List template versions : 
+##### List template versions : 사용가능한 모든 템플릿 버전 목록을 보여준다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/template_versions 
-- Request
-```javascript
-```
-- Request Elements
-- Response 
-```javascript
-```
-- Response Elements
 - Response :Response codes
 
-##### Validate template : 
+##### Validate template : 지정한 템플릿을 검증 한다.
 - Method : POST
 - Request URI : /v1/​{tenant_id}​/validate
 - Request
 ```javascript
+{
+    "template_url": "/PATH_TO_HEAT_TEMPLATES/WordPress_Single_Instance.template"
+}
 ```
 - Request Elements
+     - template_url (Optional) :지정된 작업을 수행 할 스택 템플릿을 포함하는 URI 위치 이다. URI에 있는 예상 템플릿 콘텐츠에 대한 자세한 내용은 templete 파라미터에 대한 설명을 참조한다. templete 파라미터를 생략하는 경우 이 파라미터가 필요하다. 만약 두개의 파라미터를 같이 사용하면, 이 파라미터는 무시된다. 
+     - template (Optional) :지정된 작업을 수행 할 스택 템플릿이다.
+     - environment (Optional) :A JSON environment for the stack. 
 - Response 
 ```javascript
+{
+    "Description": "A template that provides a single server instance.",
+    "Parameters": {
+        "server-size": {
+            ...
+        },
+        "key_name": {
+            ...
+        },
+        "server_name": {
+            ...
+        }
+    },
+    "ParameterGroups": [
+        {
+            "label": "Parameter groups",
+            "description": "My parameter groups",
+            "parameters": [
+                "param_name-1",
+                "param_name-2"
+            ]
+        }
+    ]
+}
 ```
 - Response Elements
-- Response :Response codes
+     - Parameters : An object that defines all input parameters that are defined in the template. Indexed by parameter name. 
+     - ParameterGroups (Optional) : A list of parameter groups. Each group contains a list of parameter names. 
 
-##### Show resource template : 
+##### Show resource template : 지정된 리소스 타입에 대한 템플릿 representation을 보여줍니다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/resource_types/​{type_name}​/template
-- Request
-```javascript
-```
+- QueryString : ?template_type={template_type}
 - Request Elements
+     - template_type (Optional) :The resource template type. Default type is cfn. The hot template type is supported. 
 - Response 
 ```javascript
+{
+    "HeatTemplateFormatVersion": "2012-12-12",
+    "Outputs": {
+        ...
+    },
+    "Parameters": {
+        ...
+    },
+    "Resources": {
+        ...
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
+
+##### List resource types : 제공되는 탬플릿 리소스 타입의 목록을 보여준다. 
+- Method : GET
+- Request URI : /v1/​{tenant_id}​/resource_types
+- Response 
+```javascript
+{
+    "resource_types": [
+        "AWS::EC2::Instance",
+        "OS::Heat::ScalingPolicy",
+        "AWS::CloudFormation::Stack",
+        "OS::Keystone::Group",
+        "OS::Glance::Image",
+        "AWS::EC2::Volume",
+        "OS::Heat::SoftwareDeployment",
+        "AWS::AutoScaling::ScalingPolicy",
+        "AWS::EC2::InternetGateway",
+        "OS::Heat::SoftwareDeployments",
+        "AWS::EC2::VolumeAttachment",
+        "AWS::CloudFormation::WaitConditionHandle",
+        "OS::Cinder::VolumeAttachment",
+        "OS::Cinder::EncryptedVolumeType",
+        "OS::Heat::AutoScalingGroup",
+        "OS::Nova::FloatingIP",
+        "OS::Heat::HARestarter",
+        "OS::Keystone::Project",
+        "OS::Keystone::Endpoint",
+        "OS::Heat::InstanceGroup",
+        "AWS::CloudWatch::Alarm",
+        "AWS::AutoScaling::AutoScalingGroup",
+        "OS::Heat::CloudConfig",
+        "OS::Heat::SoftwareComponent",
+        "OS::Cinder::Volume",
+        "OS::Keystone::Service",
+        "OS::Heat::WaitConditionHandle",
+        "OS::Heat::SoftwareConfig",
+        "AWS::CloudFormation::WaitCondition",
+        "OS::Heat::StructuredDeploymentGroup",
+        "OS::Heat::RandomString",
+        "OS::Heat::SoftwareDeploymentGroup",
+        "OS::Nova::KeyPair",
+        "OS::Heat::MultipartMime",
+        "OS::Heat::UpdateWaitConditionHandle",
+        "OS::Nova::Server",
+        "AWS::IAM::AccessKey",
+        "AWS::EC2::SecurityGroup",
+        "AWS::EC2::EIPAssociation",
+        "AWS::EC2::EIP",
+        "OS::Heat::AccessPolicy",
+        "AWS::IAM::User",
+        "OS::Heat::WaitCondition",
+        "OS::Heat::StructuredDeployment",
+        "AWS::RDS::DBInstance",
+        "AWS::AutoScaling::LaunchConfiguration",
+        "OS::Heat::Stack",
+        "OS::Nova::FloatingIPAssociation",
+        "OS::Heat::ResourceGroup",
+        "OS::Heat::StructuredConfig",
+        "OS::Nova::ServerGroup",
+        "OS::Heat::StructuredDeployments",
+        "OS::Keystone::Role",
+        "OS::Keystone::User",
+        "AWS::ElasticLoadBalancing::LoadBalancer",
+        "OS::Nova::Flavor",
+        "OS::Cinder::VolumeType"
+    ]
+}
+```
 
 ***
 ### Build info
-##### Show build information : 
+##### Show build information : 오케스트레이션 배포에 대한 빌드 정보를 보여 준다.
 - Method : GET
 - Request URI : /v1/​{tenant_id}​/build_info
-- Request
-```javascript
-```
-- Request Elements
 - Response 
 ```javascript
+{
+    "api": {
+        "revision": "{api_build_revision}"
+    },
+    "engine": {
+        "revision": "{engine_build_revision}"
+    }
+}
 ```
-- Response Elements
-- Response :Response codes
 
 ***
 ### Software configuration
