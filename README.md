@@ -20,6 +20,9 @@ MPLS technology enables the deployment of layer 2 and layer 3 VPNs between data 
 
 Below figure shows the high level physical topology for orchestrating the inter datacenter connectivity between multi-region using MPLS VPN to extend the L2 networks.
 
+![orchestrating_20150902](https://cloud.githubusercontent.com/assets/12180841/9653681/3585f38a-5260-11e5-9cf0-359d626c598c.png)
+
+
  
 
 ##### Materials and Method
@@ -41,7 +44,10 @@ For user’s perspective, the goals of the proposal are.
 - Enable simple recovery when it comes back
 
 ##### Use Case 
-DB HA(High Availability) configuration across multi-region using L2 MPLS VPN network
+- DB HA(High Availability) configuration across multi-region using L2 MPLS VPN network
+![ha_configuration_20150902](https://cloud.githubusercontent.com/assets/12180841/9653683/3a05b4a4-5260-11e5-971e-c95293da36bf.png)
 
+- HA scenario
+![ha_scenario_20150902](https://cloud.githubusercontent.com/assets/12180841/9653703/6a231d70-5260-11e5-8048-442faf219086.png)
 Reference Site: https://wiki.opendaylight.org/view/Release/Lithium/VTN/User_Guide/OpenStack_Support
 
