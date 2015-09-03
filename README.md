@@ -49,5 +49,6 @@ For user’s perspective, the goals of the proposal are.
 
 - HA scenario
 ![ha_scenario_20150902](https://cloud.githubusercontent.com/assets/12180841/9653703/6a231d70-5260-11e5-8048-442faf219086.png)
+
 Reference Site: https://wiki.opendaylight.org/view/Release/Lithium/VTN/User_Guide/OpenStack_Support
 
