@@ -1,0 +1,56 @@
+heat_template_version: 2013-05-23
+
+description: Generated template
+
+parameters:
+    server_0_flavor:
+        default: m1.tiny
+        description: Flavor to use for server server_0
+        type: string
+
+    server_0_image:
+        default: e35d4491-fd0d-4241-8524-8703c27608ff
+        description: Image to use to boot server server_0
+        type: string
+
+resources:
+
+    network_0:
+        type: OS::Neutron::Net
+        properties:
+            admin_state_up: true
+            name: public_net
+            shared: false
+            #tenant_id: 5eae73fa860c4291bab537f5e45e849b
+
+    server_0:
+        type: OS::Nova::Server
+        properties:
+            block_device_mapping:
+            - device_name: /dev/vdb
+              volume_id: { get_resource: volume_0 }
+            diskConfig: AUTO
+            flavor: { get_param: server_0_flavor }
+            image: { get_param: server_0_image }
+            name: test1
+            networks: [network: { get_resource: network_0 }]
+
+    subnet_0:
+        type: OS::Neutron::Subnet
+        properties:
+            network_id: { get_resource: network_0 }
+            cidr: 9.148.45.0/24
+            dns_nameservers : [9.148.5.22]
+            #gateway_ip: xx.xx.xx.xx
+            allocation_pools:
+            - start: 9.148.45.81
+              end: 9.148.45.94
+
+    volume_0:
+        type: OS::Cinder::Volume
+        properties:
+            name: my_vol
+            size: 1
+            metadata:
+                attached_mode: rw
+                readonly: 'False'
