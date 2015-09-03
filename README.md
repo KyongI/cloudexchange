@@ -1,4 +1,4 @@
-### Proposal for Creating an Interconnected Cloud Service
+# Proposal for Creating an Interconnected Cloud Service
 
 # Abstraction
 The proposal is for the advanced interconnection service that enables seamless, on-demand, direct access to multiple clouds from multiple networks.
@@ -8,9 +8,9 @@ In era of cloud computing, tenants have more and more data interactions with dat
 
 Esp. in designing high availability architectures using multi-regions we need to address the following set of challenges:
 
-- Workload Migration - ability to migrate our application environment across regions
+- Workload Migration - ability to migrate our application environment across regions
 - Data Synch - ability to migrate real time copy of the data between the two or more regions
-- Network Flow - ability to enable flow of network traffic between two or more regions
+- Network Flow - ability to enable flow of network traffic between two or more regions
 
 # Service Features
 Orchestration Inter Cloud Connectivity with OpenDayLight and MPLS VPN 
@@ -34,11 +34,11 @@ The following is the proposed plan for design and implementation of the MPLS VPN
 
 # Goal and Objectives
 For user’s perspective, the goals of the proposal are.
-- Get data close to global applications
-- Avoid latency cost of commit between sites
-- Keep running during intermittent network failures between sites
-- Keep running if a site fails
-- Enable simple recovery when it comes back
+- Get data close to global applications
+- Avoid latency cost of commit between sites
+- Keep running during intermittent network failures between sites
+- Keep running if a site fails
+- Enable simple recovery when it comes back
 
 # Use Case 
 DB HA(High Availability) configuration across multi-region using L2 MPLS VPN network
