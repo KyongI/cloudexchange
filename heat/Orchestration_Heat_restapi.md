@@ -8,6 +8,9 @@ Openstack Heat의 Orchestration REST API를 분석 한다.
 
 OpenStack Orchestration REST API 
 -----------------------
+![heat_api1](https://github.com/KyongI/cloudexchange/blob/master/heat/heat_api_1.png)
+![heat_api2](https://github.com/KyongI/cloudexchange/blob/master/heat/heat_api_2.png)
+
 ### API Version 
 ##### List versions :모든 Orchestration API 버전 목록을 보여준다.
 - Method : GET
