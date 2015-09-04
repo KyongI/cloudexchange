@@ -28,6 +28,8 @@ Response 메세지는 XML과 JSON 을 지원.
 VTN 코디네이터 REST API 
 -----------------------
 ![vtn_api1](https://github.com/KyongI/cloudexchange/blob/master/vtn/vtn_api_1.png)
+![vtn_api1](https://github.com/KyongI/cloudexchange/blob/master/vtn/vtn_api_2.png)
+![vtn_api1](https://github.com/KyongI/cloudexchange/blob/master/vtn/vtn_api_3.png)
 
 ### API Version Function
 ***현재 버전에서 지원하지 않음***
@@ -1018,7 +1020,7 @@ VTN 코디네이터 REST API
 ```
 - Response Elements (Create vBridge Flow Filter Entry 참조)
  
- ##### Show vBridge Flow Filter Entry:vBridge Flow Filter Entry 정보를 보여준다.
+##### Show vBridge Flow Filter Entry:vBridge Flow Filter Entry 정보를 보여준다.
 - Method : GET
 - Request URI : /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}, /vtns/{vtn_name}/vbridges/{vbr_name}/flowfilters/{ff_type}/flowfilterentries/{seqnum}/detail
 - Response (If detail is specified in URI )
