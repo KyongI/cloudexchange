@@ -1,6 +1,6 @@
 //cex_dataflow.h
 //
-//REF : ./coordinator/modules/odcdriver/include/odc_dataflow.hh
+//REF : coordinator/modules/odcdriver/include/odc_dataflow.hh
 
 #ifndef _CEX_DATAFLOW_HH_
 #define _CEX_DATAFLOW_HH_
@@ -18,10 +18,6 @@
 class DataFlowCommand {
  public:
   explicit DataFlowCommand(ConfFileValues_t conf_values);
-
-  /**
-   * @brief Default Destructor
-   */
   ~OdcDataFlowCommand();
 
   UncRespCode read_cmd(unc::driver::controller *ctr,
