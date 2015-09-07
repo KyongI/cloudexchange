@@ -43,14 +43,10 @@ For user’s perspective, the goals of the proposal are.
 - Keep running if a site fails
 - Enable simple recovery when it comes back
 
-##### Use Case 
-- DB HA(High Availability) configuration across multi-region using L2 MPLS VPN network
+To implement these features, we are going to enhance VTN Neutron bundle or to provide Heat Resource Plug-in.
 
-![ha_configuration_20150902](https://cloud.githubusercontent.com/assets/12180841/9653683/3a05b4a4-5260-11e5-971e-c95293da36bf.png)
+##### VTN Neutron Enhancement
+VTN Neutron bundle will be enhanced in the VTN Manager to operate with HEAT Manager. It supports to create the virtual tenant network between multiple clouds and cooperate with Heat Manager to deploy VMs on this virtual network.
 
-- HA scenario
-
-![ha_scenario_20150902](https://cloud.githubusercontent.com/assets/12180841/9653703/6a231d70-5260-11e5-8048-442faf219086.png)
-
-Reference Site: https://wiki.opendaylight.org/view/Release/Lithium/VTN/User_Guide/OpenStack_Support
-
+##### Heat Resource Plug-in
+Heat is a service to orchestrate multiple composite cloud applications using templates, through both an OpenStack-native REST API and a CloudFormation-compatible Query API. Heat allows service providers to extend the capabilities of the orchestration service by writing their own resource plug-ins. We will provide the heat resource plug-in. The plug-in creates the virtual tenant network between multiple clouds and deploys VMs on this virtual network.
