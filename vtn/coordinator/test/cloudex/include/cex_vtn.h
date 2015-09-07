@@ -3,7 +3,8 @@
 //TODO : 아래의 class 를 분리해야 한다. 
 //       unc::driver::controller class
 //       unc::vtndrvcache::ConfigNode class 
-//REP : coordinator/modules/odcdriver/include/odc_vtn.hh
+//REF : coordinator/modules/odcdriver/include/odc_vtn.hh
+
 #ifndef _CEX_VTN_HH_
 #define _CEX_VTN_HH_
 
