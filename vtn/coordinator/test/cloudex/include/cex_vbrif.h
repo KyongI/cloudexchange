@@ -16,7 +16,7 @@
 
 class OdcVbrIfCommand: {
  public:
-  explicit OdcVbrIfCommand(unc::restjson::ConfFileValues_t conf_values);
+  explicit OdcVbrIfCommand(ConfFileValues_t conf_values);
   ~OdcVbrIfCommand();
 
   /**
