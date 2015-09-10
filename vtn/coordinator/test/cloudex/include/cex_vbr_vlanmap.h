@@ -16,7 +16,7 @@
 
 class OdcVbrVlanMapCommand {
  public:
-  explicit OdcVbrVlanMapCommand(unc::restjson::ConfFileValues_t conf_values);
+  explicit OdcVbrVlanMapCommand(ConfFileValues_t conf_values);
   ~OdcVbrVlanMapCommand();
 
   /**
