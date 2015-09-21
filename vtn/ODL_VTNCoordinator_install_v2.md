@@ -1,4 +1,4 @@
-Open Daylight VTN feature 설치 및 설정 (PART:1 VTN Coordinator) - Ver 2.0
+Open Daylight VTN feature 설치 및 설정 (PART:2 VTN Coordinator) - Ver 2.0
 ======================================
 
 1. Prior preparation
