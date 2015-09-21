@@ -21,10 +21,23 @@ export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64 <---이 내용을 ~/.bash
 git clone https://git.opendaylight.org/gerrit/p/controller.git
 git checkout stable/helium  --> error 나는 경우 git checkout -f stable/helium 
 cd con	troller/opendaylight/distribution/opendaylight/
-mvn clean install
 ```
 
-##### 4.실행
+##### 4.build & config
+```
+mvn clean install
+cd target/distribution.opendaylight-osgipackage/opendaylight
+vi configuration/vtn.ini
+```
+- vtn.ini 파일 내용
+```
+bridgename=br-int
+portname=eth1
+protocols=OpenFlow13
+failmode=secure
+```
+
+##### 5.실행
 ```
 cd target/distribution.opendaylight-osgipackage/opendaylight
 ./run.sh
