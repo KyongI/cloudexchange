@@ -12,9 +12,9 @@ CloudExchange Development Configuration
 |-------------|-------------|------------|------------|-----------------| 
 |121.78.77.162|eth1         |192.168.0.1 |Controller  |                 |
 |121.78.77.163|eth2         |192.168.0.2 |Controller  |                 |
-|121.78.77.164|eth1         |192.168.0.3 |Control node|                 |
+|121.78.77.164|eth1         |192.168.0.3 |            |OS 재설치 필요   |
 |121.78.77.165|eth1         |192.168.0.4 |            |soft reboot 않됨 |
-|121.78.77.166|eth1         |192.168.0.5 |            |                 |
+|121.78.77.166|eth1         |192.168.0.5 |Compute node|                 |
 |121.78.77.167|eth1         |192.168.0.6 |            |                 |
 |121.78.77.168|eth1         |192.168.0.7 |            |                 |
 
@@ -22,7 +22,7 @@ CloudExchange Development Configuration
 ----------------------
 
 ##### 2.1 ODL Controller 설치 및 구성
-- [ODL Controller install v1](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_Controller_install_v1.md) 참조하여 설치 
+- [ODL Controller install v1](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_Controller_install_v1.md) 참조하여 설치
 - 실행 전단계 까지 설치 합니다. 
 
 ##### 2.2 VTN coordinator 설치 및 구성
