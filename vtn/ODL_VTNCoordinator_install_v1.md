@@ -66,3 +66,8 @@ chown vtn:vtn vtn
 ```
 --> vtn coo~ build에 실패함. mvn -f dist/pom.xml install 에서 error. 더이상 진행 불가.
 
+2. ODL VTN Coordinator 설치 (v1.1 - Fedora20)
+---------------------------
+
+- Fedora20 에서 위의 방법데로 설치 했으나 같은 에러 발생함
+
