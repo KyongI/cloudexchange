@@ -1,4 +1,4 @@
-Open Daylight VTN feature 설치 및 설정 (PART:3 Controller 설치)
+Open Daylight VTN feature 설치 및 설정 (PART:1 Controller 설치)
 ======================================
 
 1. ODL SDN Controller 설치 (v1.0)
