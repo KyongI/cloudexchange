@@ -4,14 +4,14 @@ Open Daylight VTN feature 설치 및 설정
 1. ODL VTN Coordinator 설치 (v1.0)
 ---------------------------
 
-1.참고 싸이트 
+1.참고 싸이트  
 <https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):Installation:VTN_Coordinator>
 
-2. OS 설치 환경
-CentOS 6.6
-kernel: Linux 2.6.32-431.el6.x86_64
+2. OS 설치 환경  
+CentOS 6.6  
+kernel: Linux 2.6.32-431.el6.x86_64  
 
-3. 패키지 인스톨
+3. 패키지 인스톨  
 - yum install make glibc-devel gcc gcc-c++ boost-devel openssl-devel ant perl-ExtUtils-MakeMaker unixODBC-devel perl-Digest-SHA uuid libxslt libcurl libcurl-devel git
 - boost-devel, openssl-devel은 설치되지 않음
 - ssh 가 접속 되지 않는 현상 
