@@ -34,5 +34,5 @@ cd target/distribution.opendaylight-osgipackage/opendaylight
 export MAVEN_OPTS=”-Xmx1024m -XX:MaxPermSize=512” 하고 다시 빌드.
 
 ##### 5.웹으로 접속
-http://121.78.77.162:8080/
-admin/admin
+- http://121.78.77.162:8080/
+- id/pass : admin/admin
