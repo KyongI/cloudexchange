@@ -12,7 +12,8 @@ CloudExchange Development Configuration
 - 실행 전단계 까지 설치 합니다. 
 
 ##### 2.2 VTN coordinator 설치 및 구성
-- -[ODL VTN Coordinator install v1](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_VTNCoordinator_install_v1.md) 참조하여 설치-
+- <strike>[ODL VTN Coordinator install v1](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_VTNCoordinator_install_v1.md) 참조하여 설치</strike>
+- [ODL VTN Coordinator install v2](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_VTNCoordinator_install_v2.md) 참조하여 설치
 - 빌드 후에 db setup 까지만 한다. 
 
 ##### 2.3 VTN manager 설치 및 구성
