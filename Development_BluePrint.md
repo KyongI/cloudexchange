@@ -8,6 +8,8 @@ CloudExchange Development Configuration
 ----------------------
 
 ##### 2.1 ODL Controller 설치 및 구성
+- [ODL Controller install v1](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_Controller_install_v1.md) 참조하여 설치 
+- 실행 전단계 까지 설치 합니다. 
 
 ##### 2.2 VTN coordinator 설치 및 구성
 
