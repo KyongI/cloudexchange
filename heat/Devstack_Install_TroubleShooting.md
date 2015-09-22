@@ -26,5 +26,7 @@ DevStack Control/Compute Node 설치 문제 해결
 2015-09-15 05:09:07.968 | df: '/run/user/1000/gvfs': Permission denied
 2015-09-15 05:09:07.968 | df: '/media/djkim/VBOXADDITIONS_5.0.2_102096': Permission denied
 ```
-- 해결 방법
+- 해결 방법 :
+```
 'create_network_postcommit failed' 발생하는 이유는 ODL 설치가 잘못 되어서 인데. VTN manager 가 설지 되지 않은 문제.
+```
