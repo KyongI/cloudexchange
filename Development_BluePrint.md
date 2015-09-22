@@ -57,6 +57,9 @@ curl --user admin:adminpass -H 'content-type: application/json' -X GET 'http://1
 
 ##### 3.2 설치시 문제점 해결
 - 설치시 생기는 문제점은 [이곳](https://github.com/KyongI/cloudexchange/blob/master/heat/Devstack_Install_TroubleShooting.md)을 참조한다.
+- Control Node가 계속해서 설치 되지 않는 원인
+    - 설치 시스템에 openstack이 깔려 있는 경우 100% 제거하고 다시 설치하기가 어려움.
+    - 포멧하고 OS 부터 다시 설치 하는 방법을 일반적으로 권유함.
 
 4. VTN 통신 실험
 -----------------
