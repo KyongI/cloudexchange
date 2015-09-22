@@ -52,9 +52,11 @@ curl --user admin:adminpass -H 'content-type: application/json' -X GET 'http://1
 3. Control/Compute Node
 ------------------------
 
-##### 3.1 Control Node 설치 및 구성
+##### 3.1 Control/Compute Node 설치 및 구성
+- [DevStack install v1](https://github.com/KyongI/cloudexchange/blob/master/heat/DevstackNode_install_v1.md) 참조하여 설치 
 
-##### 3.2 Compute Node 설치 및 구성
+##### 3.2 설치시 문제점 해결
+
 
 4. VTN 통신 실험
 -----------------
