@@ -56,7 +56,7 @@ curl --user admin:adminpass -H 'content-type: application/json' -X GET 'http://1
 - [DevStack install v1](https://github.com/KyongI/cloudexchange/blob/master/heat/DevstackNode_install_v1.md) 참조하여 설치 
 
 ##### 3.2 설치시 문제점 해결
-
+- 설치시 생기는 문제점은 [이곳](https://github.com/KyongI/cloudexchange/blob/master/heat/Devstack_Install_TroubleShooting.md)을 참조한다.
 
 4. VTN 통신 실험
 -----------------
