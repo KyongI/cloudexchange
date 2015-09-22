@@ -5,6 +5,7 @@ CloudExchange Development Configuration
 ---------
 
 ##### 1.1 전체 시스템 구성도
+![CloudeExBP](https://github.com/KyongI/cloudexchange/blob/master/heat/CloudExBluePrint.png)
 
 ##### 1.2 노드 정보
 
