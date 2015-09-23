@@ -40,9 +40,15 @@ sudo adduser vtn
 
 ##### 9.Download the code from git.
 ```
+sudo cd /usr/local/
 sudo git clone https://git.opendaylight.org/gerrit/p/vtn.git
 sudo chown -R vtn:vtn /usr/local/vtn
 sudo su - vtn
+vi ~/.bash_profile 
+export PATH=/opt/apache-maven-3.3.3/bin:$PATH (mvn 실행을 위해 설정)
+export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64 (path가 맞는지 확인할것)
+:wq!
+source ~/.bash_profile
 ```
 
 ##### 10.Build and install VTN Coordinator. 
@@ -51,7 +57,7 @@ cd vtn
 git checkout release/[stable**] <-- 여기에 현재 release 버젼인 lithium으로 빌드하면 mvn 에러가 난다. 원인 불명. 그래서 전버젼인 helium 으로 설치 
 cd coordinator
 mvn -f dist/pom.xml install 
-tar -C/ -jxvf dist/target/distribution.vtn-coordinator-6.1.0.0-[stable**}-bin.tar.bz2 <--[stable**] = helium
+tar -C/ -jxvf dist/target/distribution.vtn-coordinator-6.0.0.0-Helium-bin.tar.bz2
 ```
 
 3. Run VTN Coordinator
