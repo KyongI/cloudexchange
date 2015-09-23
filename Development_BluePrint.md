@@ -23,16 +23,16 @@ CloudExchange Development Configuration
 ----------------------
 ##### 2.1 전체 설치 순서 
 1.  ODL VTN Coordinator( DB setup 까지)
-2.  ODL VTN manager 설치 (kataf 실행까지 전체 설치)
+2.  ODL VTN Manager 설치 (kataf 실행까지 전체 설치)
 3.  Coordinator 실행 및 확인
-4.  controller 설치 및 실행
+4.  Controller 설치 및 실행
 
-##### 2.2 VTN coordinator 설치 및 구성
+##### 2.2 VTN Coordinator 설치 및 구성
 - <strike>[ODL VTN Coordinator install v1](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_VTNCoordinator_install_v1.md) 참조하여 설치</strike>
 - [ODL VTN Coordinator install v2](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_VTNCoordinator_install_v2.md) 참조하여 설치
 - 빌드 후에 db setup 까지만 한다. 
 
-##### 2.3 VTN manager 설치 및 구성
+##### 2.3 VTN Manager 설치 및 구성
 - [ODL VTN Manager install v1](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODL_VTNManager_install_v1.md) 참조하여 설치 
 - 빌드 후 실행
 
@@ -52,7 +52,7 @@ curl --user "admin":"admin" -H "Accept: application/json" -H "Content-type: appl
 curl --user admin:adminpass -H 'content-type: application/json' -X GET 'http://127.0.0.1:8083/vtn-webapi/api_version.json'  
 {"api_version":{"version":"V1.2"}}
 ```
-- controller 실행
+- controller 실행 및 포트 확인
 ```
 6633/6653 - OpenFlow Ports
 6640 - OVS Manager Port
