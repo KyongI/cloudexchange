@@ -7,7 +7,7 @@ Open Daylight VTN feature 설치 및 설정 (PART:1 Controller 설치)
 ##### 1.git, JDK 등 설치
 ```
 sudo apt-get update
-apt-get install pkg-config gcc make  ant g++ maven git libboost-dev libcurl4-openssl-dev libjson0-dev libssl-dev openjdk-7-jdk unixodbc-dev xmlstarlet
+sudo apt-get install pkg-config gcc make  ant g++ maven git libboost-dev libcurl4-openssl-dev libjson0-dev libssl-dev openjdk-7-jdk unixodbc-dev xmlstarlet
 export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64 <---이 내용을 ~/.bash_profile에 쓰고 저장
 ```
 
@@ -19,13 +19,14 @@ export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64 <---이 내용을 ~/.bash
 ##### 3.home/ubuntu 에서 
 ```
 git clone https://git.opendaylight.org/gerrit/p/controller.git
+cd controller
 git checkout stable/helium  --> error 나는 경우 git checkout -f stable/helium 
-cd con	troller/opendaylight/distribution/opendaylight/
 ```
 
 ##### 4.build & config
 ```
 mvn clean install
+cd controller/opendaylight/distribution/opendaylight/
 cd target/distribution.opendaylight-osgipackage/opendaylight
 vi configuration/vtn.ini
 ```
