@@ -47,6 +47,7 @@ export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk.x86_64
  
 ##### 6.Install Maven
 - http://maven.apache.org/download.cgi <--여기 가서 시키는 데로 /opt 에 maven 압축 풀고 환경변수 등록
+export PATH=/opt/apache-maven-3.3.3/bin:$PATH
 
 ##### 7.Install gtest-devel, json-c libraries 
 ```
