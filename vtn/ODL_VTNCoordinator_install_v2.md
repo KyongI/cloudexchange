@@ -12,15 +12,15 @@ ubuntu 14.04
 
 ###### 3.패키지 설치
 ```
-apt-get update
-apt-get install pkg-config gcc make  ant g++ maven git libboost-dev libcurl4-openssl-dev libjson0-dev libssl-dev openjdk-7-jdk unixodbc-dev xmlstarlet
+sudo apt-get update
+sudo apt-get install pkg-config gcc make  ant g++ maven git libboost-dev libcurl4-openssl-dev libjson0-dev libssl-dev openjdk-7-jdk unixodbc-dev xmlstarlet
 ```
 
 ##### 4.JDK 설치 - 14.04에서 필요 없음
 
 ##### 5.PostgreSQL 9.1 설치 
 ```
-apt-get install  postgresql postgresql-client postgresql-client-common postgresql-contrib odbc-postgresql
+sudo apt-get install  postgresql postgresql-client postgresql-client-common postgresql-contrib odbc-postgresql
 ```
 - 여기에서 postgresql-9.1로 하면 설치 않됨. 버전 부분을 삭제 하면 postgresql ver 9.3을 설치한다.
 
