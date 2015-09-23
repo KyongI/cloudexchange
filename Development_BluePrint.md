@@ -11,9 +11,9 @@ CloudExchange Development Configuration
 
 | 노드        | Private NIC | Private IP | 용도       | 비고            |
 |-------------|-------------|------------|------------|-----------------| 
-|121.78.77.162|eth1         |192.168.0.1 |Controller  | Cloud A - OK    |
-|121.78.77.163|eth2         |192.168.0.2 |Controller  | CloudeB - ?     |
-|121.78.77.164|eth1         |192.168.0.3 |Control Node| Cloude A - OK   |
+|121.78.77.162|eth1         |192.168.0.1 |Controller  | Cloud B - OK    |
+|121.78.77.163|eth2         |192.168.0.2 |Controller  | Cloud A - ?     |
+|121.78.77.164|eth1         |192.168.0.3 |Control Node| Cloud B - OK    |
 |121.78.77.165|eth1         |192.168.0.4 |            |                 |
 |121.78.77.166|eth1         |192.168.0.5 |            |                 |
 |121.78.77.167|eth1         |192.168.0.6 |            |                 |
