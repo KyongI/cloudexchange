@@ -73,3 +73,36 @@ Delete user “stack” in linux --> 이과정에서 stack이 실행하고 있�
 리붓 하고 다시 시도 함
 ```
 이방법으로 완벽하게 삭제되지는 않는다. Control node 재 설치시 문제가 발생함.
+
+***** ERROR : pip 가 없다고 하는 경우
+```
+- ubuntu home 으로 변경:
+   cd ~ --> to navigate to your home directory.
+
+- Then issue the below command:
+   wget -P Downloads/ https://svn.apache.org/repos/asf/oodt/tools/oodtsite.publisher/trunk/distribute_setup.py
+
+- Next step is to run the downloaded script. To do this, issue this command:
+   sudo python Downloads/distribute_setup.py
+
+- and type your user password when prompted (Please, note that your account needs to be a member of Administrators group in order to issue sudo).
+
+- Hit Enter and let the script run.
+
+- To ensure easy_install is installed, issue the command below:
+   which easy_install
+
+- The typical response in case the installation completed successfully would look something like this:
+   /usr/local/bin/easy_install
+
+- The next thing to do is use easy_install to install pip. For that you’ll need to issue:
+   sudo easy_install pip
+
+- Enter your password if prompted to confirm command.
+
+- Let the installer run and once the installation is completed type:
+   which pip
+
+- This command should typically respond with something like this:
+   /usr/local/bin/pip
+```
