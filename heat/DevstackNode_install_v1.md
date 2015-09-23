@@ -142,7 +142,7 @@ Q_OVS_USE_VETH=True
 #Details of the Control node for various services
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [ml2_odl]
-url=http://<ODL_IP_ADDRESS>:8080/controller/nb/v2/neutron #ODL IP Address (위와 같음)
+url=http://<ODL_IP_ADDRESS>:8080/controller/nb/v2/neutron #ODL IP Address(위와 같음) <--중요~!: 이 주석은 필히 지워야 설치됨
 username=admin
 password=admin
 ```
