@@ -9,14 +9,14 @@ CloudExchange Development Configuration
 
 ##### 1.2 노드 정보
 
-| 노드        | Private NIC | Private IP | 용도           | 비고                   |
-|-------------|-------------|------------|----------------|------------------------| 
-|121.78.77.162|eth1         |192.168.0.1 |ODL+Coordinator | Cloud B - OK           |
-|121.78.77.163|eth2         |192.168.0.2 |ODL BTN         | Cloud A - ?            |
-|121.78.77.164|eth1         |192.168.0.3 |Control Node    | Cloud B - OK           |
-|121.78.77.165|eth1         |192.168.0.4 |Control Node    | Cloud A - NotInstalled |
-|121.78.77.166|eth1         |192.168.0.5 |Compute Node    | Cloud B - NotInstalled |
-|121.78.77.167|eth1         |192.168.0.6 |Compute Node    | Cloud A - NotInstalled |
+| 노드        | Private NIC | Private IP | 용도              | 비고    |
+|-------------|-------------|------------|-------------------|---------| 
+|121.78.77.162|eth1         |192.168.0.1 |ODLVTN+Coordinator | Cloud B |
+|121.78.77.163|eth2         |192.168.0.2 |ODLVTN             | Cloud A |
+|121.78.77.164|eth1         |192.168.0.3 |Control Node       | Cloud B |
+|121.78.77.165|eth1         |192.168.0.4 |Control Node       | Cloud A |
+|121.78.77.166|eth1         |192.168.0.5 |Compute Node       | Cloud B |
+|121.78.77.167|eth1         |192.168.0.6 |Compute Node       | Cloud A |
 
 2. ODL VTN feature 
 ----------------------
