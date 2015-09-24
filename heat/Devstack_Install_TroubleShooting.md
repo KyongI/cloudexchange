@@ -8,7 +8,7 @@ DevStack Control/Compute Node 설치 문제 해결
 - ldappool>=1.0:python_version=='2.7' 
 + ldappool>=1.0
 ```
-
+---
 ##### ERROR: create_network_postcommit failed.
 ```
 2015-09-15 05:09:05.317 | ++ neutron net-create --tenant-id c9c0a95dd6564175939baf46fa012d72 private
@@ -30,7 +30,7 @@ DevStack Control/Compute Node 설치 문제 해결
 ```
 'create_network_postcommit failed' 발생하는 이유는 ODL 설치가 잘못 되어서 인데. VTN manager 가 설지 되지 않은 문제.
 ```
-
+---
 ##### ERROR: ImportError: No module named config
 ```
 2015-09-18 07:28:57.344 | + mysql -uroot -psupersecret -h127.0.0.1 -e 'DROP DATABASE IF EXISTS keystone;'
@@ -60,7 +60,7 @@ DevStack Control/Compute Node 설치 문제 해결
 - sudo apt-get install python-oslo.config --->해결하기 위해 이렇게 하고 수많은 에러가 발생.
 - 설치를 초기화 ./unstack.sh ,  ./clean.sh 등등 하고 재시도 (실패함)
 - devstack 을 완전히 삭제 하고 다시 설치 --> 해결 않됨
-
+---
 ##### INFO: devstack 삭제 방법 
 ```
 sudo ./clean.sh
@@ -73,7 +73,7 @@ Delete user “stack” in linux --> 이과정에서 stack이 실행하고 있�
 리붓 하고 다시 시도 함
 ```
 이방법으로 완벽하게 삭제되지는 않는다. Control node 재 설치시 문제가 발생함.
-
+---
 ##### ERROR : pip 가 없다고 하는 경우
 ```
 - ubuntu home 으로 변경:
@@ -106,7 +106,7 @@ Delete user “stack” in linux --> 이과정에서 stack이 실행하고 있�
 - This command should typically respond with something like this:
    /usr/local/bin/pip
 ```
-
+---
 ##### ERROR: AttributeError: Requirement instance has no attribute 'specifier'
  OS 다시 설치 하고 해결했다는 응답 있음. (OS 를 다시 설치 하고 해결됨)
  현재 다른 해결책 없음
