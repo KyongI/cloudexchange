@@ -116,4 +116,16 @@ Delete user “stack” in linux --> 이과정에서 stack이 실행하고 있�
  OS 다시 설치 하고 해결했다는 응답 있음. (OS 를 다시 설치 하고 해결됨)
  현재 다른 해결책 없음
  
+---
+##### ERROR:  cp: cannot create regular file '/etc/nova/policy.json': Permission denied
+```
+ because u have install the stack second times, so the file or dir has exist, 
+ you should use 'sudo rm -rf /etc/[*your components*]' 
+ 여기서는  sudo rm -rf /etc/nova 하고 다시 설치 
  
+ compute node 설치 성공시: 
+ This is your host ip: 121.78.77.166
+ 
+ --> compute node 설치 성공. 그러나 control node(164)는 복구 불가능.
+```
+
