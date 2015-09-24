@@ -74,7 +74,7 @@ Delete user “stack” in linux --> 이과정에서 stack이 실행하고 있�
 ```
 이방법으로 완벽하게 삭제되지는 않는다. Control node 재 설치시 문제가 발생함.
 
-***** ERROR : pip 가 없다고 하는 경우
+##### ERROR : pip 가 없다고 하는 경우
 ```
 - ubuntu home 으로 변경:
    cd ~ --> to navigate to your home directory.
@@ -106,3 +106,9 @@ Delete user “stack” in linux --> 이과정에서 stack이 실행하고 있�
 - This command should typically respond with something like this:
    /usr/local/bin/pip
 ```
+
+##### ERROR: AttributeError: Requirement instance has no attribute 'specifier'
+ OS 다시 설치 하고 해결했다는 응답 있음. (OS 를 다시 설치 하고 해결됨)
+ 현재 다른 해결책 없음
+ 
+ 
