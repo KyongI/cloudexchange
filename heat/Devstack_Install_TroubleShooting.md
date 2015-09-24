@@ -129,3 +129,13 @@ Delete user “stack” in linux --> 이과정에서 stack이 실행하고 있�
  --> compute node 설치 성공. 그러나 control node(164)는 복구 불가능.
 ```
 
+---
+##### ERROR : ImportError : No module named config 
+control node는 이렇게 하고 다시 설치 했을때 위와 같은 에러가 발생함.
+```
+ sudo pip install oslo.config --upgrade
+ ./clean.sh
+ ./stack.sh
+```
+
+ 
