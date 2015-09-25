@@ -138,4 +138,52 @@ control node는 이렇게 하고 다시 설치 했을때 위와 같은 에러가
  ./stack.sh
 ```
 
- 
+---
+##### ERROR: /home/stack/devstack/functions-common:532 Failure creating NET_ID
+```
+[vtn-dev] Openstack stack.sh error
+Lee He l2edzl3oy at gmail.com 
+Thu Jan 8 02:17:13 UTC 2015 
+
+ Dear Venkat,
+
+Thanks for the reply and all your help. I didn't know in-line comments
+would break the stacking process haha. Glad that the setup is working now
+and will be using it to develop a web app.
+
+Best regards,
+Lee He
+
+On Tue, Jan 6, 2015 at 10:20 AM, Venkatrangan G - ERS, HCL Tech <
+venkatrangang at hcl.com> wrote:
+
+>  Hi Lee,
+>
+>  Thanks for the added info, Helps debug faster.
+>
+> In your local.conf devstack computed the url wrongly along with that
+> comment statement
+>
+> Please change  it as follows
+>
+> REplacve
+>
+> url=http://192.168.248.4:8080/controller/nb/v2/neutron #Please Add the
+> ODL IP Address in this line
+>
+> as
+>
+> url=http://192.168.248.4:8080/controller/nb/v2/neutron
+>
+> that should solve your problem.  Also remove similar comments after the
+> parameter values in other places in your local.conf.
+>
+> Regards,
+>
+> Venkat G.
+
+지난 1월 Venkat과 Lee의 메일링을 보면 local.conf의 주석문 때문에 에러가 난것을 알수 있다. 
+주석을 지우고 ./unstack.sh ./stack.sh 하면 설치 성공
+```
+
+
