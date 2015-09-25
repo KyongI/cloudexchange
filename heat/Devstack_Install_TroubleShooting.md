@@ -184,6 +184,14 @@ venkatrangang at hcl.com> wrote:
 
 지난 1월 Venkat과 Lee의 메일링을 보면 local.conf의 주석문 때문에 에러가 난것을 알수 있다. 
 주석을 지우고 ./unstack.sh ./stack.sh 하면 설치 성공
+
+control node 설치 성공시: (예시)
+Horizon is now available at http://121.78.77.164/
+Keystone is serving at http://121.78.77.164:5000/v2.0/
+Examples on using novaclient command line is in exercise
+The default users are: admin and demo
+The password: labstack
+This is your host ip: 121.78.77.164
 ```
 
 
