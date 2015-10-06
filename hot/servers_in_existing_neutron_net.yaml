@@ -7,12 +7,15 @@ description: >
 parameters:
   key_name:
     type: string
+    default: mykey
     description: Name of keypair to assign to servers
   image:
     type: string
+    default: cirros-0.3.4-x86_64-uec
     description: Name of image to use for servers
   flavor:
     type: string
+    default: m1.nano
     description: Flavor to use for servers
   public_net_id:
     type: string
