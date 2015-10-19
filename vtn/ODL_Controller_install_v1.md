@@ -23,6 +23,26 @@ cd controller
 git checkout stable/helium  --> error 나는 경우 git checkout -f stable/helium 
 ```
 
+##### 3.1.빌드전에 vtn.ini 적용
+- vtn.ini 파일 내용
+```
+bridgename=br-int
+portname=eth1
+protocols=OpenFlow13
+failmode=secure
+```
+- 빌드전에 vtn.ini를 두는것이 맞다면, 다음의 패스중 하나임. 
+```
+cp vtn.ini controller/opendaylight/netconf/config-persister-impl/target/configuration
+cp vtn.ini controller/opendaylight/md-sal/samples/clustering-test-app/configuration
+cp vtn.ini controller/opendaylight/configuration
+cp vtn.ini controller/opendaylight/distribution/opendaylight/src/main/resources/configuration
+cp vtn.ini controller/opendaylight/distribution/opendaylight-karaf-resources/src/main/resources/configuration
+
+아래 패스는 빌드 후에 생성됨
+cp vtn.ini controller/opendaylight/distribution/opendaylight/target/configuration
+```
+
 ##### 4.build & config
 ```
 mvn clean install
@@ -46,6 +66,7 @@ cd target/distribution.opendaylight-osgipackage/opendaylight
 - 기다리다가 멈춰 있으면 엔터를 치면 'osgi>' 콘솔 프롬프트가 보이면 실행 완료
 - 실행시 ‘java.lang.OutOfMemoryError: PermGen space’ 에러가 뜨는 경우가 있습니다. 메모리 부족 현상 이므로 
 export MAVEN_OPTS=”-Xmx1024m -XX:MaxPermSize=512” 하고 다시 빌드.
+- 다시 빌드해도 에러가 나면 재부팅 후 다시 빌드해 본다. (메모리 해제 문제임)
 
 ##### 5.웹으로 접속
 - http://121.78.77.162:8080/
