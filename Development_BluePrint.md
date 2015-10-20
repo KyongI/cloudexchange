@@ -66,6 +66,7 @@ curl --user admin:adminpass -H 'content-type: application/json' -X GET 'http://1
 ```
 su - 
 cd /usr/local/vtn/manager/dist-karaf/target/assembly/bin
+chmod 777 ./start
 ./start
 netstat -ntlp |grep '*' --> 여기서 8080 확인
 ```
