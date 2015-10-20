@@ -61,6 +61,7 @@ curl --user admin:adminpass -H 'content-type: application/json' -X GET 'http://1
 
 ##### 2.5 ODL VTN Feature SDN Controller 서비스 데몬 실행순서
 - 재부팅 후에도 동작하기 위해서 데몬 형태롤 실행하는 방법
+
 1. manager 실행
 ```
 su - 
@@ -68,11 +69,13 @@ cd /usr/local/vtn/manager/dist-karaf/target/assembly/bin
 ./start
 netstat -ntlp |grep '*' --> 여기서 8080 확인
 ```
+
 2. coordinator 확인 (코디네이터는 이미 항상 실행중이다.)
 ```
 코디네이터는 이미 실행중이다. 2.4의 Rest API 로 확인하여 응답이 없는 경우에 다음과 같이 실행 한다.
 /usr/local/vtn/bin/vtn_start
 ```
+
 3. Controller 실행
 ```
 cd ~/controller/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage/opendaylight
