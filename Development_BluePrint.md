@@ -60,6 +60,7 @@ curl --user admin:adminpass -H 'content-type: application/json' -X GET 'http://1
   * controller가 웹으로 접속 되지 않음. VTN manager rest api포트와 겹친다. (?웹서비스 포트를 옮김?)
 
 ##### 2.5 ODL VTN Feature SDN Controller 서비스 데몬 실행순서
+- 재부팅 후에도 동작하기 위해서 데몬 형태롤 실행하는 방법
 1. manager 실행
 ```
 su - 
@@ -72,7 +73,7 @@ netstat -ntlp |grep '*' --> 여기서 8080 확인
 코디네이터는 이미 실행중이다. 2.4의 Rest API 로 확인하여 응답이 없는 경우에 다음과 같이 실행 한다.
 /usr/local/vtn/bin/vtn_start
 ```
-3. ontroller 실행
+3. Controller 실행
 ```
 cd ~/controller/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage/opendaylight
 ./run.sh -start
