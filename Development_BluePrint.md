@@ -97,3 +97,7 @@ cd ~/controller/opendaylight/distribution/opendaylight/target/distribution.opend
 
 4. VTN 통신 실험
 -----------------
+
+##### 4.1 설정 관련 이슈 
+- VTN Manager와 ODL SDN Controller 포트 충돌 이슈 
+
