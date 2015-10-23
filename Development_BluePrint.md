@@ -99,5 +99,5 @@ cd ~/controller/opendaylight/distribution/opendaylight/target/distribution.opend
 -----------------
 
 ##### 4.1 설정 관련 이슈 
-- VTN Manager와 ODL SDN Controller 포트 충돌 이슈 
+- VTN Manager와 ODL SDN Controller 포트 충돌 이슈 [(Issue151016_PortConflict.md)](https://github.com/KyongI/cloudexchange/blob/master/vtn/Issue151016_PortConflict.md)
 
