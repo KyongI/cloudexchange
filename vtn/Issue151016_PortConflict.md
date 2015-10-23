@@ -10,6 +10,25 @@
 포트가 8080입니다. 그러면 포트가 겹쳐서 충돌이 일어난다. 
 
 ##### 포트 충돌 현상 확인
+- 아무 것도 실행 되지 않은 상태 (5432 port : postgresql DB 에서 사용 하는 Port)
+```
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -               
+tcp6       0      0 ::1:5432                :::*                    LISTEN      -               
+tcp6       0      0 :::22                   :::*                    LISTEN      - 
+```
+
+- Vtn coordinator 실행시 
+```
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      -               
+tcp        0      0 127.0.0.1:12730         0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -               
+tcp6       0      0 ::1:5432                :::*                    LISTEN      -               
+tcp6       0      0 ::1:12730               :::*                    LISTEN      -               
+tcp6       0      0 :::8083                 :::*                    LISTEN      -               
+tcp6       0      0 :::22                   :::*                    LISTEN      -    
+```
+
 - Vtn manager + vtn coordinator 실행시
 ```
 tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      -               
@@ -59,4 +78,4 @@ tcp6       0      0 127.0.0.1:49108         :::*                    LISTEN      
 tcp6       0      0 :::22                   :::*                    LISTEN      -             
 ```
 
-
+- 
