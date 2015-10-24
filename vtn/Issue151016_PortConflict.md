@@ -122,4 +122,9 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 ```
 
 - 8080 은 해결 되지만 8185, 12001, 6633는 여전히 문제가 있다. (모두 회피하는것이 맞는가?)
-- 나머지 충돌 포트에 대한 controller 실행시 로그 메세지 ()
+- 나머지 충돌 포트에 대한 controller 실행시 로그 메세지 [(Issue151024_ControllerLog.md )](https://github.com/KyongI/cloudexchange/blob/master/vtn/Issue151024_ControllerLog.md)
+- 이제는 ODL SDN Controller 에 윕으로 접속 가능하다. 접속시 두개의 vSwitch 가 등록 되어 있음
+![ODL web GUI](https://github.com/KyongI/cloudexchange/blob/master/vtn/ODLController.png)
+
+
+
