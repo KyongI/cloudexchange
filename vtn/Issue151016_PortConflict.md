@@ -78,4 +78,48 @@ tcp6       0      0 127.0.0.1:49108         :::*                    LISTEN      
 tcp6       0      0 :::22                   :::*                    LISTEN      -             
 ```
 
-- 
+- 포트 충돌을 회피하기 위해 ~/controller/opendaylight/distribution/opendaylight/target/distribution.opendaylight-osgipackage/opendaylight/configuration/tomcat-server.xml 파일에서 다음의 내용을 수정
+```
+28   <Service name="Catalina">
+29     <Connector port="8080" protocol="HTTP/1.1"
+30                connectionTimeout="20000"
+31                redirectPort="8443" />
+```
+
+- 8080을 8088로 수정함. 수정 후 포트 정보.
+```
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      -               
+tcp        0      0 127.0.0.1:12730         0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -               
+tcp6       0      0 127.0.0.1:50679         :::*                    LISTEN      1847/java       
+tcp6       0      0 :::8088                 :::*                    LISTEN      1847/java       
+tcp6       0      0 127.0.0.1:36344         :::*                    LISTEN      -               
+tcp6       0      0 127.0.0.1:7800          :::*                    LISTEN      -               
+tcp6       0      0 ::1:5432                :::*                    LISTEN      -               
+tcp6       0      0 127.0.0.1:7801          :::*                    LISTEN      1847/java       
+tcp6       0      0 :::8185                 :::*                    LISTEN      -               
+tcp6       0      0 ::1:12730               :::*                    LISTEN      -               
+tcp6       0      0 :::44444                :::*                    LISTEN      -               
+tcp6       0      0 :::6653                 :::*                    LISTEN      -               
+tcp6       0      0 127.0.0.1:56061         :::*                    LISTEN      -               
+tcp6       0      0 :::12001                :::*                    LISTEN      -               
+tcp6       0      0 :::40004                :::*                    LISTEN      -               
+tcp6       0      0 :::8101                 :::*                    LISTEN      -               
+tcp6       0      0 :::1830                 :::*                    LISTEN      1847/java       
+tcp6       0      0 :::34343                :::*                    LISTEN      -               
+tcp6       0      0 127.0.0.1:41127         :::*                    LISTEN      -               
+tcp6       0      0 :::6633                 :::*                    LISTEN      -               
+tcp6       0      0 :::1099                 :::*                    LISTEN      -               
+tcp6       0      0 :::49612                :::*                    LISTEN      -               
+tcp6       0      0 :::6640                 :::*                    LISTEN      -               
+tcp6       0      0 :::8080                 :::*                    LISTEN      -               
+tcp6       0      0 127.0.0.1:59089         :::*                    LISTEN      -               
+tcp6       0      0 127.0.0.1:56530         :::*                    LISTEN      1847/java       
+tcp6       0      0 :::8083                 :::*                    LISTEN      -               
+tcp6       0      0 127.0.0.1:53268         :::*                    LISTEN      1847/java       
+tcp6       0      0 :::8181                 :::*                    LISTEN      -               
+tcp6       0      0 :::22                   :::*                    LISTEN      -   
+```
+
+- 8080 은 해결 되지만 8185, 12001, 6633는 여전히 문제가 있다. (모두 회피하는것이 맞는가?)
+- 나머지 충돌 포트에 대한 controller 실행시 로그 메세지 ()
