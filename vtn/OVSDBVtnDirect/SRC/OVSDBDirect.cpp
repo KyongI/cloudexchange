@@ -1,15 +1,28 @@
-#include "global.h"
+#include "OVSDBDirect.hpp"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <mysql.h>
+COVSDBDirect::COVSDBDirect()
+{
+	strcpy(m_szHost, "121.78.77.164");
+	strcpy(m_szUser, "root");
+	strcpy(m_szPass, "supersecret");
+	strcpy(m_szDb, "neutron");
+}
 
-#include "DbConnect.hpp"
-#define MAX 1024
+COVSDBDirect::~COVSDBDirect()
+{
+	if( m_pcDbConnect_ !== NULL) {
+		delete m_pcDbConnect_;
+	}
+}
 
-void usage(char *s)
+int COVSDBDirect::Init()
+{
+	m_pcDbConnect_ = new DbConnect( &m_nRet, m_szHost, m_szUser, m_szPass, m_szDb);
+	
+
+}
+
+void COVSDBDirect::Usage(char *s)
 {
     printf("\n\n=====================================================================\n");
     printf("\n");
@@ -36,45 +49,7 @@ void usage(char *s)
     printf("=====================================================================\n\n\n\n");
 }
 
-int conf_loading()
-{
-
-    MYSQL     mysql;
-    MYSQL_RES *res;
-    MYSQL_ROW row;
-    int       fields;
-
-    mysql_init(&mysql);
-
-    mysql_real_connect(&mysql,NULL, "jsk5225", "qlffld09","jsk5225",3306,"/opt/redmine-2.3.1-3/mysql/tmp/mysql.sock", 0);
-
-    char szQueryResult[1024];
-    sprintf(szQueryResult, "select * from nud_fromat");
-
-     if(mysql_query(&mysql, szQueryResult) != NULL)
-     {
-         printf("%s\n", mysql_error(&mysql));
-         exit(1);
-     }
-
-     res = mysql_store_result( &mysql ) ;
-     fields = mysql_num_fields(res) ;
-
-     while((row = mysql_fetch_row(res)))
-     {
-          //for(int cnt = 0 ; cnt < fields ; ++cnt)
-              printf(" %s ||", row[0]);
-
-          //printf("\n");
-     }
-     printf("\n");
-
-     mysql_free_result(res);
-     mysql_close(&mysql);
-
-}
-
-int run(int argc, char** argv)
+int COVSDBDirect::Run(int argc, char** argv)
 {
 
     char cOption;
@@ -92,6 +67,11 @@ int run(int argc, char** argv)
 
     int nPrintFlag = 0;
 
+
+	if (argc < 2) {
+		Usage(argv[0]);
+		exit(0);
+	}
 
     while ((cOption = getopt(argc, argv, "aes:")) != -1 ){
         switch(cOption){
@@ -116,8 +96,6 @@ int run(int argc, char** argv)
                 exit(0);
         }
     }
-
-    conf_loading();
 
     nFileCount = optind;
     if(nOptionS) nFileCount++ ;
@@ -147,14 +125,22 @@ int run(int argc, char** argv)
 
 int main(int argc, char *argv[])
 {
+	COVSDBDirect clsOVSDB;
 
-    if (argc < 2) {
-        usage(argv[0]);
-        exit(0);
+	if( clsOVSDB.Init() == ITF_ERROR )
+	{
+		printf("Viewer Init() Error.\n");
+		exit(ITF_EXIT_ABNORMAL)
+	}
+
+    if( clsOVSDB.Run(argc, argv) != ITF_OK )
+    {
+        exit(ITF_EXIT_ABNORMAL);
     }
-
-    run(argc, argv);
-
+	else
+    {
+        exit(ITF_EXIT_NORMAL);
+    }
 }
 
 

@@ -1,6 +1,25 @@
 #ifndef __GLOBAL__
 #define __GLOBAL__
 
+//-----------------------------------------------------------------------------
+//// Definitions for Return
+////-----------------------------------------------------------------------------
+const int ITF_OK                = 0;
+const int ITF_ERROR             = -1;
+const int ITF_RETRY				= 1;
+const int ITF_TIMEOUT			= -2;
+
+const int ITF_TRUE              = 1;
+const int ITF_FALSE             = 0;
+
+//-----------------------------------------------------------------------------
+//// Definitions for Process Exit
+////-----------------------------------------------------------------------------
+const int ITF_EXIT_NORMAL       =   0; 
+const int ITF_EXIT_ABNORMAL     =  99; 
+const int ITF_EXIT_CONFIG		=   1; // Configuration Error
+
+
 typedef struct __mem_info
 {
     int     seq;

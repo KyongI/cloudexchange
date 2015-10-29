@@ -5,7 +5,6 @@ DbConnect::DbConnect(int *Ret, char *Host, char *User, char *Passwd, char *Name)
     SetDBString(Host, User, Passwd, Name) ;
 
     *Ret = 0;
-
 }
 
 DbConnect::~DbConnect()
@@ -59,7 +58,7 @@ int DbConnect::ConnectDB()
 {
     mysql_init(&mysql);
 
-    if( mysql_real_connect(&mysql, HostNamePri, UserName, Password, Dbname, 3306, "/opt/redmine-2.3.1-3/mysql/tmp/mysql.sock", 0) == NULL )
+    if( mysql_real_connect(&mysql, HostNamePri, UserName, Password, Dbname, 3306, "/var/run/db.sock", 0) == NULL )
     {
         printf("connect failed\n");
         return -1;
