@@ -6,7 +6,6 @@
 APP_PATH			= .
 APP_HOME			= .
 
-
 #COMMON Path
 PROJECTPATH 			= $(APP_PATH)
 RELEASEPATH 			= $(APP_HOME)
@@ -26,19 +25,19 @@ XSLT_LIB	= -lxslt
 ##############################################################################
 # Compiler Define
 ##############################################################################
-#VIEW=1
+VIEW=1
 ifeq ("$(VIEW)", "1")
-	CC		 	= g++
-	ARC			= ar
-	ARC2	   	= ranlib
-	ARC_FLAG2  	= 
+	CC		= g++
+	ARC		= ar
+	ARC2		= ranlib
+	ARC_FLAG2	= 
 	RANLIB		= ranlib
 else
-	CC		  = @echo "		CC	  " $@; g++
-	ARC		 = @echo "		ARC	 " $@; ar
+	CC		= @echo "		CC	  " $@; g++
+	ARC		= @echo "		ARC	 " $@; ar
 	ARC2		= @echo "		ARC2	" $@; ranlib
-	AR		  = @echo "		AR	  " $@; ar
-	RANLIB	  = @echo "		RANLIB  " $@; ranlib
+	AR		= @echo "		AR	  " $@; ar
+	RANLIB		= @echo "		RANLIB  " $@; ranlib
 endif
 
 ARC_FLAG   		= -r
@@ -80,7 +79,6 @@ IFLAGS 		= -I../INCLUDE \
 			-I../INC \
 			-I. \
 			-I$(INCPATH)  \
-			-I$(RE_INC_PATH) \
 			-I$(INC_MYSQL_PATH)
 
 LFLAGS 		= $(LLIBTHREAD) $(LIB_MYSQL_PATH)
