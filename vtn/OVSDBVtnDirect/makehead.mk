@@ -3,13 +3,13 @@
 # Common Path Define
 #
 ##############################################################################
-NMD_APP_PATH			= .
-NMD_HOME			= .
+APP_PATH			= .
+APP_HOME			= .
 
 
 #COMMON Path
-PROJECTPATH 			= $(NMD_APP_PATH)
-RELEASEPATH 			= $(NMD_HOME)
+PROJECTPATH 			= $(APP_PATH)
+RELEASEPATH 			= $(APP_HOME)
 INCPATH 			= $(PROJECTPATH)/COMMON/INCLUDE
 SRCPATH 			= $(PROJECTPATH)/COMMON/SRC
 BINPATH 			= $(RELEASEPATH)/BIN

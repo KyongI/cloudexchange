@@ -13,7 +13,7 @@ void usage(char *s)
 {
     printf("\n\n=====================================================================\n");
     printf("\n");
-    printf("                NUD Viewer V1.0 \n");
+    printf("                      ODL OVSDB Viewer V1.0 \n");
     printf("\n");
     printf("=====================================================================\n");
     printf("\n");
@@ -21,10 +21,8 @@ void usage(char *s)
     printf("  %s [-aes] [file_name]\n", s);
     printf("\n");
     printf("DESCRIPTION:\n");
-    printf("  This utility display NUD format in file_named file\n");
+    printf("  This utility display OVSDB neutron information.\n");
     printf("  If there is no option key fields are output.\n");
-    printf("  key fields : SYSTEM_NAME, REQUEST_TIME, RESPONSE_TIME, DELIVERY_RESULT, DELIVERY_STATUS, SYSTEM_DIVISION \n");
-    printf("             : DCMF_PID,    BILL_FLAG,    NUD_TID,       CHARGE_AMOUNT,   CHARGE_PIVOT,    CHARGING_ID \n");
     printf("\n");
     printf("OPTION:\n");
     printf("  a : All fields are output. \n");
@@ -34,9 +32,6 @@ void usage(char *s)
     printf("\n");
     printf("EXAMPLES:\n");
     printf("  %s -a OMP001_000_3CC_20130801_0000469.dat \n", s);
-    printf("  %s -e OMP001_000_3CC_20130801_0000469.dat \n", s);
-    printf("  %s -s CHARGING_ID 01094085208 OMP001_000_3CC_20130801_0000469.dat \n", s);
-    printf("  %s -s CHARGING_ID 01094085208 -a OMP001_000_3CC_20130801_0000469.dat \n", s);
     printf("                                  Last Change : %s %s\n", __DATE__, __TIME__);
     printf("=====================================================================\n\n\n\n");
 }
@@ -148,10 +143,7 @@ int run(int argc, char** argv)
 
     } // for ( ; nFileCount <= argc -1 ; nFileCount++)
 
-
-
-
-} // int run(int argc, char** argv)
+} 
 
 int main(int argc, char *argv[])
 {
@@ -163,7 +155,7 @@ int main(int argc, char *argv[])
 
     run(argc, argv);
 
-} // int main(int argc, char *argv[])
+}
 
 
 

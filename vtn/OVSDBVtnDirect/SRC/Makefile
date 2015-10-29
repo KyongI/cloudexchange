@@ -3,7 +3,8 @@ include ../makehead.mk
 LOCALFLAGS = -I./ -D_CV_DATA_ 
 
 EXE = UT_VI_OVSDB
-OBS = OVSDirect.o 
+OBS = 	OVSDirect.o \
+	DbConnect.o
 
 all : $(EXE)
 
