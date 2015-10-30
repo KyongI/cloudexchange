@@ -1,1 +1,4 @@
 tags
+*.o
+UT_VI_OVSDB
+core.*

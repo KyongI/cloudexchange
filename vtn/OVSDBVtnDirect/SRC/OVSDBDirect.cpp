@@ -10,7 +10,7 @@ COVSDBDirect::COVSDBDirect()
 
 COVSDBDirect::~COVSDBDirect()
 {
-	if( m_pcDbConnect_ !== NULL) {
+	if( m_pcDbConnect_ != NULL) {
 		delete m_pcDbConnect_;
 	}
 }
@@ -20,6 +20,7 @@ int COVSDBDirect::Init()
 	m_pcDbConnect_ = new DbConnect( &m_nRet, m_szHost, m_szUser, m_szPass, m_szDb);
 	
 
+	return ITF_OK;
 }
 
 void COVSDBDirect::Usage(char *s)
@@ -92,7 +93,7 @@ int COVSDBDirect::Run(int argc, char** argv)
                 gSearchStr = argv[optind];
                 break;
             default :
-                usage(argv[0]);
+                Usage(argv[0]);
                 exit(0);
         }
     }
@@ -109,11 +110,11 @@ int COVSDBDirect::Run(int argc, char** argv)
             return -1;
         }
 
-        cLineSave = (char*)malloc(MAX);
+        cLineSave = (char*)malloc(LINE_MAX_LENGTH);
 
-        while(fgets(cLineSave,MAX,pFop))
+        while(fgets(cLineSave, LINE_MAX_LENGTH, pFop))
         {
-            // printf("%s \n",cLineSave);
+            printf("%s \n",cLineSave);
         }
 
         fclose(pFop);
@@ -121,6 +122,7 @@ int COVSDBDirect::Run(int argc, char** argv)
 
     } // for ( ; nFileCount <= argc -1 ; nFileCount++)
 
+	return ITF_OK;
 } 
 
 int main(int argc, char *argv[])
@@ -130,17 +132,13 @@ int main(int argc, char *argv[])
 	if( clsOVSDB.Init() == ITF_ERROR )
 	{
 		printf("Viewer Init() Error.\n");
-		exit(ITF_EXIT_ABNORMAL)
+		exit(ITF_EXIT_ABNORMAL);
 	}
 
-    if( clsOVSDB.Run(argc, argv) != ITF_OK )
-    {
-        exit(ITF_EXIT_ABNORMAL);
-    }
-	else
-    {
-        exit(ITF_EXIT_NORMAL);
-    }
+    if( clsOVSDB.Run(argc, argv) != ITF_OK ) exit(ITF_EXIT_ABNORMAL);
+	else exit(ITF_EXIT_NORMAL);
+
+	return ITF_OK;
 }
 
 

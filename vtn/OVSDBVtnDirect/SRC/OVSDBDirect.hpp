@@ -10,12 +10,13 @@
 #include "global.h"
 #include "DbConnect.hpp"
 
-#define	READ_BUFFER_SIZE     512
-#define SEARCH_TYPE_ALL      0x01
-#define SEARCH_TYPE_MDN      0x02
-#define IPMD_TOTAL_LENGTH_LEN           4//addk
+#define	BUFFER_SIZE		512
+#define SEARCH_TYPE_ALL			0x01
+#define SEARCH_TYPE_MDN			0x02
+#define IPMD_TOTAL_LENGTH_LEN   4
+#define LINE_MAX_LENGTH			8192
 
-class COVSDBDirect 
+class COVSDBDirect
 {
 	public :
 		COVSDBDirect();
@@ -28,12 +29,12 @@ class COVSDBDirect
 		DbConnect*	m_pcDbConnect_;
 
 		int			m_nRet;
-		char*		m_szHost;
-		char*		m_szUser;
-		char*		m_szPass;
-		char*		m_szDb;
+		char		m_szHost[BUFFER_SIZE];
+		char		m_szUser[BUFFER_SIZE];
+		char		m_szPass[BUFFER_SIZE];
+		char		m_szDb[BUFFER_SIZE];
 
 		void		Usage(char *s);
-}
+};
 
 #endif

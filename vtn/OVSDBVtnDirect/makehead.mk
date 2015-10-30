@@ -25,7 +25,7 @@ XSLT_LIB	= -lxslt
 ##############################################################################
 # Compiler Define
 ##############################################################################
-VIEW=1
+#VIEW=1
 ifeq ("$(VIEW)", "1")
 	CC		= g++
 	ARC		= ar
@@ -73,7 +73,7 @@ MFLAGS		=
 ARCH_FLAG	= 
 DEFINES 	= -D__LINUX -D_LINUX_ -D_LITTLE_ENDIAN_ -D_MYSQL_
 
-#TODO: _LINUX_ __LINUX define ÇÊ¿ä
+#TODO: _LINUX_ __LINUX define ?Ê¿?
 
 IFLAGS 		= -I../INCLUDE \
 			-I../INC \
