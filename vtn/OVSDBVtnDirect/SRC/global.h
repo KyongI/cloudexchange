@@ -1,5 +1,8 @@
 #ifndef __GLOBAL__
 #define __GLOBAL__
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable" 
+#pragma GCC diagnostic ignored "-Wunused-variable" 
+// Hides warning: 'packed' attribute ignored for field of type 'UINT8' [-Wattributes]
 
 //-----------------------------------------------------------------------------
 //// Definitions for Return

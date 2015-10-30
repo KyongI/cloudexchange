@@ -18,109 +18,103 @@ COVSDBDirect::~COVSDBDirect()
 int COVSDBDirect::Init()
 {
 	m_pcDbConnect_ = new DbConnect( &m_nRet, m_szHost, m_szUser, m_szPass, m_szDb);
-	
+	m_pcDbConnect_->ConnectDB();
 
 	return ITF_OK;
 }
 
 void COVSDBDirect::Usage(char *s)
 {
-    printf("\n\n=====================================================================\n");
-    printf("\n");
-    printf("                      ODL OVSDB Viewer V1.0 \n");
-    printf("\n");
-    printf("=====================================================================\n");
-    printf("\n");
-    printf("USAGE:\n");
-    printf("  %s [-aes] [file_name]\n", s);
-    printf("\n");
-    printf("DESCRIPTION:\n");
-    printf("  This utility display OVSDB neutron information.\n");
-    printf("  If there is no option key fields are output.\n");
-    printf("\n");
-    printf("OPTION:\n");
-    printf("  a : All fields are output. \n");
-    printf("  e : ERROR NUDs are output .\n");
-    printf("  s {SearchID} {value} : search by ID, value. \n ");
-    printf("  s + a : when used as a option to search in all fields. \n");
-    printf("\n");
-    printf("EXAMPLES:\n");
-    printf("  %s -a OMP001_000_3CC_20130801_0000469.dat \n", s);
-    printf("                                  Last Change : %s %s\n", __DATE__, __TIME__);
-    printf("=====================================================================\n\n\n\n");
+	printf("\n\n=====================================================================\n");
+	printf("\n");
+	printf("                      ODL OVSDB Viewer V1.0 \n");
+	printf("\n");
+	printf("=====================================================================\n");
+	printf("\n");
+	printf("USAGE:\n");
+	printf("  %s [-d]\n", s);
+	printf("\n");
+	printf("DESCRIPTION:\n");
+	printf("  This utility display OVSDB neutron information.\n");
+	printf("  If there is no option key fields are output.\n");
+	printf("\n");
+	printf("OPTION:\n");
+	printf("  d : debug print output. \n");
+	printf("\n");
+	printf("EXAMPLES:\n");
+	printf("                                  Last Change : %s %s\n", __DATE__, __TIME__);
+	printf("=====================================================================\n\n\n\n");
 }
 
 int COVSDBDirect::Run(int argc, char** argv)
 {
 
-    char cOption;
-    int nOptionA = 0;
-    int nOptionE = 0;
-    int nOptionS = 0;
+	char cOption;
+	int nOptionA = 0;
+	char cFileName[80];
+	FILE *pFop;
+	char *cLineSave;
+	int  nFileCount = 0;
+	char* gSearchID;
+	char* gSearchStr;
+	int nPrintFlag = 0;
 
-    char cFileName[80];
-    FILE *pFop;
-    char *cLineSave;
-    int  nFileCount = 0;
-
-    char* gSearchID;
-    char* gSearchStr;
-
-    int nPrintFlag = 0;
-
-
-	if (argc < 2) {
-		Usage(argv[0]);
-		exit(0);
+	while ((cOption = getopt(argc, argv, "des:")) != -1 ){
+		switch(cOption){
+			case 'd':
+				nOptionA = 1;
+				break;
+			case 'e':
+				nOptionA = 0;
+				break;
+			case 's':
+				nPrintFlag = 0;
+				gSearchID = optarg;
+				gSearchStr = argv[optind];
+				break;
+			default :
+				Usage(argv[0]);
+				exit(0);
+		}
 	}
 
-    while ((cOption = getopt(argc, argv, "aes:")) != -1 ){
-        switch(cOption){
-            case 'a':
-                nOptionA = 1;
-                nOptionE = 0;
-                break;
-            case 'e':
-                nOptionE = 1;
-                nOptionA = 0;
-                nOptionS = 0;
-                break;
-            case 's':
-                nOptionS = 1;
-                nOptionE = 0;
-                nPrintFlag = 0;
-                gSearchID = optarg;
-                gSearchStr = argv[optind];
-                break;
-            default :
-                Usage(argv[0]);
-                exit(0);
-        }
-    }
+	
+	printf("--- networks --------------------------------------------------\n");
+	int nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from networks");
+	MYSQL_RES *result = m_pcDbConnect_->GetDBRes();
+	MYSQL_ROW row;
+	int fields = mysql_num_fields(result);
 
-    nFileCount = optind;
-    if(nOptionS) nFileCount++ ;
+	while((row = mysql_fetch_row(result)))
+	{
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+			printf(" %s ||", row[cnt]);
+		printf("\n");
+	}
+	printf("\n");
+	
+	nFileCount = optind;
 
-    for ( ; nFileCount <= argc -1 ; nFileCount++)
-    {
-        strcpy(cFileName, argv[nFileCount]);
+	for ( ; nFileCount <= argc -1 ; nFileCount++)
+	{
+		strcpy(cFileName, argv[nFileCount]);
 
-        if ((pFop = fopen(cFileName,"r")) < 0) {
-            printf("[LOG] INPUT FILE OPEN ERROR");
-            return -1;
-        }
+		if ((pFop = fopen(cFileName,"r")) < 0) {
+			printf("[LOG] INPUT FILE OPEN ERROR");
+			return -1;
+		}
 
-        cLineSave = (char*)malloc(LINE_MAX_LENGTH);
+		cLineSave = (char*)malloc(LINE_MAX_LENGTH);
 
-        while(fgets(cLineSave, LINE_MAX_LENGTH, pFop))
-        {
-            printf("%s \n",cLineSave);
-        }
+		while(fgets(cLineSave, LINE_MAX_LENGTH, pFop))
+		{
+			printf("%s \n",cLineSave);
+		}
 
-        fclose(pFop);
-        free(cLineSave);
+		fclose(pFop);
+		free(cLineSave);
 
-    } // for ( ; nFileCount <= argc -1 ; nFileCount++)
+	} // for ( ; nFileCount <= argc -1 ; nFileCount++)
 
 	return ITF_OK;
 } 
@@ -135,7 +129,7 @@ int main(int argc, char *argv[])
 		exit(ITF_EXIT_ABNORMAL);
 	}
 
-    if( clsOVSDB.Run(argc, argv) != ITF_OK ) exit(ITF_EXIT_ABNORMAL);
+	if( clsOVSDB.Run(argc, argv) != ITF_OK ) exit(ITF_EXIT_ABNORMAL);
 	else exit(ITF_EXIT_NORMAL);
 
 	return ITF_OK;

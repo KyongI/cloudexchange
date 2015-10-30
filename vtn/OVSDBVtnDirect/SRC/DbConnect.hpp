@@ -23,18 +23,15 @@ class DbConnect
         DbConnect(int *ret, char *Host, char *User, char *Passwd, char *Db);
         ~DbConnect();
 
-        //Set DB Connect Information
         int SetDBString(char *Host, char *User, char *Passwd, char *Db);
-        //Connect DB
         int ConnectDB();
-        //Execute SQL Query
         int ExecuteSQL(char *query);
-        //DB Disconnect
         int Disconnect();
-        //Store member_info table data
-        int StoreResult(NUD_FORMAT *_nudformat);
-        //Get member_info Data by row
+        
+	int StoreResult(NUD_FORMAT *_nudformat);
         int GetRow(NUD_FORMAT *_nudformat);
+
+	MYSQL_RES* GetDBRes();
 
 };
 
