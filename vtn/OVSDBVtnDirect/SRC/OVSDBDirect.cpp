@@ -79,7 +79,7 @@ int COVSDBDirect::Run(int argc, char** argv)
 	}
 
 	
-	printf("--- networks --------------------------------------------------\n");
+	printf("--- neutron::networks --------------------------------------------------\n");
 	int nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from networks");
 	MYSQL_RES *result = m_pcDbConnect_->GetDBRes();
 	MYSQL_ROW row;
@@ -92,7 +92,61 @@ int COVSDBDirect::Run(int argc, char** argv)
 		printf("\n");
 	}
 	printf("\n");
-	
+
+	printf("--- neutron::subnets --------------------------------------------------\n");
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from subnets");
+	result = m_pcDbConnect_->GetDBRes();
+	fields = mysql_num_fields(result);
+
+	while((row = mysql_fetch_row(result)))
+	{
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+			printf(" %s ||", row[cnt]);
+		printf("\n");
+	}
+	printf("\n");
+
+	printf("--- neutron::routers --------------------------------------------------\n");
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from routers");
+	result = m_pcDbConnect_->GetDBRes();
+	fields = mysql_num_fields(result);
+
+	while((row = mysql_fetch_row(result)))
+	{
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+			printf(" %s ||", row[cnt]);
+		printf("\n");
+	}
+	printf("\n");
+
+	printf("--- neutron::ports --------------------------------------------------\n");
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from ports");
+	result = m_pcDbConnect_->GetDBRes();
+	fields = mysql_num_fields(result);
+
+	while((row = mysql_fetch_row(result)))
+	{
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+			printf(" %s ||", row[cnt]);
+		printf("\n");
+	}
+	printf("\n");
+
+	printf("--- neutron::ip allocations --------------------------------------------------\n");
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from ipallocations");
+	result = m_pcDbConnect_->GetDBRes();
+	fields = mysql_num_fields(result);
+
+	while((row = mysql_fetch_row(result)))
+	{
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+			printf(" %s ||", row[cnt]);
+		printf("\n");
+	}
+	printf("\n");
+
+
+
 	nFileCount = optind;
 
 	for ( ; nFileCount <= argc -1 ; nFileCount++)
