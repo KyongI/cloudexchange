@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1446547313465
+Build-Jdk: 1.7.0_79
+Built-By: ubuntu
+Bundle-Activator: org.opendaylight.controller.cloudexchange.Activator
+Bundle-ManifestVersion: 2
+Bundle-Name: cloudexchange
+Bundle-SymbolicName: org.opendaylight.controller.cloudexchange
+Bundle-Version: 0.1.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.opendaylight.controller.cloudexchange;uses:="org.ope
+ ndaylight.controller.sal.core,org.apache.felix.dm,org.slf4j";version="0
+ .1.0"
+Import-Package: org.apache.felix.dm;version="[3.0,4)",org.opendaylight.c
+ ontroller.sal.core;version="[0.7,1)",org.slf4j;version="[1.7,2)"
+Tool: Bnd-1.50.0
