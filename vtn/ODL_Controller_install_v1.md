@@ -45,7 +45,7 @@ cp vtn.ini controller/opendaylight/distribution/opendaylight/target/configuratio
 
 ##### 4.build & config
 ```
-mvn clean install
+mvn clean install -DskipTests
 cd controller/opendaylight/distribution/opendaylight/
 cd target/distribution.opendaylight-osgipackage/opendaylight
 vi configuration/vtn.ini
