@@ -61,14 +61,10 @@ Address: 125.209.222.141
 
 ##### 5. ssh 활성화, git을 설치
 ```
-service ssh start --> SSH 서비스 실행 
-netstat -ntlp | grep '*' --> SSH 서비스 포트 Listen 확인 
-apt-get install sysv-rc-conf
-sysv-rc-conf ssh on --> 부팅 시 SSH 자동 실행 
-apt-get update
-apt-get install -y git sudo
-ufw disable 
-iptables -F 
+sudo apt-get update
+sudo apt-get install -y git sudo
+sudo ufw disable 
+sudo iptables -F 
 sudo apt-get install net-tools
 ```
 
