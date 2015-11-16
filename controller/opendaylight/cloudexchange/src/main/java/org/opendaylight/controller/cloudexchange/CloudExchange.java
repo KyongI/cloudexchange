@@ -1,9 +1,11 @@
 package org.opendaylight.controller.cloudexchange;
 
+import java.net.InetAddress;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
                                                  
@@ -15,8 +17,15 @@ import org.opendaylight.controller.networkconfig.neutron.NeutronPort;
 
 import org.opendaylight.ovsdb.lib.notation.Row;
 import org.opendaylight.ovsdb.lib.schema.GenericTableSchema;
+import org.opendaylight.ovsdb.plugin.Connection;
 import org.opendaylight.ovsdb.plugin.api.StatusWithUuid;
+//import org.opendaylight.ovsdb.plugin.api.Connection;
+import org.opendaylight.ovsdb.plugin.api.OvsdbInventoryListener;
+import org.opendaylight.ovsdb.plugin.ConnectionService;
+//import org.opendaylight.ovsdb.plugin.OvsdbConfigService;
+import org.opendaylight.ovsdb.plugin.impl.ConfigurationServiceImpl;
 
+import org.opendaylight.controller.sal.connection.ConnectionConstants;
 import org.opendaylight.controller.sal.core.Node;
 import org.opendaylight.controller.sal.utils.ServiceHelper;
 import org.opendaylight.controller.sal.utils.IObjectReader;
@@ -24,11 +33,13 @@ import org.opendaylight.controller.sal.utils.Status;
 
 public class CloudExchange {
 
-
 	//private INeutronPortCRUD neutronPortService = (INeutronPortCRUD)ServiceHelper.getGlobalInstance(INeutronPortCRUD.class, this);
 	//private OvsdbConfigService ovsdbTable = (OvsdbConfigService)ServiceHelper.getGlobalInstance(OvsdbConfigService.class, this);
 	private INeutronPortCRUD neutronPortService = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
-	private OvsdbConfigService ovsdbConfigService;
+	//private OvsdbConfigService ovsdbConfigService;
+	private ConfigurationServiceImpl ovsdbConfigService;
+	private ConnectionService connectionServiceInternal;
+	private OvsdbInventoryListener ovsdbInventoryListener;
 
         public void start() {
                 System.out.println("CloudExchange API service Start.");
@@ -37,6 +48,7 @@ public class CloudExchange {
         public void stop() {
                 System.out.println("CloudExchange API service Terminate");
         }
+
 
 	///////////////////////////// neutronPortService API //////////////////////////
 	/**
@@ -172,7 +184,6 @@ public class CloudExchange {
 	 * @param tableName Table on which the row is Updated
 	 * @param rowUuid UUID of the row that is being deleted
 	 */
-
 	public Status CE_deleteRow(Node node, String tableName, String rowUUID) {
 		return ovsdbConfigService.deleteRow( node, tableName, rowUUID);
 	}
@@ -186,7 +197,6 @@ public class CloudExchange {
 	 * @param rowUuid UUID of the row being queried
 	 * @return a row with a list of Column data that corresponds to an unique Row-identifier called uuid in a given table.
 	 */
-
 	public Row CE_getRow(Node node, String tableName, String uuid) {
 		return ovsdbConfigService.getRow( node, tableName, uuid);
 	}
@@ -199,7 +209,6 @@ public class CloudExchange {
 	 * @param tableName Table Name
 	 * @return List of rows that makes the entire Table.
 	 */
-
 	public ConcurrentMap<String, Row> CE_getRows(Node node, String tableName) {
 		return ovsdbConfigService.getRows( node, tableName);
 	}
@@ -231,8 +240,94 @@ public class CloudExchange {
 		return ovsdbConfigService.setOFController( node, bridgeUUID);
 	}
 
+	///////////////////////////// IConnectionServiceInternal API //////////////////////////
+
+	/**
+	 * Deprecated.
+	 * Specified by: 
+	 *	getConnection in interface OvsdbConnectionService
+	 * Specified by: 
+	 *	getConnection in interface IConnectionServiceInternal 
+	 */
+        public Connection CE_getConnection(Node node) {
+                return connectionServiceInternal.getConnection( node);
+        }
+
+	/**
+	 * Deprecated.
+	 * Specified by: 
+	 *	getNodes in interface OvsdbConnectionService
+	 * Specified by: 
+	 *	getNodes in interface IConnectionServiceInternal 
+	 */
+        public List<Node> CE_getNodes() {
+                return connectionServiceInternal.getNodes();
+        }
 	
+	/**
+	 * Deprecated.
+	 * Specified by:
+	 *	connect in interface org.opendaylight.controller.sal.connection.IPluginInConnectionService
+	 * Specified by:
+	 * 	connect in interface OvsdbConnectionService
+	 * Specified by:
+	 *	connect in interface IConnectionServiceInternal 
+	 */
+        public Node CE_connect(String identifier, Map<ConnectionConstants, String> params) {
+                return connectionServiceInternal.connect(identifier, params);
+        }	
+
+	///////////////////////////// OVSDBInventoryListener API //////////////////////////
+	/**
+	 * When an AD-SAL node is added by the OVSDB Inventory Service, Add an MD-SAL node
+	 *
+	 * @param node    The AD-SAL node
+	 * @param address The {@link java.net.InetAddress} of the Node
+	 * @param port    The ephemeral port number used by this connection
+	 */
+	public void CE_nodeAdded(Node node, InetAddress address, int port ) {
+		ovsdbInventoryListener.nodeAdded( node, address, port );	
+	}
+
+	/**
+	 * When an AD-SAL node is removed by the OVSDB Inventory Service, Remove the MD-SAL node
+	 *
+	 * @param node The AD-SAL node
+	 */
+	public void CE_nodeRemoved(Node node) {
+		ovsdbInventoryListener.nodeRemoved( node);
+	}
+
+	//public void rowAdded(Node node, String tableName, String uuid, Row row); //noop
 	
+	/**
+	 * Handle OVSDB row updates When a Bridge row is updated and it contains a DPID then add a new OpenFlow node to 
+	 the
+	 * inventory A relationship is created between the OpenFlow and OVSDB nodes
+	 *
+	 * @param node      The AD-SAL node
+	 * @param tableName The name of the updated table
+	 * @param uuid      The UUID of the updated row
+	 * @param old       The old contents of the row
+	 * @param row       The updated Row
+	 */
+	public void CE_rowUpdated(Node node, String tableName, String uuid, Row old, Row row) {
+		ovsdbInventoryListener.rowUpdated( node, tableName, uuid, old, row);
+	}
+
+	/**
+	 * Handle OVSDB row removed When a Bridge row is removed, the OpenFlow Node is deleted The parent OVSDB node is
+	 * updated and the OpenFlow node removed from it's managed-nodes list
+	 *
+	 * @param node      The AD-SAL node
+	 * @param tableName The name of modified table
+	 * @param uuid      The UUID of the deleted row
+	 * @param row       The deleted Row
+	 */
+	public void CE_rowRemoved(Node node, String tableName, String uuid, Row row, Object context) {
+		ovsdbInventoryListener.rowRemoved( node, tableName, uuid, row, context);
+	}
+
 }
 
 

@@ -1,71 +1,260 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.
-xsd">
-<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-<groupId>org.opendaylight.controller</groupId>
-<artifactId>cloudexchange</artifactId>
-<version>0.1</version>
-<packaging>bundle</packaging>
+	<groupId>org.opendaylight.controller</groupId>
+	<artifactId>cloudexchange</artifactId>
+	<version>0.1</version>
+	<packaging>bundle</packaging>
 
-<build>
-<plugins>
-<plugin>
-<groupId>org.apache.felix</groupId>
-<artifactId>maven-bundle-plugin</artifactId>
-<version>2.3.7</version>
-<extensions>true</extensions>
-<configuration>
-<instructions>
-<Import-Package>
-*
-</Import-Package>
-<Export-Package>
-org.opendaylight.controller.cloudexchange
-</Export-Package>
-<Bundle-Activator>
-org.opendaylight.controller.cloudexchange.Activator
-</Bundle-Activator>
-</instructions>
-<manifestLocation>${project.basedir}/META-INF</manifestLocation>
-</configuration>
-</plugin>
-</plugins>
-</build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Import-Package>
+							org.opendaylight.controller.networkconfig.neutron,
+							org.opendaylight.controller.containermanager,
+							org.opendaylight.controller.switchmanager,
+							org.opendaylight.controller.forwardingrulesmanager,
+							org.opendaylight.controller.sal.core,
+							org.opendaylight.controller.sal.utils,
+							org.opendaylight.controller.sal.action,
+							org.opendaylight.ovsdb.plugin,
+							org.opendaylight.ovsdb.lib.notation,
+							org.opendaylight.ovsdb.lib.table,
+							org.opendaylight.ovsdb.lib.table.internal,
+							org.opendaylight.controller.sal.binding.api,
+							org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819,
+							org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.nodes,
+							org.opendaylight.yangtools.yang.binding,
+							org.apache.felix.dm,
+							org.slf4j,
+							org.osgi.framework,
+							*
+						</Import-Package>
+						<Export-Package>
+							org.opendaylight.controller.cloudexchange
+						</Export-Package>
+						<Bundle-Activator>
+							org.opendaylight.controller.cloudexchange.Activator
+						</Bundle-Activator>
+					</instructions>
+					<manifestLocation>${project.basedir}/META-INF</manifestLocation>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-<dependencies>
-<dependency>
-<groupId>org.opendaylight.controller</groupId>
-<artifactId>sal</artifactId>
-<version>0.7.0</version>
-</dependency>
-</dependencies>
+	<properties>
+		<!-- ODL repository / plugin repository -->
+		<nexusproxy>http://nexus.opendaylight.org/content</nexusproxy>
+		<!-- Surefire/Failsafe Arguments -->
+		<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+		<!-- OVSB Component Versions -->
+		<ovsdb.library.version>1.2.0-SNAPSHOT</ovsdb.library.version>
+		<ovsdb.plugin.version>1.0.0-SNAPSHOT</ovsdb.plugin.version>
+		<openstack.netvirt.version>1.0.0-SNAPSHOT</openstack.netvirt.version>
+		<openstack.netvirt.providers.version>1.0.0-SNAPSHOT
+		</openstack.netvirt.providers.version>
+		<ovsdb.northbound.version>0.6.0-SNAPSHOT</ovsdb.northbound.version>
+		<schema.openvswitch.version>1.0.0-SNAPSHOT
+		</schema.openvswitch.version>
+		<schema.hardwarevtep.version>1.0.0-SNAPSHOT
+		</schema.hardwarevtep.version>
+		<!-- Skip Coverage and IT by default -->
+		<skip.coverage>true</skip.coverage>
+		<skip.integrationtest>true</skip.integrationtest>
+		<!-- The directory where maven was executed -->
+		<root.directory>${env.PWD}</root.directory>
+		<!-- UT reports are per-module -->
+		<sonar.jacoco.reportPath>target/code-coverage/jacoco.exec
+		</sonar.jacoco.reportPath>
+		<!-- IT report is aggregated to enable PAX Exam coverage to be logged -->
+		<sonar.jacoco.itReportPath>${root.directory}/target/code-coverage/jacoco-it.exec
+		</sonar.jacoco.itReportPath>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<!-- Override the JaCoCo version in ODL Parent -->
+		<jacoco.version>0.6.4.201312101107</jacoco.version>
+		<!-- ODL Dependency Versions -->
+		<containermanager.version>0.5.2-SNAPSHOT</containermanager.version>
+		<forwardingrulesmanager.version>0.6.0-SNAPSHOT
+		</forwardingrulesmanager.version>
+		<networkconfig.neutron.version>0.4.2-SNAPSHOT
+		</networkconfig.neutron.version>
+		<clustering.services.version>0.5.1-SNAPSHOT
+		</clustering.services.version>
+		<sal.version>0.8.1-SNAPSHOT</sal.version>
+		<sal.connection.version>0.1.2-SNAPSHOT</sal.connection.version>
+		<sal.networkconfiguration.version>0.0.3-SNAPSHOT
+		</sal.networkconfiguration.version>
+		<mdsal.version>1.1-SNAPSHOT</mdsal.version>
+		<switchmanager.api.version>0.7.1-SNAPSHOT</switchmanager.api.version>
+		<yangtools.version>0.6.2-SNAPSHOT</yangtools.version>
+		<northbound.commons.version>0.4.2-SNAPSHOT
+		</northbound.commons.version>
+		<checkstyle.rules.version>0.0.3-SNAPSHOT</checkstyle.rules.version>
+		<!-- 3rd Pary Dependency Versions -->
+		<commons.collection.version>1.0</commons.collection.version>
+		<portlet.version>2.0</portlet.version>
+		<powermock.version>1.5.2</powermock.version>
+		<httpcomponents.version>4.2.1</httpcomponents.version>
+	</properties>
 
-<repositories>
-<!-- OpenDaylight releases -->
-<repository>
-<id>opendaylight-mirror</id>
-<name>opendaylight-mirror</name>
-<url>http://nexus.opendaylight.org/content/groups/public/</url>
-<snapshots>
-<enabled>false</enabled>
-</snapshots>
-<releases>
-<enabled>true</enabled>
-<updatePolicy>never</updatePolicy>
-</releases>
-</repository>
-<!-- OpenDaylight snapshots -->
-<repository>
-<id>opendaylight-snapshot</id>
-<name>opendaylight-snapshot</name>
-<url>http://nexus.opendaylight.org/content/repositories/opendaylight.snapshot/</url>
-<snapshots>
-<enabled>true</enabled>
-</snapshots>
-<releases>
-<enabled>false</enabled>
-</releases>
-</repository>
-</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>clustering.services</artifactId>
+			<version>${clustering.services.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>sal</artifactId>
+			<version>${sal.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>sal.connection</artifactId>
+			<version>${sal.connection.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>sal.networkconfiguration</artifactId>
+			<version>${sal.networkconfiguration.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>containermanager</artifactId>
+			<version>${containermanager.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>forwardingrulesmanager</artifactId>
+			<version>${forwardingrulesmanager.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>networkconfig.neutron</artifactId>
+			<version>${networkconfig.neutron.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>sal-binding-api</artifactId>
+			<version>${mdsal.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>sal-common-util</artifactId>
+			<version>${mdsal.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>switchmanager</artifactId>
+			<version>${switchmanager.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller.model</groupId>
+			<artifactId>model-flow-base</artifactId>
+			<version>${mdsal.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller.model</groupId>
+			<artifactId>model-flow-service</artifactId>
+			<version>${mdsal.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller.model</groupId>
+			<artifactId>model-inventory</artifactId>
+			<version>${mdsal.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.yangtools</groupId>
+			<artifactId>yang-binding</artifactId>
+			<version>${yangtools.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>commons.northbound</artifactId>
+			<version>${northbound.commons.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>library</artifactId>
+			<version>${ovsdb.library.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>ovsdb</artifactId>
+			<version>0.5.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>plugin</artifactId>
+			<version>${ovsdb.plugin.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>openstack.net-virt</artifactId>
+			<version>${openstack.netvirt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>openstack.net-virt-providers</artifactId>
+			<version>${openstack.netvirt.providers.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>northbound</artifactId>
+			<version>${ovsdb.northbound.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>schema.hardwarevtep</artifactId>
+			<version>${schema.hardwarevtep.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.ovsdb</groupId>
+			<artifactId>schema.openvswitch</artifactId>
+			<version>${schema.openvswitch.version}</version>
+		</dependency>
+
+
+	</dependencies>
+
+
+	<repositories>
+		<!-- OpenDaylight releases -->
+		<repository>
+			<id>opendaylight-mirror</id>
+			<name>opendaylight-mirror</name>
+			<url>http://nexus.opendaylight.org/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</repository>
+		<!-- OpenDaylight snapshots -->
+		<repository>
+			<id>opendaylight-snapshot</id>
+			<name>opendaylight-snapshot</name>
+			<url>http://nexus.opendaylight.org/content/repositories/opendaylight.snapshot/
+			</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
 </project>
