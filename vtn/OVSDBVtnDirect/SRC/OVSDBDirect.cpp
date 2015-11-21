@@ -2,7 +2,7 @@
 
 COVSDBDirect::COVSDBDirect()
 {
-	strcpy(m_szHost, "121.78.77.164");
+	strcpy(m_szHost, "121.78.77.163");
 	strcpy(m_szUser, "root");
 	strcpy(m_szPass, "supersecret");
 	strcpy(m_szDb, "neutron");
@@ -19,6 +19,8 @@ int COVSDBDirect::Init()
 {
 	m_pcDbConnect_ = new DbConnect( &m_nRet, m_szHost, m_szUser, m_szPass, m_szDb);
 	m_pcDbConnect_->ConnectDB();
+
+	m_pcNeutronTest_ = new CNeutronTest();
 
 	return ITF_OK;
 }
@@ -50,14 +52,14 @@ int COVSDBDirect::Run(int argc, char** argv)
 {
 
 	char cOption;
-	int nOptionA = 0;
+	int  nOptionA = 0;
 	char cFileName[80];
 	FILE *pFop;
 	char *cLineSave;
 	int  nFileCount = 0;
-	char* gSearchID;
-	char* gSearchStr;
-	int nPrintFlag = 0;
+	char *gSearchID;
+	char *gSearchStr;
+	int  nPrintFlag = 0;
 
 	while ((cOption = getopt(argc, argv, "des:")) != -1 ){
 		switch(cOption){
@@ -78,6 +80,8 @@ int COVSDBDirect::Run(int argc, char** argv)
 		}
 	}
 
+	m_pcNeutronTest_->Init(m_pcDbConnect_);
+	m_pcNeutronTest_->TestNetwork();
 	
 	printf("--- neutron::networks --------------------------------------------------\n");
 	int nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from networks");
@@ -92,7 +96,7 @@ int COVSDBDirect::Run(int argc, char** argv)
 		printf("\n");
 	}
 	printf("\n");
-
+	
 	printf("--- neutron::subnets --------------------------------------------------\n");
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)"select * from subnets");
 	result = m_pcDbConnect_->GetDBRes();

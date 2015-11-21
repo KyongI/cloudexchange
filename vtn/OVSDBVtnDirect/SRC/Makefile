@@ -2,14 +2,19 @@
 include ../makehead.mk
 LOCALFLAGS = -I./ -D_CV_DATA_ -L/usr/lib64/mysql/
 EXE = UT_VI_OVSDB
-OBJS = OVSDBDirect.o DbConnect.o
+OBJS = OVSDBDirect.o DbConnect.o NeutronTest.o
 
-all:$(EXE)
+LFLAGS += -Lconf_lex -lparse
+
+SUBDIR = conf_lex
+
+all :: $(EXE)
+
 $(EXE) : $(OBJS)
 	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LOCALFLAGS) $(DB_OBJ) $(LFLAGS)
 
-install : $(EXE)
+install :: $(EXE)
 	$(MV) $(EXE) $(UTILPATH)/
 
-clean :
+clean ::
 	rm -rf $(EXE) $(OBJS) core.

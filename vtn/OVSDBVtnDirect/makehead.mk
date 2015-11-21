@@ -98,3 +98,17 @@ CFLAGS 		= -Wall -g -fPIC $(MFLAGS) $(DEFINES) $(LOCAL_DEFINES) $(IFLAGS)
 
 .C.o:
 	$(CC) -c -o $*.o $(CFLAGS) $(IFLAGS) $*.C 
+
+.PHONY: all clean install netinstall initial tags cscope distclean
+
+all clean install netinstall initial tags cscope distclean ::
+	@set -e;                        \
+	for i in $(SUBDIR);             \
+	do (                            \
+		if [ $$i"NULL" != "NULL" ]; \
+			then                        \
+			echo "    CD " $(CURDIR)/$$i;   \
+			$(MAKE) -C $$i $@;      \
+		fi                          \
+	);                              \
+	done; 

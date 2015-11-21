@@ -1,5 +1,5 @@
 #ifndef _OVSDBDIRECT_HPP_
-#define _OVSDBDIRECT_HPP__
+#define _OVSDBDIRECT_HPP_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,12 +9,13 @@
 
 #include "global.h"
 #include "DbConnect.hpp"
+#include "NeutronTest.hpp"
 
 #define	BUFFER_SIZE		512
-#define SEARCH_TYPE_ALL			0x01
-#define SEARCH_TYPE_MDN			0x02
+#define SEARCH_TYPE_ALL		0x01
+#define SEARCH_TYPE_MDN		0x02
 #define IPMD_TOTAL_LENGTH_LEN   4
-#define LINE_MAX_LENGTH			8192
+#define LINE_MAX_LENGTH		8192
 
 class COVSDBDirect
 {
@@ -22,13 +23,14 @@ class COVSDBDirect
 		COVSDBDirect();
 		~COVSDBDirect();
 
-		int			Run( int argc, char** argv );
-        int         Init();
+		int	Run( int argc, char** argv );
+		int	Init();
 
 	private :
 		DbConnect*	m_pcDbConnect_;
+		CNeutronTest*	m_pcNeutronTest_;
 
-		int			m_nRet;
+		int		m_nRet;
 		char		m_szHost[BUFFER_SIZE];
 		char		m_szUser[BUFFER_SIZE];
 		char		m_szPass[BUFFER_SIZE];
