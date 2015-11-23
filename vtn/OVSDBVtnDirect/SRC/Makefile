@@ -1,6 +1,6 @@
 #g++ test.cpp -I/usr/include/mysql -L/usr/lib64/mysql/ -lmysqlclient_r
 include ../include.mk
-LOCALFLAGS = -I./ -D_CV_DATA_ -L/usr/lib64/mysql/
+LOCALFLAGS = -I./ -I./conf_lex -I./wrap -D_CV_DATA_ -L/usr/lib64/mysql/
 EXE = UT_VI_OVSDB
 OBJS = OVSDBDirect.o \
 		DbConnect.o \

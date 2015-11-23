@@ -1,5 +1,5 @@
 #ifndef __WRAP_HPP_
-#define __WRAP_HPP_ 1
+#define __WRAP_HPP_
 
 #include <stdio.h>
 

@@ -73,7 +73,7 @@ void COVSDBDirect::Usage(char *s)
 {
 	printf("\n\n=====================================================================\n");
 	printf("\n");
-	printf("                      ODL OVSDB Viewer V1.0 \n");
+	printf("                      Cloud Info Viewer V1.0 \n");
 	printf("\n");
 	printf("=====================================================================\n");
 	printf("\n");
@@ -81,7 +81,7 @@ void COVSDBDirect::Usage(char *s)
 	printf("  %s [-d]\n", s);
 	printf("\n");
 	printf("DESCRIPTION:\n");
-	printf("  This utility display OVSDB neutron information.\n");
+	printf("  This utility display OpenStack neutron information.\n");
 	printf("  If there is no option key fields are output.\n");
 	printf("\n");
 	printf("OPTION:\n");

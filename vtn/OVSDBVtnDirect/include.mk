@@ -7,13 +7,13 @@ PREFIX		:= $(dir $(word $(words $(MAKEFILE_LIST)), $(MAKEFILE_LIST)))
 
 
 
-INCDIR		= -I/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC_LHJ/conf_lex
-INCDIR		+= -I/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC_LHJ/wrap
+INCDIR		= -I/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC/conf_lex
+INCDIR		+= -I/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC/wrap
 INCDIR		+= -I/usr/include/mysql
 
 
-LIBDIR		+= -L/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC_LHJ/conf_lex
-LIBDIR		+= -L/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC_LHJ/wrap
+LIBDIR		+= -L/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC/conf_lex
+LIBDIR		+= -L/home/stack/cloudexchange/vtn/OVSDBVtnDirect/SRC/wrap
 
 LIBS		+= -lparse -lwrap -lmysqlclient_r -ldl
 
