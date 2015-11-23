@@ -79,30 +79,18 @@ int Parser::get_id(char *s)
 	if((len = lower(string, s, MAXSTRINGLEN)) == MAXSTRINGLEN)
 		return NOTOKEN;
 	
-	if(!strcmp(string, "core_mask"))
-		return CW_MASK; 
-	if(!strcmp(string, "client_count"))
-		return CW_CLIENT_COUNT; 
-	if(!strcmp(string, "port_mask"))
-		return CW_PORT_MASK; 
-	if(!strcmp(string, "node_count"))
-		return CW_NODE_COUNT; 
-	if(!strcmp(string, "hugepage_count"))
-		return CW_HUGE_COUNT; 
-	if(!strcmp(string, "hugepage_size"))
-		return CW_HUGE_SIZE; 
-	if(!strcmp(string, "client_core"))
-		return CW_CLIENT_CORE; 
-	if(!strcmp(string, "db_addr"))
-		return CW_DB_ADDR; 
-	if(!strcmp(string, "db_user"))
-		return CW_DB_USER; 
-	if(!strcmp(string, "db_name"))
-		return CW_DB_NAME; 
-	if(!strcmp(string, "db_pass"))
-		return CW_DB_PASS; 
-	if(!strcmp(string, "server_port"))
-		return CW_SERVER_PORT; 
+	if(!strcmp(string, "vm1_ip"))
+		return CW_VM1_IP; 
+	if(!strcmp(string, "vm1_id"))
+		return CW_VM1_ID; 
+	if(!strcmp(string, "vm1_pw"))
+		return CW_VM1_PW; 
+	if(!strcmp(string, "vm2_ip"))
+		return CW_VM2_IP; 
+	if(!strcmp(string, "vm2_id"))
+		return CW_VM2_ID; 
+	if(!strcmp(string, "vm2_pw"))
+		return CW_VM2_PW; 
 	
 	/*  unresolved lexemes are strings */
 	yylval.sval = mk_string(s, len);

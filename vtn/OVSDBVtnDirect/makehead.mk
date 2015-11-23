@@ -78,10 +78,12 @@ DEFINES 	= -D__LINUX -D_LINUX_ -D_LITTLE_ENDIAN_ -D_MYSQL_
 IFLAGS 		= -I../INCLUDE \
 			-I../INC \
 			-I. \
+			-I./conf_lex \
+			-I./wrap \
 			-I$(INCPATH)  \
 			-I$(INC_MYSQL_PATH)
 
-LFLAGS 		= $(LLIBTHREAD) $(LIB_MYSQL_PATH)
+LFLAGS 		= $(LLIBTHREAD) $(LIB_MYSQL_PATH) -L./conf_lex -L./wrap -lparse -lwrap
 
 CFLAGS 		= -Wall -g -fPIC $(MFLAGS) $(DEFINES) $(LOCAL_DEFINES) $(IFLAGS)
 

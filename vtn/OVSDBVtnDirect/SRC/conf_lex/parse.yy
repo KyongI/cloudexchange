@@ -30,18 +30,12 @@ static CONFIG* parse_tree;
 
 %token NOTOKEN
 
-%token CW_MASK
-%token CW_CLIENT_COUNT
-%token CW_CLIENT_CORE
-%token CW_PORT_MASK
-%token CW_NODE_COUNT
-%token CW_HUGE_COUNT
-%token CW_HUGE_SIZE
-%token CW_DB_ADDR
-%token CW_DB_USER
-%token CW_DB_NAME
-%token CW_DB_PASS
-%token CW_SERVER_PORT
+%token CW_VM1_IP
+%token CW_VM1_ID
+%token CW_VM1_PW
+%token CW_VM2_IP
+%token CW_VM2_ID
+%token CW_VM2_PW
 %token T_ASSIGN
 
 %token <ival> T_INT
@@ -53,15 +47,12 @@ static CONFIG* parse_tree;
 %left               '*' '/'
 
 %type  <config> command
-%type  <config> mask_config
-%type  <config> client_count_config
-%type  <config> port_mask_config
-%type  <config> node_count_config
-%type  <config> huge_count_config
-%type  <config> huge_size_config
-%type  <config> client_core_config
-%type  <config> db_config
-%type  <config> server_port_config
+%type  <config> vm1_ip_config
+%type  <config> vm1_id_config
+%type  <config> vm1_pw_config
+%type  <config> vm2_ip_config
+%type  <config> vm2_id_config
+%type  <config> vm2_pw_config
 
 %%
 
@@ -70,89 +61,58 @@ start
    ;
 
 command
-   : mask_config
+   : vm1_ip_config 
      {$$ = $1;}
     
-   | client_count_config
+   | vm1_id_config
      {$$ = $1;}
 
-   | port_mask_config
+   | vm1_pw_config
      {$$ = $1;}
 
-   | node_count_config
+   | vm2_ip_config
      {$$ = $1;}
 
-   | huge_count_config
+   | vm2_id_config
      {$$ = $1;}
 
-   | huge_size_config 
+   | vm2_pw_config
      {$$ = $1;}
 
-   | client_core_config
-     {$$ = $1;}
-
-   | db_config
-     {$$ = $1;}
-
-   | server_port_config
-     {$$ = $1;}
 
    | nothing
      {$$ = default_config(); }
 
-mask_config
-   : CW_MASK T_ASSIGN T_STRING
-     {$$ = assign_core_mask($3);}
-   | CW_MASK T_ASSIGN T_INT
-     {$$ = assign_core_mask($3);}
+vm1_ip_config
+   : CW_VM1_IP T_ASSIGN T_STRING
+     {$$ = assign_vm1_ip_config($3);}
    ;
 
-
-client_count_config
-   : CW_CLIENT_COUNT T_ASSIGN T_INT
-     {$$ = assign_client_count($3);}
+vm1_id_config
+   : CW_VM1_ID T_ASSIGN T_STRING
+     {$$ = assign_vm1_id_config($3);}
    ;
 
-port_mask_config
-   : CW_PORT_MASK T_ASSIGN T_INT
-     {$$ = assign_port_mask($3);}
+vm1_pw_config
+   : CW_VM1_PW T_ASSIGN T_STRING
+     {$$ = assign_vm1_pw_config($3);}
    ;
 
-node_count_config
-   : CW_NODE_COUNT T_ASSIGN T_INT
-     {$$ = assign_node_count($3);}
+vm2_ip_config
+   : CW_VM2_IP T_ASSIGN T_STRING
+     {$$ = assign_vm2_ip_config($3);}
    ;
 
-huge_count_config
-   : CW_HUGE_COUNT T_ASSIGN T_INT
-     {$$ = assign_huge_count($3);}
+vm2_id_config
+   : CW_VM2_ID T_ASSIGN T_STRING
+     {$$ = assign_vm2_id_config($3);}
    ;
 
-huge_size_config
-   : CW_HUGE_SIZE T_ASSIGN T_STRING
-     {$$ = assign_huge_size($3);}
+vm2_pw_config
+   : CW_VM2_PW T_ASSIGN T_STRING
+     {$$ = assign_vm2_pw_config($3);}
    ;
 
-client_core_config
-   : CW_CLIENT_CORE T_INT T_ASSIGN T_INT
-     {$$ = assign_client_core($2, $4);}
-   ;
-
-db_config
-   : CW_DB_ADDR T_ASSIGN T_STRING
-     {$$ = assign_db_addr($3);}
-   | CW_DB_USER T_ASSIGN T_STRING
-     {$$ = assign_db_user($3);}
-   | CW_DB_PASS T_ASSIGN T_STRING
-     {$$ = assign_db_pass($3);}
-   | CW_DB_NAME T_ASSIGN T_STRING
-     {$$ = assign_db_name($3);}
-   ;
-
-server_port_config
-   : CW_SERVER_PORT T_ASSIGN T_INT
-     {$$ = assign_server_port($3);}
-   ;
 
 nothing
    :

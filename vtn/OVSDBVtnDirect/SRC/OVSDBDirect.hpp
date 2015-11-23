@@ -9,13 +9,17 @@
 
 #include "global.h"
 #include "DbConnect.hpp"
-#include "NeutronTest.hpp"
+#include "NeutronInfo.hpp"
+#include "NovaInfo.hpp"
+#include "PrintUtil.hpp"
+#include "config.h"
 
 #define	BUFFER_SIZE		512
 #define SEARCH_TYPE_ALL		0x01
 #define SEARCH_TYPE_MDN		0x02
 #define IPMD_TOTAL_LENGTH_LEN   4
 #define LINE_MAX_LENGTH		8192
+
 
 class COVSDBDirect
 {
@@ -24,11 +28,12 @@ class COVSDBDirect
 		~COVSDBDirect();
 
 		int	Run( int argc, char** argv );
-		int	Init();
+		int	Init(CONFIG *a_stConf_);
 
 	private :
-		DbConnect*	m_pcDbConnect_;
-		CNeutronTest*	m_pcNeutronTest_;
+		uint8_t		m_unDbCnt;
+		DbConnect*	m_pcDbConnect_[10];
+		PrintUtil	*m_pcPrint;
 
 		int		m_nRet;
 		char		m_szHost[BUFFER_SIZE];

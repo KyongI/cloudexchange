@@ -1,17 +1,20 @@
 #g++ test.cpp -I/usr/include/mysql -L/usr/lib64/mysql/ -lmysqlclient_r
-include ../makehead.mk
+include ../include.mk
 LOCALFLAGS = -I./ -D_CV_DATA_ -L/usr/lib64/mysql/
 EXE = UT_VI_OVSDB
-OBJS = OVSDBDirect.o DbConnect.o NeutronTest.o
+OBJS = OVSDBDirect.o \
+		DbConnect.o \
+		NeutronInfo.o \
+		NovaInfo.o \
+		PrintUtil.o
 
-LFLAGS += -Lconf_lex -lparse
-
-SUBDIR = conf_lex
+SUBDIR = conf_lex \
+	wrap
 
 all :: $(EXE)
 
 $(EXE) : $(OBJS)
-	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LOCALFLAGS) $(DB_OBJ) $(LFLAGS)
+	$(CXX) -o $@ $(OBJS) $(CFLAGS) $(INCDIR) $(LDFLAGS) -lparse
 
 install :: $(EXE)
 	$(MV) $(EXE) $(UTILPATH)/

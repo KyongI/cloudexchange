@@ -46,23 +46,17 @@ extern int yydebug;
   enum yytokentype
   {
     NOTOKEN = 258,
-    CW_MASK = 259,
-    CW_CLIENT_COUNT = 260,
-    CW_CLIENT_CORE = 261,
-    CW_PORT_MASK = 262,
-    CW_NODE_COUNT = 263,
-    CW_HUGE_COUNT = 264,
-    CW_HUGE_SIZE = 265,
-    CW_DB_ADDR = 266,
-    CW_DB_USER = 267,
-    CW_DB_NAME = 268,
-    CW_DB_PASS = 269,
-    CW_SERVER_PORT = 270,
-    T_ASSIGN = 271,
-    T_INT = 272,
-    T_REAL = 273,
-    T_STRING = 274,
-    T_QSTRING = 275
+    CW_VM1_IP = 259,
+    CW_VM1_ID = 260,
+    CW_VM1_PW = 261,
+    CW_VM2_IP = 262,
+    CW_VM2_ID = 263,
+    CW_VM2_PW = 264,
+    T_ASSIGN = 265,
+    T_INT = 266,
+    T_REAL = 267,
+    T_STRING = 268,
+    T_QSTRING = 269
   };
 #endif
 
@@ -78,7 +72,7 @@ union YYSTYPE
   char *sval;
   CONFIG* config;
 
-#line 82 "parse.h" /* yacc.c:1909  */
+#line 76 "parse.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
