@@ -6,6 +6,7 @@ OBJS = OVSDBDirect.o \
 		DbConnect.o \
 		NeutronInfo.o \
 		NovaInfo.o \
+		KeystoneInfo.o \
 		PrintUtil.o
 
 SUBDIR = conf_lex \

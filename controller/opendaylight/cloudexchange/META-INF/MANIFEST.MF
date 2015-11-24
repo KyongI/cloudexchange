@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1447576975768
+Bnd-LastModified: 1448364206381
 Build-Jdk: 1.7.0_85
 Built-By: stack
 Bundle-Activator: org.opendaylight.controller.cloudexchange.Activator
@@ -10,11 +10,11 @@ Bundle-Version: 0.1.0
 Created-By: Apache Maven Bundle Plugin
 Export-Package: org.opendaylight.controller.cloudexchange;uses:="org.ope
  ndaylight.controller.sal.core,org.apache.felix.dm,org.slf4j,org.openday
- light.controller.networkconfig.neutron,org.opendaylight.ovsdb.plugin.ap
- i,org.opendaylight.ovsdb.plugin,org.opendaylight.ovsdb.lib.notation,org
- .opendaylight.controller.sal.utils,org.opendaylight.controller.sal.conn
- ection,org.opendaylight.ovsdb.lib.schema,org.opendaylight.ovsdb.plugin.
- impl";version="0.1.0"
+ light.controller.sal.connection,org.opendaylight.ovsdb.plugin,org.opend
+ aylight.ovsdb.plugin.api,org.opendaylight.ovsdb.lib.notation,org.openda
+ ylight.ovsdb.lib.schema,org.opendaylight.controller.sal.utils,org.opend
+ aylight.ovsdb.plugin.impl,org.opendaylight.controller.networkconfig.neu
+ tron";version="0.1.0"
 Import-Package: org.apache.felix.dm;version="[3.0,4)",org.opendaylight.c
  ontroller.containermanager;version="[0.5,1)",org.opendaylight.controlle
  r.forwardingrulesmanager;version="[0.6,1)",org.opendaylight.controller.

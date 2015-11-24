@@ -1,0 +1,288 @@
+#include "KeystoneInfo.hpp"
+
+CKeystoneInfo::CKeystoneInfo()
+{
+
+}
+
+CKeystoneInfo::~CKeystoneInfo()
+{
+
+}
+
+int CKeystoneInfo::Init(DbConnect* pcDbConnect) 
+{
+	m_pcDbConnect_ = pcDbConnect;
+	return ITF_OK;
+}
+
+int CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
+                                   char *_tbName,
+                                   bool _vmode)
+{
+	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
+
+	int		count=0;
+	int		nRowCount; 
+	int		fields;
+	char	query[1024];
+	KeystoneEndpoint	nEndp;
+
+	memset(query, 0x00, sizeof(query));
+	sprintf(query, "select * from %s", _tbName);
+
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char *)query);
+	if (nRowCount == ITF_ERROR)
+	{
+		printf(" Table [%s] info get failed\n\n", _tbName);
+		return ITF_ERROR;
+	}
+	else if (nRowCount == 0)
+	{
+		printf(" Table [%s] has no more rows\n\n", _tbName);
+		return ITF_ERROR;
+	}
+
+	m_pResult = m_pcDbConnect_->GetDBRes();
+	fields    = mysql_num_fields(m_pResult);
+
+	while((row = mysql_fetch_row(m_pResult)))
+	{
+		memset(&nEndp, 0x00, sizeof(KeystoneEndpoint));
+
+#ifdef _PRINT_ALLROWS
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+		{
+			printf(" %s ||", row[cnt]);
+		}
+		printf("\n");
+#endif
+		unsigned int rowIdx = 0;
+
+		strncpy(nEndp.id,        row[rowIdx++], ID_SIZE_K);
+		rowIdx++;
+		strncpy(nEndp.interface, row[rowIdx++], INF_SIZE);
+		rowIdx++;
+		strncpy(nEndp.url,       row[rowIdx++], URL_SIZE);
+
+		if (_vmode == true)
+		{
+			printf(" %2d:", count++);
+			printf(" [ID] "CYAN"%s "RESET"||", nEndp.id);
+			printf(" [INTERFACE] "CYAN"%s "RESET"||\n", nEndp.interface);
+			printf("     [URL] "CYAN"%s "RESET"\n", nEndp.url);
+		}
+
+		_vecEndp.push_back(nEndp);
+	}
+
+	if (_vmode == false)
+		printf(" ID/INTERFACE/URL get success\n\n");
+	else
+		printf("\n");
+
+	return ITF_OK; 
+}
+
+int CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
+                                  char *_tbName,
+                                  bool _vmode)
+{
+	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
+
+	int		count=0;
+	int		nRowCount;
+	int		fields;
+	char	query[1024];
+	KeystoneProject	nProj;
+
+	memset(query, 0x00, sizeof(query));
+	sprintf(query, "select * from %s", _tbName);
+
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
+	if (nRowCount == ITF_ERROR)
+	{
+		printf(" Table [%s] info get failed\n\n", _tbName);
+		return ITF_ERROR;
+	}
+	else if (nRowCount == 0)
+	{
+		printf(" Table [%s] has no more rows\n\n", _tbName);
+		return ITF_ERROR;
+	}
+
+	m_pResult = m_pcDbConnect_->GetDBRes();
+	fields    = mysql_num_fields(m_pResult);
+
+	while((row = mysql_fetch_row(m_pResult)))
+	{
+		memset(&nProj, 0x00, sizeof(KeystoneProject));
+
+#ifdef _PRINT_ALLROWS
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+		{
+			printf(" %s ||", row[cnt]);
+		}
+		printf("\n");
+#endif
+		unsigned int rowIdx = 0;
+
+		strncpy(nProj.id,   row[rowIdx++], ID_SIZE_K);
+		strncpy(nProj.name, row[rowIdx++], NAME_SIZE_K);
+
+		if (_vmode == true)
+		{
+			printf(" %2d:", count++);
+			printf(" [ID] "CYAN"%s "RESET"||", nProj.id);
+			printf(" [NAME] "CYAN"%s "RESET"||\n", nProj.name);
+		}
+
+		_vecProj.push_back(nProj);
+	}
+
+	if (_vmode == false)
+		printf(" ID/NAME get success\n\n");
+	else
+		printf("\n");
+
+	return ITF_OK;
+}
+
+int CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
+                                char *_tbName,
+                                bool _vmode)
+{
+	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
+
+	int		count=0;
+	int		nRowCount;
+	int		fields;
+	char	query[1024];
+	KeystoneToken	nToken;
+
+	memset(query, 0x00, sizeof(query));
+	sprintf(query, "select * from %s", _tbName);
+
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
+	if (nRowCount == ITF_ERROR)
+	{
+		printf(" Table [%s] info get failed\n\n", _tbName);
+		return ITF_ERROR;
+	}
+	else if (nRowCount == 0)
+	{
+		printf(" Table [%s] has no more rows\n\n", _tbName);
+		return ITF_ERROR;
+	}
+
+	m_pResult = m_pcDbConnect_->GetDBRes();
+	fields    = mysql_num_fields(m_pResult);
+
+	while((row = mysql_fetch_row(m_pResult)))
+	{
+		memset(&nToken, 0x00, sizeof(KeystoneToken));
+
+		unsigned int rowIdx=0;
+
+		strncpy(nToken.id,      row[rowIdx++], ID_SIZE_K);
+		rowIdx++;
+		strncpy(nToken.extra,   row[rowIdx++], EXTRA_SIZE);
+		rowIdx += 2;
+		strncpy(nToken.user_id, row[rowIdx++], ID_SIZE_K);
+
+		if (_vmode == true)
+		{
+			printf(" %3d:", count++);
+			printf(" [ID] "CYAN"%s "RESET"||", nToken.id);
+			printf(" [USER_ID] "CYAN"%s "RESET"||\n", nToken.user_id);
+			printf("      [EXTRA] "CYAN"%s "RESET"||\n", nToken.extra);
+		}
+
+		_vecToken.push_back(nToken);
+	}
+
+	if (_vmode == false)
+		printf(" ID/EXTRA/USER_ID get success\n\n");
+	else
+		printf("\n");
+
+	return ITF_OK;
+}
+
+int CKeystoneInfo::GetDBInfo(char *_tbName)
+{
+	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
+
+	int		nRowCount;
+	int		fields;
+	char	query[1024];
+
+	memset(query, 0x00, sizeof(query));
+	sprintf(query, "select * from %s", _tbName);
+
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
+	if (nRowCount == ITF_ERROR)
+	{
+		printf(" Table [%s] info get failed\n\n", _tbName);
+		return ITF_ERROR;
+	}
+	else if (nRowCount == 0)
+	{
+		printf(" Table [%s] has no more rows\n\n", _tbName);
+		return ITF_ERROR;
+	}
+
+	m_pResult = m_pcDbConnect_->GetDBRes();
+	fields    = mysql_num_fields(m_pResult);
+
+	while((row = mysql_fetch_row(m_pResult)))
+	{
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+		{
+			printf(" %s ||", row[cnt]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+
+	return ITF_OK;
+}
+
+int CKeystoneInfo::ShowTableInfo(void)
+{
+	printf("--- nova::table list --------------------------------------------------\n");
+
+	int     nRowCount;
+	int     fields;
+	char    query[1024];
+
+	memset(query, 0x00, sizeof(query));
+	sprintf(query, "show tables");
+
+	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
+	if (nRowCount == ITF_ERROR)
+	{
+		printf(" Table info get failed\n\n");
+		return ITF_ERROR;
+	}
+	else if (nRowCount == 0)
+	{
+		printf(" Table has no more rows\n\n");
+		return ITF_ERROR;
+	}
+
+	m_pResult = m_pcDbConnect_->GetDBRes();
+	fields    = mysql_num_fields(m_pResult);
+
+	while((row = mysql_fetch_row(m_pResult)))
+	{
+		for(int cnt = 0 ; cnt < fields ; ++cnt)
+		{
+			printf(" %s ||", row[cnt]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+
+	return ITF_OK;
+}

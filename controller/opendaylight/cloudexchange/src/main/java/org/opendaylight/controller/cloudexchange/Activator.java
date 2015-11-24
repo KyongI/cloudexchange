@@ -7,9 +7,14 @@ import org.opendaylight.controller.sal.core.ComponentActivatorAbstractBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/** 
+* @ClassName: Activator 
+* @Description: TODO Activator
+*  
+*/ 
 public class Activator extends ComponentActivatorAbstractBase {
 
-	private static final Logger log = LoggerFactory.getLogger(CloudExchange.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CloudExchange.class);
 
 	/**
 	 * Function called when the activator starts just after some
@@ -40,7 +45,7 @@ public class Activator extends ComponentActivatorAbstractBase {
 	 * Object
 	 */	
         public Object[] getImplementations() {
-                log.trace("Getting Implementations");
+        	LOG.trace("Getting Implementations");
 
                 Object[] res = { CloudExchange.class };
                 return res;
@@ -60,7 +65,7 @@ public class Activator extends ComponentActivatorAbstractBase {
 	 * should not be the case though.
 	 */
         public void configureInstance(Component c, Object imp, String containerName) {
-                log.trace("Configuring instance");
+        	LOG.trace("Configuring instance");
 
                 if (imp.equals(CloudExchange.class)) {
 

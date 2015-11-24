@@ -1,0 +1,9 @@
+cloudexchange/testMain.class
+cloudexchange/service/testService.class
+cloudexchange/service/testCEDbConfigService.class
+cloudexchange/service/testCloudExchange.class
+cloudexchange/log/testLog.class
+cloudexchange/service/testCEConnectionService.class
+cloudexchange/util/testUtil.class
+cloudexchange/service/testCEDbInventoryListener.class
+cloudexchange/service/testCEPortService.class

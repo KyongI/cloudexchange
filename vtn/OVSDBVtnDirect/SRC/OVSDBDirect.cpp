@@ -6,7 +6,6 @@ using namespace Parser;
 CWrap*		g_pcWrap;
 CSingleLog*	g_pcLog;
 
-
 COVSDBDirect::COVSDBDirect()
 {
 	m_unDbCnt = 0;
@@ -39,21 +38,28 @@ int COVSDBDirect::Init(CONFIG *a_stConf_)
 
 	for(int i = 0; i < m_unDbCnt ; i++)
 	{
-		m_pcDbConnect_[i] = 
-					new DbConnect( &ret, a_stConf_->vm_config[i].ip, a_stConf_->vm_config[i].id, a_stConf_->vm_config[i].pw, NULL);
+		m_pcDbConnect_[i] = new DbConnect(&ret, 
+										  a_stConf_->vm_config[i].ip, 
+										  a_stConf_->vm_config[i].id, 
+										  a_stConf_->vm_config[i].pw, 
+										  NULL);
 		ret = m_pcDbConnect_[i]->ConnectDB();
 		if (ret != ITF_OK)
 		{
-			g_pcLog->LogMsg(0, (char*)NULL, " DB Connect Failure : IP [%s] User [%s] Pw [%s]\n\n", a_stConf_->vm_config[i].ip
-														  , a_stConf_->vm_config[i].id
-														  , a_stConf_->vm_config[i].pw);
+			g_pcLog->LogMsg(0, (char*)NULL, 
+							" DB Connect Failure : IP [%s] User [%s] Pw [%s]\n\n", 
+							a_stConf_->vm_config[i].ip,
+							a_stConf_->vm_config[i].id,
+							a_stConf_->vm_config[i].pw);
 			return ITF_ERROR;
 		}
 		else	
 		{
-			g_pcLog->LogMsg(0, (char*)NULL, " DB Connect Success : IP [%s] User [%s] Pw [%s]\n\n", a_stConf_->vm_config[i].ip
-														  , a_stConf_->vm_config[i].id
-														  , a_stConf_->vm_config[i].pw);
+			g_pcLog->LogMsg(0, (char*)NULL, 
+							" DB Connect Success : IP [%s] User [%s] Pw [%s]\n\n", 
+							a_stConf_->vm_config[i].ip,
+							a_stConf_->vm_config[i].id, 
+							a_stConf_->vm_config[i].pw);
 		}
 	}
 
@@ -65,6 +71,7 @@ int COVSDBDirect::Init(CONFIG *a_stConf_)
 
 //	m_pcNeutronInfo_	= new CNeutronInfo();
 //	m_pcNovaInfo_		= new CNovaInfo();
+	m_pcKeystoneInfo_   = new CKeystoneInfo();
 
 	return ITF_OK;
 }
@@ -78,15 +85,23 @@ void COVSDBDirect::Usage(char *s)
 	printf("=====================================================================\n");
 	printf("\n");
 	printf("USAGE:\n");
-	printf("  %s [-d]\n", s);
+	printf("  %s [-d] {DB name}\n", s);
+	printf("  %s [-t] {Table name}\n", s);
+	printf("  %s [-k] {Keystone table name}\n", s);
 	printf("\n");
 	printf("DESCRIPTION:\n");
-	printf("  This utility display OpenStack neutron information.\n");
-	printf("  If there is no option key fields are output.\n");
+	printf("  This utility displays OpenStack DB information.\n");
+	printf("  DB option is neutron,nova,keystone. Other DBs are not supported in this version .\n");
+	printf("  Tables selection is also limited. List are as belows\n");
+	printf("   - [NEUTRON]  networks, subnets, ports\n");
+	printf("   - [NOVA]     certifcates, instances\n");
+	printf("   - [KEYSTONE] endpoint, project, token\n");
 	printf("\n");
 	printf("OPTION:\n");
 	printf("  h : Help output.\n");
-	printf("  s : View selected DB information (ex. neutron, nova)\n");
+	printf("  d : View selected DB information (ex. neutron, nova, keystone)\n");
+	printf("  t : View selected table information (ex. networks, subnets, ports...)\n");
+	printf("  k : View selected table's ID conversion (ex. endpoint, project, token)\n");
 	printf("  a : View all DB information\n");
 	printf("\n");
 	printf("EXAMPLES:\n");
@@ -96,25 +111,22 @@ void COVSDBDirect::Usage(char *s)
 
 int COVSDBDirect::Run(int argc, char** argv)
 {
-
-	char cOption;
-	int  nOptionA = 0;
+	char	 cOption;
+	char	*dbname;
+#if 0
 	char cFileName[80];
 	FILE *pFop;
 	char *cLineSave;
 	int  nFileCount = 0;
-	char *gSearchID;
-	char *gSearchStr;
 	int  nPrintFlag = 0;
+#endif
 
-	char    *dbname;
-
-	while ((cOption = getopt(argc, argv, "nbpcihs:a")) != -1 ){
+	while ((cOption = getopt(argc, argv, "had:t:k:")) != -1 ){
 		switch(cOption){
 			case 'h':
 				Usage(argv[0]);
 				return ITF_OK;
-			case 's':
+			case 'd':
 				dbname = optarg;
 				if (strcmp(optarg, "neutron") == 0)
 				{
@@ -132,9 +144,91 @@ int COVSDBDirect::Run(int argc, char** argv)
 						m_pcPrint->PrintNovaInfo(m_pcDbConnect_[i]);
 					}
 				}
+				else if (strcmp(optarg, "keystone") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintKeystoneInfo(m_pcDbConnect_[i]);
+					}
+				}
 				else
 				{
 					printf(" Invalid DB name. Use \"neutron\" or \"nova\"\n");
+				}
+				return ITF_OK;
+			case 't':
+				if (strcmp(optarg, "networks") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintNetworkInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else if (strcmp(optarg, "subnets") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintSubnetInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else if (strcmp(optarg, "ports") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintPortInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else if (strcmp(optarg, "certificates") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintCertificateInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else if (strcmp(optarg, "instances") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintInstanceInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else if (strcmp(optarg, "endpoint") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintEndpointInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else if (strcmp(optarg, "project") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintProjectInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else if (strcmp(optarg, "token") == 0)
+				{
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintTokenInfo(m_pcDbConnect_[i]);
+					}
+				}
+				else
+				{
+					printf(" Invalid table name.\n");
+					printf("  [table name list]\n");
+					printf("   - networks, subnets, ports\n");
+					printf("   - certificates, instances\n");
+					printf("   - endpoint, project, token\n");
 				}
 				return ITF_OK;
 			case 'a':
@@ -143,54 +237,44 @@ int COVSDBDirect::Run(int argc, char** argv)
 					m_pcPrint->PrintVM(i);
 					m_pcPrint->PrintNeutronInfo(m_pcDbConnect_[i]);
 					m_pcPrint->PrintNovaInfo(m_pcDbConnect_[i]);
+					m_pcPrint->PrintEndpointInfo(m_pcDbConnect_[i], false);
+					m_pcPrint->PrintProjectInfo(m_pcDbConnect_[i], false);
+					m_pcPrint->PrintTokenInfo(m_pcDbConnect_[i], false);
 				}
 				return ITF_OK;
-			case 'n':
-				printf(" Print Networks Info\n");
-				for(int i = 0; i < m_unDbCnt ; i++)
+			case 'k':
+				if (strcmp(optarg, "endpoint") == 0)
 				{
-					m_pcPrint->PrintVM(i);
-					m_pcPrint->PrintNetworkInfo(m_pcDbConnect_[i]);
-					printf("\n\n");
+					stdEndp_.clear();
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintEndpointInfo(m_pcDbConnect_[i], false);
+					}
 				}
-				break;
-			case 'b':
-				printf(" Print Subnets Info\n");
-				for(int i = 0; i < m_unDbCnt ; i++)
+				else if (strcmp(optarg, "project") == 0)
 				{
-					m_pcPrint->PrintVM(i);
-					m_pcPrint->PrintSubnetInfo(m_pcDbConnect_[i]);
-					printf("\n\n");
+					stdProj_.clear();
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintProjectInfo(m_pcDbConnect_[i], false);
+					}
 				}
-				break;
-			case 'p':
-				printf(" Print Ports Info\n");
-				for(int i = 0; i < m_unDbCnt ; i++)
+				else if (strcmp(optarg, "token") == 0)
 				{
-					m_pcPrint->PrintVM(i);
-					m_pcPrint->PrintPortInfo(m_pcDbConnect_[i]);
-					printf("\n\n");
+					stdToken_.clear();
+					for(int i = 0; i < m_unDbCnt ; i++)
+					{
+						m_pcPrint->PrintVM(i);
+						m_pcPrint->PrintTokenInfo(m_pcDbConnect_[i], false);
+					}
 				}
-				break;
-			case 'c':
-				printf(" Print Certificates Info\n");
-				for(int i = 0; i < m_unDbCnt ; i++)
+				else
 				{
-					m_pcPrint->PrintVM(i);
-					m_pcPrint->PrintCertificateInfo(m_pcDbConnect_[i]);
-					printf("\n\n");
+					printf(" Invalid DB name. Use \"endpoint\" or \"project\" or \"token\"\n");
 				}
-				break;
-			case 'i':
-				printf(" Print Instances Info\n");
-				for(int i = 0; i < m_unDbCnt ; i++)
-				{
-					m_pcPrint->PrintVM(i);
-					m_pcPrint->PrintInstanceInfo(m_pcDbConnect_[i]);
-					printf("\n\n");
-				}
-				break;
-
+				return ITF_OK;
 			case '?':
 				printf("Unknown option: %c\n", optopt);
 				Usage(argv[0]);
@@ -201,6 +285,8 @@ int COVSDBDirect::Run(int argc, char** argv)
 		}
 	
 	}
+
+	Usage(argv[0]);
 
 #if 0
 	m_pcNeutronInfo_->Init(m_pcDbConnect_);

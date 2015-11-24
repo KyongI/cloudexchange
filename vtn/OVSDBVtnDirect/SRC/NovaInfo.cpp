@@ -74,7 +74,7 @@ int CNovaInfo::GetCertificatesInfo(std::vector<NovaCerti> &_vecCert,
 	}
 
 	if (_vmode == false)
-		printf(" USER_ID/PROJECT_ID get success\n");
+		printf(" USER_ID/PROJECT_ID get success\n\n");
 	else
 		printf("\n");
 
@@ -132,14 +132,16 @@ int CNovaInfo::GetInstancesInfo(std::vector<NovaInstances> &_vecInst,
 		if (_vmode == true)
 		{
 			printf(" %d:", count++);
-			printf(" [USER_ID] "GREEN"%s "RESET"||", nInst.user_id);
-			printf(" [HOSTNAME] "GREEN"%s "RESET"||\n", nInst.hostname);
-			printf("    [UUID] "GREEN"%s "RESET"\n", nInst.uuid);
+			printf(" [USER_ID] "YELLOW"%s "RESET"||", nInst.user_id);
+			printf(" [HOSTNAME] "YELLOW"%s "RESET"||\n", nInst.hostname);
+			printf("    [UUID] "YELLOW"%s "RESET"\n", nInst.uuid);
 		}
+
+		_vecInst.push_back(nInst);
 	}
 
 	if (_vmode == false)
-		printf(" USER_ID/HOSTNAME/UUID get success\n");
+		printf(" USER_ID/HOSTNAME/UUID get success\n\n");
 	else
 		printf("\n");
 

@@ -1,0 +1,41 @@
+#ifndef _KEYSTONEINFO_HPP_
+#define _KEYSTONEINFO_HPP_
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <mysql.h>
+#include <vector>
+
+#include "global.h"
+#include "DbConnect.hpp"
+#include "OVSDBDefine.hpp"
+
+class CKeystoneInfo
+{
+	public:
+		 CKeystoneInfo();
+		~CKeystoneInfo();
+
+		int			 Init(DbConnect* pcDbConnect);
+
+		int			 GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp, 
+									 char *_tbName,
+									 bool _vmode=true);
+		int			 GetProjectInfo(std::vector<KeystoneProject> &_vecProj, 
+									char *_tbName,
+									bool _vmode=true);
+		int			 GetTokenInfo(std::vector<KeystoneToken> &_vecToken, 
+								  char *_tbName,
+								  bool _vmode=true);
+		int			 GetDBInfo(char *_tbName);
+		int			 ShowTableInfo(void);
+
+	private:
+		DbConnect	*m_pcDbConnect_;
+		MYSQL_RES	*m_pResult;
+		MYSQL_ROW	 row;
+
+};
+
+#endif

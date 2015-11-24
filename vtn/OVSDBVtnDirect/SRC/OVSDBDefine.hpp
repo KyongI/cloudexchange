@@ -3,13 +3,18 @@
 
 #define TENANT_ID_SIZE	255
 #define ID_SIZE			36
+#define ID_SIZE_K		64
 #define NAME_SIZE		255
+#define NAME_SIZE_K		64
 #define NET_ID_SIZE		36
 #define DEVICE_ID_SIZE	255
 #define USER_ID_SIZE	255
 #define PROJECT_ID_SIZE	255
 #define HOSTNAME_SIZE	255
 #define UUID_SIZE		36
+#define	INF_SIZE		8
+#define URL_SIZE		2048
+#define	EXTRA_SIZE		65535
 
 typedef struct
 {
@@ -54,5 +59,31 @@ typedef struct
 } NovaInstances;
 
 #define NOVA_INSTANCE_SIZE	sizeof(NovaInstances)
+
+typedef struct
+{
+	char	id			[ID_SIZE_K+1];
+	char	interface	[INF_SIZE+1];
+	char	url			[URL_SIZE+1];
+} KeystoneEndpoint;
+
+#define	KEYSTONE_ENDPOINT_SIZE	sizeof(KeystoneEndpoint)
+
+typedef struct
+{
+	char	id			[ID_SIZE_K+1];
+	char	name		[NAME_SIZE_K+1];
+} KeystoneProject;
+
+#define KEYSTONE_PROJECT_SIZE	sizeof(KeystoneProject)
+
+typedef struct
+{
+	char	id			[ID_SIZE_K+1];
+	char	extra		[EXTRA_SIZE+1];
+	char	user_id		[ID_SIZE_K+1];
+} KeystoneToken;
+
+#define KEYSTONE_TOKEN_SIZE		sizeof(KeystoneToken)
 
 #endif

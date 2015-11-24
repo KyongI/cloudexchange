@@ -73,7 +73,7 @@ int CNeutronInfo::GetNetworksInfo(std::vector<NeutronNetworks> &_vecNet,
 	}
 
 	if (_vmode == false) 
-		printf(" TENANE_ID/ID get success\n");
+		printf(" TENANE_ID/ID get success\n\n");
 	else
 		printf("\n");
 
@@ -131,14 +131,16 @@ int CNeutronInfo::GetSubnetsInfo(std::vector<NeutronSubnets> &_vecSubn,
 		if (_vmode == true)
 		{
 			printf(" %d:", count++);
-			printf(" [TENANT_ID] "CYAN"%s "RESET"||", nSubnet.tenant_id);
-			printf(" [NAME] "CYAN"%s "RESET"||\n", nSubnet.name);
-			printf("    [NETWORK_ID] "CYAN"%s "RESET"\n", nSubnet.network_id);
+			printf(" [TENANT_ID] "GREEN"%s "RESET"||", nSubnet.tenant_id);
+			printf(" [NAME] "GREEN"%s "RESET"||\n", nSubnet.name);
+			printf("    [NETWORK_ID] "GREEN"%s "RESET"\n", nSubnet.network_id);
 		}
+
+		_vecSubn.push_back(nSubnet);
 	}
 
 	if (_vmode == false) 
-		printf(" TENANE_ID/NAME/NETWORK_ID get success\n");
+		printf(" TENANE_ID/NAME/NETWORK_ID get success\n\n");
 	else
 		printf("\n");
 
@@ -198,15 +200,17 @@ int CNeutronInfo::GetPortsInfo(std::vector<NeutronPorts> &_vecPort,
 		if (_vmode == true)
 		{
 			printf(" %d:", count++);
-			printf(" [ID] "BLUE"%s "RESET"||\n", nPorts.id);
-			printf("    [TENANT_ID] "BLUE"%s "RESET"||", nPorts.tenant_id);
-			printf(" [NETWORK_ID] "BLUE"%s "RESET"||\n", nPorts.network_id);
-			printf("    [DEVICE_ID] "BLUE"%s "RESET"\n", nPorts.device_id);
+			printf(" [ID] "GREEN"%s "RESET"||\n", nPorts.id);
+			printf("    [TENANT_ID] "GREEN"%s "RESET"||", nPorts.tenant_id);
+			printf(" [NETWORK_ID] "GREEN"%s "RESET"||\n", nPorts.network_id);
+			printf("    [DEVICE_ID] "GREEN"%s "RESET"\n", nPorts.device_id);
 		}
+
+		_vecPort.push_back(nPorts);
 	}
 
 	if (_vmode == false) 
-		printf(" TENANE_ID/ID/NETWORK_ID/DEVICE_ID get success\n");
+		printf(" TENANE_ID/ID/NETWORK_ID/DEVICE_ID get success\n\n");
 	else
 		printf("\n");
 

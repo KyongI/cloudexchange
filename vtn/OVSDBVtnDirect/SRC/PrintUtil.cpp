@@ -3,25 +3,20 @@
 PrintUtil::PrintUtil()
 {
 
-
-
 }
-
-
 
 PrintUtil::~PrintUtil()
 {
-
-
 
 }
 
 int PrintUtil::Initialize()
 {
-	m_pcNeutronInfo = new CNeutronInfo();
-	m_pcNovaInfo = new CNovaInfo();
-	return 0;
+	m_pcNeutronInfo  = new CNeutronInfo();
+	m_pcNovaInfo     = new CNovaInfo();
+	m_pcKeystoneInfo = new CKeystoneInfo();
 
+	return 0;
 }
 
 void PrintUtil::PrintVM(int a_nVM)
@@ -38,14 +33,24 @@ void PrintUtil::PrintNeutronInfo(DbConnect *a_pclsDB)
 	PrintNetworkInfo(a_pclsDB);		
 	PrintSubnetInfo(a_pclsDB);		
 	PrintPortInfo(a_pclsDB);		
-	printf("\n\n");
-	return ;
+	
+	return;
 }
 
 void PrintUtil::PrintNovaInfo(DbConnect *a_pclsDB)
 {
 	PrintCertificateInfo(a_pclsDB);
 	PrintInstanceInfo(a_pclsDB);
+
+	return;
+}
+
+void PrintUtil::PrintKeystoneInfo(DbConnect *a_pclsDB)
+{
+	PrintTokenInfo(a_pclsDB);
+	PrintEndpointInfo(a_pclsDB);
+	PrintProjectInfo(a_pclsDB);
+
 	return;
 }
 
@@ -55,6 +60,7 @@ void PrintUtil::PrintNetworkInfo(DbConnect *a_pclsDB)
 	a_pclsDB->SelectDB((char*)"neutron");
 	m_pcNeutronInfo->Init(a_pclsDB);	
 	m_pcNeutronInfo->GetNetworksInfo(stdNetwork, (char*)"networks");
+
 	return;
 }
 
@@ -96,7 +102,36 @@ void PrintUtil::PrintInstanceInfo(DbConnect *a_pclsDB)
 	a_pclsDB->SelectDB((char*)"nova");
 	m_pcNovaInfo->Init(a_pclsDB);	
 	m_pcNovaInfo->GetInstancesInfo(stdInst, (char*)"instances");
+
 	return;
 }
 
+void PrintUtil::PrintEndpointInfo(DbConnect *a_pclsDB, bool a_bMode) 
+{
+	stdEndp.clear();
+	a_pclsDB->SelectDB((char*)"keystone");
+	m_pcKeystoneInfo->Init(a_pclsDB);
+	m_pcKeystoneInfo->GetEndpointInfo(stdEndp, (char*)"endpoint", a_bMode);
 
+	return;
+}
+
+void PrintUtil::PrintProjectInfo(DbConnect *a_pclsDB, bool a_bMode)
+{
+	stdProj.clear();
+	a_pclsDB->SelectDB((char*)"keystone");
+	m_pcKeystoneInfo->Init(a_pclsDB);
+	m_pcKeystoneInfo->GetProjectInfo(stdProj, (char*)"project", a_bMode);
+
+	return;
+}
+
+void PrintUtil::PrintTokenInfo(DbConnect *a_pclsDB, bool a_bMode)
+{
+	stdToken.clear();
+	a_pclsDB->SelectDB((char*)"keystone");
+	m_pcKeystoneInfo->Init(a_pclsDB);
+	m_pcKeystoneInfo->GetTokenInfo(stdToken, (char*)"token", a_bMode);
+
+	return;
+}
