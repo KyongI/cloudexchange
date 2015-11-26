@@ -40,7 +40,6 @@ class CKeystoneInfo
 		uint32_t	 GetTokenInfo			(std::vector<KeystoneToken> &_vecToken, 
 											 char *_tbName,
 											 bool _vmode=true);
-		uint32_t	 GetDBInfo				(char *_tbName);
 		uint32_t	 ShowTableInfo			(void);
 
 	private:

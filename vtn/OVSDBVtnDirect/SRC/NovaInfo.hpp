@@ -25,7 +25,6 @@ class CNovaInfo
 		int			 GetInstancesInfo(std::vector<NovaInstances> &_vecInst, 
 									  char *_tbName,
 									  bool _vmode=true);
-		int			 GetDBInfo(char *_tbName);
 		int			 ShowTableInfo(void);
 
 	private:

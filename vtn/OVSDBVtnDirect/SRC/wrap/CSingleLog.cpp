@@ -28,7 +28,6 @@ bool CSingleLog::Initialize( char* pPROC, unsigned long long uID, char* pBASE )
 	m_nLevel	= 3;
 
 	CalcDiffEpochFromLocal() ;
-
 	StartFile ( pBASE, pPROC, uID );
 
 	return true;
@@ -61,8 +60,6 @@ void CSingleLog::StartFile ( char* pBASE, char* pPROC, unsigned long long uID )
 	SetLogLevel ( m_nLevel );
 }
 
-
-
 char* CSingleLog::GetLogPath ( void )
 {
 	return ( m_LOG.szLogName );
@@ -93,17 +90,17 @@ void CSingleLog::CloseLog(log_templete* pLog)
 // 로그 메세지 기본을 만드는 함수
 void CSingleLog::SetLogBase( char* szLogBase)
 {
-    if (szLogBase == NULL || strlen(szLogBase) == 0)
-    {
-        __log_base__[0] = 0;
-        return;
-    }
+	if (szLogBase == NULL || strlen(szLogBase) == 0)
+	{
+		__log_base__[0] = 0;
+		return;
+	}
 
-    strncpy(__log_base__, szLogBase, strlen(szLogBase));
-    if (__log_base__[strlen(__log_base__) - 1] != '/')
-    {
-        strcat(__log_base__, "/");
-    }
+	strncpy(__log_base__, szLogBase, strlen(szLogBase));
+	if (__log_base__[strlen(__log_base__) - 1] != '/')
+	{
+		strcat(__log_base__, "/");
+	}
 }
 
 //--[Getter, Setter]-----------------------------------------------
@@ -153,8 +150,8 @@ void CSingleLog::SetLogFile( const char* szLogFile)
 		return;
 
 	memset ( szFileName, INULL, sizeof ( szFileName ));
-  
-  	snprintf ( szFileName, PATH_MAX, "%s%s", __log_base__, szLogFile);
+
+	snprintf ( szFileName, PATH_MAX, "%s%s", __log_base__, szLogFile);
 	szDir = strdup(szFileName);
 
 	MakeDirs(dirname(szDir));
@@ -166,14 +163,13 @@ void CSingleLog::SetLogFile( const char* szLogFile)
 		struct tm	rt ;
 
 		time(&tNow);
-		strftime(szFileName + strlen(szFileName)
-				, sizeof(szFileName) - strlen(szFileName)
-				, ".%Y%m%d"
-				, localtime_r(&tNow, &rt));
+		strftime(szFileName + strlen(szFileName),
+				 sizeof(szFileName) - strlen(szFileName),
+				 ".%Y%m%d",
+				 localtime_r(&tNow, &rt));
 
 		m_LOG.tDate = tNow - ((tNow - g_nLocalDiff) % ONEDAY);
 	}
-
 
 	if (m_LOG.nLogDevs & LOG_DEV_FILE_NEW)
 		m_LOG.fpLog = fopen(szFileName, "wt");
@@ -190,8 +186,9 @@ void CSingleLog::SetLogFile( const char* szLogFile)
 	getcurtimestr(szCurTime, sizeof(szCurTime));
 
 	fprintf(m_LOG.fpLog, "\n\n");
-	fprintf(m_LOG.fpLog, "\n-------------------------log open at %s-------------------------\n"
-				, szCurTime);
+	fprintf(m_LOG.fpLog, 
+			"\n-------------------------log open at %s-------------------------\n",
+			szCurTime);
 	fprintf(m_LOG.fpLog, "\n\n");
 }
 
@@ -293,7 +290,6 @@ void CSingleLog::LogMsgM( int nLevel, int nCode, const char* szFmt, ...)
 	gettimeofday(&tvNow, NULL);
 	AdjustFileName( tvNow.tv_sec);
 
-
 	va_start(args, szFmt);
 
 	// %d -> %lu modify by jameshans
@@ -327,7 +323,9 @@ void CSingleLog::LogHexMsg( int nLevel, const char* pBuf, int nLen)
 
 	if (m_LOG.fpLog && (m_LOG.nLogDevs & (LOG_DEV_FILE_APPEND | LOG_DEV_FILE_NEW)))
 	{
-		fprintf(m_LOG.fpLog, "[%s]\n------------------------------------------------------------------\n", time2str(&tNow));
+		fprintf(m_LOG.fpLog, 
+				"[%s]\n------------------------------------------------------------------\n", 
+				time2str(&tNow));
 		HexDump((unsigned char*)pBuf, nLen, m_LOG.fpLog);
 		fprintf(m_LOG.fpLog, "------------------------------------------------------------------\n");
 #ifndef	linux
@@ -337,14 +335,15 @@ void CSingleLog::LogHexMsg( int nLevel, const char* pBuf, int nLen)
 
 	if (m_LOG.nLogDevs & LOG_DEV_CONSOLE)
 	{
-		fprintf(stdout, "[%s]\n------------------------------------------------------------------\n", time2str(&tNow));
+		fprintf(stdout, 
+				"[%s]\n------------------------------------------------------------------\n", 
+				time2str(&tNow));
 		HexDump((unsigned char*)pBuf, nLen, stdout);
 		fprintf(stdout, "------------------------------------------------------------------\n");
 	}
 }
 
 //--[Utiltity Function]-----------------------------------------------------------
-
 void CSingleLog::__time2str__(time_t* ptime, char* szTime, int nBufLen)
 {
 	struct tm rt ;
@@ -353,80 +352,78 @@ void CSingleLog::__time2str__(time_t* ptime, char* szTime, int nBufLen)
         
 char* CSingleLog::time2str(time_t* ptime)
 {           
-    __time2str__(ptime, g_szTimeStr, sizeof(g_szTimeStr));                                                                               
-    return g_szTimeStr;
+	__time2str__(ptime, g_szTimeStr, sizeof(g_szTimeStr));
+	return g_szTimeStr;
 }     
 
 int CSingleLog::MakeDirs(const char* szPath)
 {
-    char*           szDirc  = strdup(szPath);
-    char*           szBasec = strdup(szPath);
-    char*           szDir;
-    char*           szBase;
+	char		*szDirc  = strdup(szPath);
+	char		*szBasec = strdup(szPath);
+	char		*szDir;
+	char		*szBase;
 
-    szDir = dirname(szDirc);
-    szBase = basename(szBasec);
-    
-    if (strcmp(szBase, ".") == 0 || strcmp(szBase, "..") == 0)
+	szDir = dirname(szDirc);
+	szBase = basename(szBasec);
+
+	if (strcmp(szBase, ".") == 0 || strcmp(szBase, "..") == 0)
 	{
 		free(szDirc);
 		free(szBasec);
 		return 0;
 	}
 
-    if (strcmp(szDir, ".") != 0 && strcmp(szDir, "/") != 0)
-        MakeDirs(szDir);
+	if (strcmp(szDir, ".") != 0 && strcmp(szDir, "/") != 0)
+		MakeDirs(szDir);
 
-    mkdir(szPath, 0777);
-    
-        
-bye:    
-    free(szDirc);
-    free(szBasec);
-    
-    return 0;
+	mkdir(szPath, 0777);
+
+	free(szDirc);
+	free(szBasec);
+
+	return 0;
 }
 
 void CSingleLog::HexDump(unsigned char* pData, int nSize, FILE* fpWrite)
 {   
-    int             i, j, k;
+	int		i, j, k;
 
-    for (i = 0; i < nSize; i++)
-    {
-        fprintf(fpWrite, "%02x ", pData[i]);
-        if (i % 16 == 15 || i == nSize - 1)
-        {
-            for (k = i % 16; k < 15; k++)
-                fprintf(fpWrite, "   ");                                                                                                 
+	for (i = 0; i < nSize; i++)
+	{
+		fprintf(fpWrite, "%02x ", pData[i]);
+		if (i % 16 == 15 || i == nSize - 1)
+		{
+			for (k = i % 16; k < 15; k++)
+				fprintf(fpWrite, "   ");
 
-            fprintf(fpWrite, "| ");                                                                                                      
-            for (j = i - (i % 16); j <= i; j++)                                                                                          
-            {       
-                if (pData[j] >= 32 && pData[j] <= 126)                                                                                   
-                    fprintf(fpWrite, "%c", pData[j]);                                                                                    
-                else                                                                                                                     
-                    fprintf(fpWrite, ".");                                                                                               
-            }
-                                                                                                                                         
-            fprintf(fpWrite, "\n");
-        }                                                                                                                                
-    }   
-        
-    fprintf(fpWrite, "\n");                                                                                                              
+			fprintf(fpWrite, "| ");
+			for (j = i - (i % 16); j <= i; j++)
+			{
+				if (pData[j] >= 32 && pData[j] <= 126)
+					fprintf(fpWrite, "%c", pData[j]);
+				else
+					fprintf(fpWrite, ".");
+			}
+
+			fprintf(fpWrite, "\n");
+		}
+	}   
+
+	fprintf(fpWrite, "\n");                                                                                                              
 }
 
 char* CSingleLog::getcurtimestr(char* szBuf, int nLen)
 {               
-    time_t          ct;
-                
-    if (!szBuf)     
-    {       
-        szBuf = (char*)g_szTimeStr;                                                                                                      
-        nLen = sizeof(g_szTimeStr);
-    }   
-    
-    time(&ct);
-    __time2str__(&ct, szBuf, nLen);                                                                                                      
+	time_t		ct;
 
-    return szBuf;                                                                                                                        
+	if (!szBuf)     
+	{       
+		szBuf = (char*)g_szTimeStr;
+		nLen = sizeof(g_szTimeStr);
+	} 
+
+	time(&ct);
+	__time2str__(&ct, szBuf, nLen);
+
+	return szBuf;                                                                                                                        
 }

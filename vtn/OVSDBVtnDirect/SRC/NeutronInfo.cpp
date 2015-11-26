@@ -236,46 +236,6 @@ GetPortsInfo(std::vector<NeutronPorts> &_vecPort,
 }
 
 int CNeutronInfo::
-GetDBInfo(char *_tbName)
-{
-	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
-
-	int		nRowCount;
-	int		fields;
-	char	query[1024];
-
-	memset(query, 0x00, sizeof(query));
-	snprintf(query, 1024, "select * from %s", _tbName);
-
-	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
-	if (nRowCount == ITF_ERROR)
-	{
-		printf(" Table [%s] info get failed\n\n", _tbName);
-		return ITF_ERROR;
-	}
-	else if (nRowCount == 0) 
-	{
-		printf(" Table [%s] has no more rows\n\n", _tbName);
-		return ITF_ERROR;
-	}
-
-	m_pResult = m_pcDbConnect_->GetDBRes();
-	fields    = mysql_num_fields(m_pResult);
-
-	while((row = mysql_fetch_row(m_pResult)))
-	{
-		for(int cnt = 0 ; cnt < fields ; ++cnt)
-		{
-			printf(" %s ||", row[cnt]);
-		}
-		printf("\n");
-	}
-	printf("\n");
-
-	return ITF_OK;
-}
-
-int CNeutronInfo::
 ShowTableInfo(void)
 {
 	printf("--- neutron::table list --------------------------------------------------\n");

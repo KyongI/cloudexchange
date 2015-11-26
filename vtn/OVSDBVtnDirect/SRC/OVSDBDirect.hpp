@@ -42,9 +42,6 @@ class COVSDBDirect
 
 		DbConnect		*m_pcDbConnect_[10];
 		PrintUtil		*m_pcPrint;
-		std::vector<KeystoneEndpoint>	stdEndp_;
-		std::vector<KeystoneProject>	stdProj_;
-		std::vector<KeystoneToken>		stdToken_;
 
 		int				 m_nRet;
 		char			 m_szHost[BUFFER_SIZE];
