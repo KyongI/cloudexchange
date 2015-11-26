@@ -1,8 +1,6 @@
 #include "OVSDBDirect.hpp"
 #include "CWrap.hpp"
 
-using namespace Parser;
-
 CWrap*		g_pcWrap;
 CSingleLog*	g_pcLog;
 

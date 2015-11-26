@@ -1,0 +1,135 @@
+
+
+
+-------------------------log open at 2015-11-26, 10:53:40-------------------------
+
+
+[2015-11-26, 10:53:40] | Info, cfg->vm_config[1].ip (121.78.77.163
+) 
+[2015-11-26, 10:53:40] | Info, cfg->vm_config[1].id (root
+) 
+[2015-11-26, 10:53:40] | Info, cfg->vm_config[1].pw (supersecret
+) 
+[2015-11-26, 10:53:40] | Info, cfg->vm_config[2].ip (121.78.77.163
+) 
+[2015-11-26, 10:53:40] | Info, cfg->vm_config[2].id (root
+) 
+[2015-11-26, 10:53:40] | Info, cfg->vm_config[2].pw (supersecret
+) 
+[2015-11-26, 10:53:40] | Info, Start UP
+[2015-11-26, 10:53:40] |  DB Connect Failure : IP [] User [] Pw []
+
+
+[2015-11-26, 10:53:40] | Error, Viewer Init() Error
+
+
+
+-------------------------log open at 2015-11-26, 10:54:32-------------------------
+
+
+[2015-11-26, 10:54:32] | Info, cfg->vm_config[1].ip (121.78.77.163
+) 
+[2015-11-26, 10:54:32] | Info, cfg->vm_config[1].id (root
+) 
+[2015-11-26, 10:54:32] | Info, cfg->vm_config[1].pw (supersecret
+) 
+[2015-11-26, 10:54:32] | Info, cfg->vm_config[2].ip (121.78.77.163
+) 
+[2015-11-26, 10:54:32] | Info, cfg->vm_config[2].id (root
+) 
+[2015-11-26, 10:54:32] | Info, cfg->vm_config[2].pw (supersecret
+) 
+[2015-11-26, 10:54:32] | Info, Start UP
+[2015-11-26, 10:54:32] |  DB Connect Failure : IP [] User [] Pw []
+
+
+[2015-11-26, 10:54:32] | Error, Viewer Init() Error
+
+
+
+-------------------------log open at 2015-11-26, 10:56:12-------------------------
+
+
+[2015-11-26, 10:56:12] | Info, cfg->vm_config[1].ip (121.78.77.163) 
+[2015-11-26, 10:56:12] | Info, cfg->vm_config[1].id (root) 
+[2015-11-26, 10:56:12] | Info, cfg->vm_config[1].pw (supersecret) 
+[2015-11-26, 10:56:12] | Info, cfg->vm_config[2].ip (121.78.77.163) 
+[2015-11-26, 10:56:12] | Info, cfg->vm_config[2].id (root) 
+[2015-11-26, 10:56:12] | Info, cfg->vm_config[2].pw (supersecret) 
+[2015-11-26, 10:56:12] | Info, Start UP
+[2015-11-26, 10:56:12] |  DB Connect Failure : IP [] User [] Pw []
+
+
+[2015-11-26, 10:56:12] | Error, Viewer Init() Error
+
+
+
+-------------------------log open at 2015-11-26, 10:58:05-------------------------
+
+
+[2015-11-26, 10:58:05] | Info, cfg->vm_config[1].ip (121.78.77.163) 
+[2015-11-26, 10:58:05] | Info, cfg->vm_config[1].id (root) 
+[2015-11-26, 10:58:05] | Info, cfg->vm_config[1].pw (supersecret) 
+[2015-11-26, 10:58:05] | Info, cfg->vm_config[2].ip (121.78.77.163) 
+[2015-11-26, 10:58:05] | Info, cfg->vm_config[2].id (root) 
+[2015-11-26, 10:58:05] | Info, cfg->vm_config[2].pw (supersecret) 
+[2015-11-26, 10:58:05] | Info, Start UP
+[2015-11-26, 10:58:05] |  DB Connect Failure : IP [] User [] Pw []
+
+
+[2015-11-26, 10:58:05] | Error, Viewer Init() Error
+
+
+
+-------------------------log open at 2015-11-26, 10:58:09-------------------------
+
+
+[2015-11-26, 10:58:09] | Info, cfg->vm_config[1].ip (121.78.77.163) 
+[2015-11-26, 10:58:09] | Info, cfg->vm_config[1].id (root) 
+[2015-11-26, 10:58:09] | Info, cfg->vm_config[1].pw (supersecret) 
+[2015-11-26, 10:58:09] | Info, cfg->vm_config[2].ip (121.78.77.163) 
+[2015-11-26, 10:58:09] | Info, cfg->vm_config[2].id (root) 
+[2015-11-26, 10:58:09] | Info, cfg->vm_config[2].pw (supersecret) 
+[2015-11-26, 10:58:09] | Info, Start UP
+[2015-11-26, 10:58:09] |  DB Connect Failure : IP [] User [] Pw []
+
+
+[2015-11-26, 10:58:09] | Error, Viewer Init() Error
+
+
+
+-------------------------log open at 2015-11-26, 11:05:37-------------------------
+
+
+[2015-11-26, 11:05:37] | Info, cfg->vm_config[1].ip () 
+[2015-11-26, 11:05:37] | Info, cfg->vm_config[1].id () 
+[2015-11-26, 11:05:37] | Info, cfg->vm_config[1].pw () 
+[2015-11-26, 11:05:37] | Info, cfg->vm_config[2].ip () 
+[2015-11-26, 11:05:37] | Info, cfg->vm_config[2].id () 
+[2015-11-26, 11:05:37] | Info, cfg->vm_config[2].pw () 
+[2015-11-26, 11:05:37] | Info, Start UP
+[2015-11-26, 11:05:37] |  DB Connect Success : IP [121.78.77.163] User [root] Pw [supersecret]
+
+
+[2015-11-26, 11:05:37] |  DB Connect Success : IP [121.78.77.163] User [root] Pw [supersecret]
+
+
+
+
+
+-------------------------log open at 2015-11-26, 11:06:22-------------------------
+
+
+[2015-11-26, 11:06:22] | Info, cfg->vm_config[1].ip () 
+[2015-11-26, 11:06:22] | Info, cfg->vm_config[1].id () 
+[2015-11-26, 11:06:22] | Info, cfg->vm_config[1].pw () 
+[2015-11-26, 11:06:22] | Info, cfg->vm_config[2].ip () 
+[2015-11-26, 11:06:22] | Info, cfg->vm_config[2].id () 
+[2015-11-26, 11:06:22] | Info, cfg->vm_config[2].pw () 
+[2015-11-26, 11:06:22] | Info, Start UP
+[2015-11-26, 11:06:22] |  DB Connect Success : IP [121.78.77.163] User [root] Pw [supersecret]
+
+
+[2015-11-26, 11:06:22] |  DB Connect Success : IP [121.78.77.163] User [root] Pw [supersecret]
+
+

@@ -2,7 +2,6 @@
 #include "CWrap.hpp"
 #endif
 
-using namespace Parser;
 
 /*	Constructor
  *	Input : Process name
@@ -64,14 +63,21 @@ int CWrap::Initialize()
  */
 CONFIG* CWrap::InitConfig()
 {
+	int nCfgNum = 0;
 	//Config Pointer
-	CONFIG *cfg = NULL;
+	CONFIG *cfg = new CONFIG;
+	if(cfg != NULL)
+	{
+		memset(cfg->vm_config,  0x00, sizeof(VM_CONF) * DEF_MAX_CONFIG);
+		cfg->unDbCnt = 0;
+	}
 
 	//Config File Pointer
 	FILE *fp;
 
 	//file Read Buffer
 	char buff[DEF_BUFFER_1024];
+	char *p = NULL;
 	
 	//Config File Path
 	char strCfgPath[DEF_BUFFER_256];
@@ -87,8 +93,6 @@ CONFIG* CWrap::InitConfig()
 	}
 
 
-	parse_init_config();
-	
 	//config Parsing use Parser Lib
 	while(1)
 	{
@@ -98,7 +102,76 @@ CONFIG* CWrap::InitConfig()
 			break;
 		}
 	
-		cfg = parseCommand(buff, strlen(buff) );
+		p = buff;
+		while(*(++p) != '\n')
+		{
+		}
+		*p = 0x00;
+
+		if( strncmp(buff, (char*)"VM_IP_", strlen( (char*)"VM_IP_" ) ) == 0)
+		{
+			nCfgNum = atoi( &(buff[6]) );
+			if(nCfgNum >= DEF_MAX_CONFIG)
+			{
+				m_pLog->LogMsg(0, (char*)NULL, "Error, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
+				continue;
+			}
+
+			if(nCfgNum >= cfg->unDbCnt)
+				cfg->unDbCnt = nCfgNum;
+
+			p = &buff[8];
+			while( (*p == ' ') || (*p == '=') )
+			{
+				p++;
+			}
+			
+			sprintf(cfg->vm_config[nCfgNum-1].ip, "%s", p);
+			m_pLog->LogMsg(0, (char*)NULL, "Info, cfg->vm_config[%d].ip (%s) ", nCfgNum, cfg->vm_config[nCfgNum].ip);
+		}
+		else if( strncmp(buff, (char*)"VM_ID_", strlen( (char*)"VM_ID_" ) ) == 0)
+		{
+			nCfgNum = atoi( &(buff[6]) );
+			if(nCfgNum >= DEF_MAX_CONFIG)
+			{
+				m_pLog->LogMsg(0, (char*)NULL, "Error, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
+				continue;
+			}
+
+			if(nCfgNum >= cfg->unDbCnt)
+				cfg->unDbCnt = nCfgNum;
+
+			p = &buff[8];
+			while( (*p == ' ') || (*p == '=') )
+			{
+				p++;
+			}
+			
+			sprintf(cfg->vm_config[nCfgNum-1].id, "%s", p);
+			m_pLog->LogMsg(0, (char*)NULL, "Info, cfg->vm_config[%d].id (%s) ", nCfgNum, cfg->vm_config[nCfgNum].id);
+		}
+		else if( strncmp(buff, (char*)"VM_PW_", strlen( (char*)"VM_PW_" ) ) == 0)
+		{
+			nCfgNum = atoi( &(buff[6]) );
+			if(nCfgNum >= DEF_MAX_CONFIG)
+			{
+				m_pLog->LogMsg(0, (char*)NULL, "Error, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
+				continue;
+			}
+
+			if(nCfgNum >= cfg->unDbCnt)
+				cfg->unDbCnt = nCfgNum;
+
+			p = &buff[8];
+			while( (*p == ' ') || (*p == '=') )
+			{
+				p++;
+			}
+			
+			sprintf(cfg->vm_config[nCfgNum-1].pw, "%s", p);
+			m_pLog->LogMsg(0, (char*)NULL, "Info, cfg->vm_config[%d].pw (%s) ", nCfgNum, cfg->vm_config[nCfgNum].pw);
+		}
+
 	}
 
 

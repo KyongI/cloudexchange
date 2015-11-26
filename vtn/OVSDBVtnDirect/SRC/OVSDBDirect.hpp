@@ -12,7 +12,7 @@
 #include "NeutronInfo.hpp"
 #include "NovaInfo.hpp"
 #include "PrintUtil.hpp"
-#include "config.h"
+#include "CWrap.hpp"
 
 #define	BUFFER_SIZE		512
 #define SEARCH_TYPE_ALL		0x01

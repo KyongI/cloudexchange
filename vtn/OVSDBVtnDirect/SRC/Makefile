@@ -9,13 +9,12 @@ OBJS = OVSDBDirect.o \
 		KeystoneInfo.o \
 		PrintUtil.o
 
-SUBDIR = conf_lex \
-	wrap
+SUBDIR = wrap
 
 all :: $(EXE)
 
 $(EXE) : $(OBJS)
-	$(CXX) -o $@ $(OBJS) $(CFLAGS) $(INCDIR) $(LDFLAGS) -lparse
+	$(CXX) -o $@ $(OBJS) $(CFLAGS) $(INCDIR) $(LDFLAGS) 
 
 install :: $(EXE)
 	$(MV) $(EXE) $(UTILPATH)/
