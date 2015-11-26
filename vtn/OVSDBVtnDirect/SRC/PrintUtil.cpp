@@ -165,3 +165,25 @@ void PrintUtil::PrintTokenInfo(DbConnect *a_pclsDB, bool a_bMode)
 
 	return;
 }
+
+void PrintUtil::PrintNeutronTablelist(DbConnect *a_pclsDB)
+{
+	a_pclsDB->SelectDB((char*)"neutron");
+	m_pcNeutronInfo->Init(a_pclsDB);	
+	m_pcNeutronInfo->ShowTableInfo();
+}
+
+void PrintUtil::PrintNovaTablelist(DbConnect *a_pclsDB)
+{
+	a_pclsDB->SelectDB((char*)"nova");
+	m_pcNovaInfo->Init(a_pclsDB);
+	m_pcNovaInfo->ShowTableInfo();
+}
+
+void PrintUtil::PrintKeystoneTablelist(DbConnect *a_pclsDB)
+{
+	a_pclsDB->SelectDB((char*)"keystone");
+	m_pcKeystoneInfo->Init(a_pclsDB);
+	m_pcKeystoneInfo->ShowTableInfo();
+}
+

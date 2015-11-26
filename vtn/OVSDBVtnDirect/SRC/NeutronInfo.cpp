@@ -12,15 +12,17 @@ CNeutronInfo::~CNeutronInfo()
 
 }
 
-int CNeutronInfo::Init(DbConnect* pcDbConnect) 
+int CNeutronInfo::
+Init(DbConnect* pcDbConnect) 
 {
 	m_pcDbConnect_ = pcDbConnect;
 	return ITF_OK;
 }
 
-int CNeutronInfo::GetNetworksInfo(std::vector<NeutronNetworks> &_vecNet, 
-                                  char *_tbName,
-                                  bool _vmode)
+int CNeutronInfo::
+GetNetworksInfo(std::vector<NeutronNetworks> &_vecNet, 
+                char *_tbName,
+                bool _vmode)
 {
 	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
 
@@ -86,9 +88,10 @@ int CNeutronInfo::GetNetworksInfo(std::vector<NeutronNetworks> &_vecNet,
 	return ITF_OK; 
 }
 
-int CNeutronInfo::GetSubnetsInfo(std::vector<NeutronSubnets> &_vecSubn, 
-                                 char *_tbName,
-                                 bool _vmode)
+int CNeutronInfo::
+GetSubnetsInfo(std::vector<NeutronSubnets> &_vecSubn, 
+               char *_tbName,
+               bool _vmode)
 {
 	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
 
@@ -157,9 +160,10 @@ int CNeutronInfo::GetSubnetsInfo(std::vector<NeutronSubnets> &_vecSubn,
 	return ITF_OK;
 }
 
-int CNeutronInfo::GetPortsInfo(std::vector<NeutronPorts> &_vecPort, 
-                               char *_tbName,
-                               bool _vmode)
+int CNeutronInfo::
+GetPortsInfo(std::vector<NeutronPorts> &_vecPort, 
+             char *_tbName,
+             bool _vmode)
 {
 	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
 
@@ -231,7 +235,8 @@ int CNeutronInfo::GetPortsInfo(std::vector<NeutronPorts> &_vecPort,
 	return ITF_OK;
 }
 
-int CNeutronInfo::GetDBInfo(char *_tbName)
+int CNeutronInfo::
+GetDBInfo(char *_tbName)
 {
 	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
 
@@ -270,7 +275,8 @@ int CNeutronInfo::GetDBInfo(char *_tbName)
 	return ITF_OK;
 }
 
-int CNeutronInfo::ShowTableInfo(void)
+int CNeutronInfo::
+ShowTableInfo(void)
 {
 	printf("--- neutron::table list --------------------------------------------------\n");
 

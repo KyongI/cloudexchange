@@ -27,15 +27,21 @@ class COVSDBDirect
 		COVSDBDirect();
 		~COVSDBDirect();
 
-		int				 Init(CONFIG *a_stConf_);
-		int				 Run( int argc, char** argv );
+		int				 Init	(CONFIG *a_stConf_);
+		int				 Run	(int argc, char** argv);
+		void			 Usage	(char *s);
+
+		void			 ShowAllInfo		(void);
+		void			 ShowTableInfo		(char *_tbname);
+		void			 ShowKeyInfo		(char *_tbname);
+		void			 ShowDBInfo			(char *_dbname);
+		void			 ShowDBTableList	(char *_dbname);
 
 	private :
 		uint8_t			 m_unDbCnt;
 
 		DbConnect		*m_pcDbConnect_[10];
 		PrintUtil		*m_pcPrint;
-		CKeystoneInfo	*m_pcKeystoneInfo_;
 		std::vector<KeystoneEndpoint>	stdEndp_;
 		std::vector<KeystoneProject>	stdProj_;
 		std::vector<KeystoneToken>		stdToken_;
@@ -45,8 +51,6 @@ class COVSDBDirect
 		char			 m_szUser[BUFFER_SIZE];
 		char			 m_szPass[BUFFER_SIZE];
 		char			 m_szDb[BUFFER_SIZE];
-
-		void			 Usage(char *s);
 };
 
 #endif

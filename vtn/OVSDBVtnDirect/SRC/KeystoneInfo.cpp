@@ -20,7 +20,8 @@ CKeystoneInfo::~CKeystoneInfo()
 /**
 	Init CKeystoneInfo Class 
 */
-uint32_t CKeystoneInfo::Init(DbConnect* pcDbConnect) 
+uint32_t CKeystoneInfo::
+Init(DbConnect* pcDbConnect) 
 {
 	m_pcDbConnect_ = pcDbConnect;
 	return ITF_OK;
@@ -29,7 +30,8 @@ uint32_t CKeystoneInfo::Init(DbConnect* pcDbConnect)
 /**
 	Convert Key Stone ID to UUID
 */
-char *CKeystoneInfo::ConvertIDToUUID(char *a_strID)
+char *CKeystoneInfo::
+ConvertIDToUUID(char *a_strID)
 {
 	static char	 strBuff[UUID_LEN];	
 	char		*p_from = a_strID;
@@ -65,7 +67,8 @@ char *CKeystoneInfo::ConvertIDToUUID(char *a_strID)
 /**
 	Convert UUID To VTN Key
 */
-char *CKeystoneInfo::ConvertUUIDToVTNKey(char *a_uuid)
+char *CKeystoneInfo::
+ConvertUUIDToVTNKey(char *a_uuid)
 {
 	static char	 strBuff[UUID_LEN];
 	char		*p_from = a_uuid;
@@ -110,9 +113,10 @@ char *CKeystoneInfo::ConvertUUIDToVTNKey(char *a_uuid)
 /**
 	Get Endpoint Table Data From Keystone
 */
-uint32_t CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
-									char *_tbName,
-									bool _vmode)
+uint32_t CKeystoneInfo::
+GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
+                char *_tbName,
+                bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
@@ -200,9 +204,10 @@ uint32_t CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
 /**
 	Get Project Table Data From Keystone
 */
-uint32_t CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
-										char *_tbName,
-										bool _vmode)
+uint32_t CKeystoneInfo::
+GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
+               char *_tbName,
+               bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
@@ -287,9 +292,10 @@ uint32_t CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
 /**
 	Get token Table Data From Keystone
 */
-uint32_t CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
-								char *_tbName,
-								bool _vmode)
+uint32_t CKeystoneInfo::
+GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
+             char *_tbName,
+             bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
@@ -364,7 +370,8 @@ uint32_t CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
 /**
 	Get Keystone DB Info
 */
-uint32_t CKeystoneInfo::GetDBInfo(char *_tbName)
+uint32_t CKeystoneInfo::
+GetDBInfo(char *_tbName)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
@@ -406,9 +413,10 @@ uint32_t CKeystoneInfo::GetDBInfo(char *_tbName)
 /** 
 	Show Key stone Table Info
 */
-uint32_t CKeystoneInfo::ShowTableInfo(void)
+uint32_t CKeystoneInfo::
+ShowTableInfo(void)
 {
-	printf("--- nova::table list --------------------------------------------------\n");
+	printf("--- keystone::table list --------------------------------------------------\n");
 
 	uint32_t     nRowCount;
 	uint32_t     fields;

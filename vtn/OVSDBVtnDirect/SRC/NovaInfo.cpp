@@ -11,15 +11,17 @@ CNovaInfo::~CNovaInfo()
 
 }
 
-int CNovaInfo::Init(DbConnect* pcDbConnect) 
+int CNovaInfo::
+Init(DbConnect* pcDbConnect) 
 {
 	m_pcDbConnect_ = pcDbConnect;
 	return ITF_OK;
 }
 
-int CNovaInfo::GetCertificatesInfo(std::vector<NovaCerti> &_vecCert, 
-                                   char *_tbName,
-                                   bool _vmode)
+int CNovaInfo::
+GetCertificatesInfo(std::vector<NovaCerti> &_vecCert, 
+                    char *_tbName,
+                    bool _vmode)
 {
 	printf("--- nova::%s --------------------------------------------------\n", _tbName);
 
@@ -86,9 +88,10 @@ int CNovaInfo::GetCertificatesInfo(std::vector<NovaCerti> &_vecCert,
 	return ITF_OK; 
 }
 
-int CNovaInfo::GetInstancesInfo(std::vector<NovaInstances> &_vecInst, 
-                                char *_tbName,
-                                bool _vmode)
+int CNovaInfo::
+GetInstancesInfo(std::vector<NovaInstances> &_vecInst, 
+                 char *_tbName,
+                 bool _vmode)
 {
 	printf("--- nova::%s --------------------------------------------------\n", _tbName);
 
@@ -157,7 +160,8 @@ int CNovaInfo::GetInstancesInfo(std::vector<NovaInstances> &_vecInst,
 	return ITF_OK;
 }
 
-int CNovaInfo::GetDBInfo(char *_tbName)
+int CNovaInfo::
+GetDBInfo(char *_tbName)
 {
 	printf("--- nova::%s --------------------------------------------------\n", _tbName);
 
@@ -196,7 +200,8 @@ int CNovaInfo::GetDBInfo(char *_tbName)
 	return ITF_OK;
 }
 
-int CNovaInfo::ShowTableInfo(void)
+int CNovaInfo::
+ShowTableInfo(void)
 {
 	printf("--- nova::table list --------------------------------------------------\n");
 

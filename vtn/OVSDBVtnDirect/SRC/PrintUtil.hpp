@@ -19,9 +19,9 @@ class PrintUtil
 		std::vector<NeutronPorts>       stdPorts;
 		std::vector<NovaCerti>          stdCerts;
 		std::vector<NovaInstances>      stdInst;
-		std::vector<KeystoneEndpoint>	stdEndp;
-		std::vector<KeystoneProject>	stdProj;
-		std::vector<KeystoneToken>		stdToken;
+		std::vector<KeystoneEndpoint>   stdEndp;
+		std::vector<KeystoneProject>    stdProj;
+		std::vector<KeystoneToken>      stdToken;
 
 	public:
 		PrintUtil();
@@ -41,4 +41,7 @@ class PrintUtil
 		void	PrintEndpointInfo		(DbConnect *a_pclsDB, bool a_bMode = true);
 		void	PrintProjectInfo		(DbConnect *a_pclsDB, bool a_bMode = true);
 		void	PrintTokenInfo			(DbConnect *a_pclsDB, bool a_bMode = true);
+		void	PrintNeutronTablelist	(DbConnect *a_pclsDB);
+		void	PrintNovaTablelist		(DbConnect *a_pclsDB);
+		void	PrintKeystoneTablelist	(DbConnect *a_pclsDB);
 };
