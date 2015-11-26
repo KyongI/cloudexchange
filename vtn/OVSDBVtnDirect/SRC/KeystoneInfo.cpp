@@ -115,8 +115,8 @@ ConvertUUIDToVTNKey(char *a_uuid)
 */
 uint32_t CKeystoneInfo::
 GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
-                char *_tbName,
-                bool _vmode)
+				char *_tbName,
+				bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
@@ -206,8 +206,8 @@ GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
 */
 uint32_t CKeystoneInfo::
 GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
-               char *_tbName,
-               bool _vmode)
+			   char *_tbName,
+			   bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
@@ -294,8 +294,8 @@ GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
 */
 uint32_t CKeystoneInfo::
 GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
-             char *_tbName,
-             bool _vmode)
+			 char *_tbName,
+			 bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 

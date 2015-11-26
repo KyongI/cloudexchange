@@ -21,8 +21,8 @@ Init(DbConnect* pcDbConnect)
 
 int CNeutronInfo::
 GetNetworksInfo(std::vector<NeutronNetworks> &_vecNet, 
-                char *_tbName,
-                bool _vmode)
+				char *_tbName,
+				bool _vmode)
 {
 	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
 
@@ -90,8 +90,8 @@ GetNetworksInfo(std::vector<NeutronNetworks> &_vecNet,
 
 int CNeutronInfo::
 GetSubnetsInfo(std::vector<NeutronSubnets> &_vecSubn, 
-               char *_tbName,
-               bool _vmode)
+			   char *_tbName,
+			   bool _vmode)
 {
 	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
 
@@ -162,8 +162,8 @@ GetSubnetsInfo(std::vector<NeutronSubnets> &_vecSubn,
 
 int CNeutronInfo::
 GetPortsInfo(std::vector<NeutronPorts> &_vecPort, 
-             char *_tbName,
-             bool _vmode)
+			 char *_tbName,
+			 bool _vmode)
 {
 	printf("--- neutron::%s --------------------------------------------------\n", _tbName);
 

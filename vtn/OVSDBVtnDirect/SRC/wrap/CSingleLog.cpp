@@ -347,7 +347,7 @@ void CSingleLog::LogHexMsg( int nLevel, const char* pBuf, int nLen)
 void CSingleLog::__time2str__(time_t* ptime, char* szTime, int nBufLen)
 {
 	struct tm rt ;
-    strftime(szTime, nBufLen, "%Y-%m-%d, %H:%M:%S", localtime_r(ptime, &rt));
+	strftime(szTime, nBufLen, "%Y-%m-%d, %H:%M:%S", localtime_r(ptime, &rt));
 }   
         
 char* CSingleLog::time2str(time_t* ptime)

@@ -20,8 +20,8 @@ Init(DbConnect* pcDbConnect)
 
 int CNovaInfo::
 GetCertificatesInfo(std::vector<NovaCerti> &_vecCert, 
-                    char *_tbName,
-                    bool _vmode)
+					char *_tbName,
+					bool _vmode)
 {
 	printf("--- nova::%s --------------------------------------------------\n", _tbName);
 
@@ -90,8 +90,8 @@ GetCertificatesInfo(std::vector<NovaCerti> &_vecCert,
 
 int CNovaInfo::
 GetInstancesInfo(std::vector<NovaInstances> &_vecInst, 
-                 char *_tbName,
-                 bool _vmode)
+				 char *_tbName,
+				 bool _vmode)
 {
 	printf("--- nova::%s --------------------------------------------------\n", _tbName);
 
