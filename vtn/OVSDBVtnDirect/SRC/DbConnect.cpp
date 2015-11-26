@@ -2,6 +2,12 @@
 
 DbConnect::DbConnect(int *Ret, char *Host, char *User, char *Passwd, char *Name)
 {
+	result = NULL;
+	isReconnect = false;
+	DbTimeout = 0;
+	ReadTimeout = 0;
+	WriteTimeout = 0;
+
 	SetDBString(Host, User, Passwd, Name) ;
 
 	*Ret = 0;
@@ -202,7 +208,7 @@ int DbConnect::GetErrorNo()
 	return mysql_errno(&mysql);
 }
 
-//Get Table data
+#if 0
 int DbConnect::StoreResult(NUD_FORMAT *_nudformat)
 {
 	int		i = 0;
@@ -260,4 +266,4 @@ int DbConnect::GetRow(NUD_FORMAT *_nudformat)
 		return 0;
 	}
 }
-
+#endif

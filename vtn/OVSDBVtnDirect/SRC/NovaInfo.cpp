@@ -2,7 +2,8 @@
 
 CNovaInfo::CNovaInfo()
 {
-
+	m_pcDbConnect_ = NULL;
+	m_pResult = NULL;
 }
 
 CNovaInfo::~CNovaInfo()
@@ -24,12 +25,14 @@ int CNovaInfo::GetCertificatesInfo(std::vector<NovaCerti> &_vecCert,
 
 	int		count=0;
 	int		nRowCount; 
+#ifdef _PRINT_ALLROWS
 	int		fields;
+#endif
 	char	query[1024];
 	NovaCerti	nCert;
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "select * from %s", _tbName);
+	snprintf(query, 1024, "select * from %s", _tbName);
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char *)query);
 	if (nRowCount == ITF_ERROR)
@@ -44,7 +47,9 @@ int CNovaInfo::GetCertificatesInfo(std::vector<NovaCerti> &_vecCert,
 	}
 
 	m_pResult = m_pcDbConnect_->GetDBRes();
+#ifdef _PRINT_ALLROWS
 	fields    = mysql_num_fields(m_pResult);
+#endif
 
 	while((row = mysql_fetch_row(m_pResult)))
 	{
@@ -89,12 +94,14 @@ int CNovaInfo::GetInstancesInfo(std::vector<NovaInstances> &_vecInst,
 
 	int		count=0;
 	int		nRowCount;
+#ifdef _PRINT_ALLROWS
 	int		fields;
+#endif
 	char	query[1024];
 	NovaInstances	nInst;
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "select * from %s", _tbName);
+	snprintf(query, 1024, "select * from %s", _tbName);
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
 	if (nRowCount == ITF_ERROR)
@@ -109,7 +116,9 @@ int CNovaInfo::GetInstancesInfo(std::vector<NovaInstances> &_vecInst,
 	}
 
 	m_pResult = m_pcDbConnect_->GetDBRes();
+#ifdef _PRINT_ALLROWS
 	fields    = mysql_num_fields(m_pResult);
+#endif
 
 	while((row = mysql_fetch_row(m_pResult)))
 	{
@@ -157,7 +166,7 @@ int CNovaInfo::GetDBInfo(char *_tbName)
 	char	query[1024];
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "select * from %s", _tbName);
+	snprintf(query, 1024, "select * from %s", _tbName);
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
 	if (nRowCount == ITF_ERROR)
@@ -196,7 +205,7 @@ int CNovaInfo::ShowTableInfo(void)
 	char    query[1024];
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "show tables");
+	snprintf(query, 1024, "show tables");
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
 	if (nRowCount == ITF_ERROR)

@@ -38,10 +38,10 @@ class DbConnect
 		int			 Rollback();
 		int			 Ping();
 		int			 SelectDB(char *_dbname);
-
+#if 0
 		int			 StoreResult(NUD_FORMAT *_nudformat);
 		int			 GetRow(NUD_FORMAT *_nudformat);
-
+#endif
 		MYSQL_RES	*GetDBRes();
 		const char	*GetError();
 		int			 GetErrorNo();

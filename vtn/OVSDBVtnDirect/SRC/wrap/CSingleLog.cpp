@@ -4,7 +4,12 @@ CSingleLog*	CSingleLog::the_config = 0;
 
 CSingleLog::CSingleLog()
 {
-
+	memset(&m_LOG, 0, sizeof(log_templete));
+	memset(__log_base__, 0x00, sizeof(__log_base__));
+	g_nLocalDiff = 0;
+	m_nLevel = 0;
+	memset(g_szTimeStr, 0x00, sizeof(g_szTimeStr));
+	m_lID = 0;
 }
 
 CSingleLog* CSingleLog::instance()
@@ -94,7 +99,7 @@ void CSingleLog::SetLogBase( char* szLogBase)
         return;
     }
 
-    strcpy(__log_base__, szLogBase);
+    strncpy(__log_base__, szLogBase, strlen(szLogBase));
     if (__log_base__[strlen(__log_base__) - 1] != '/')
     {
         strcat(__log_base__, "/");
@@ -149,7 +154,7 @@ void CSingleLog::SetLogFile( const char* szLogFile)
 
 	memset ( szFileName, INULL, sizeof ( szFileName ));
   
-  	sprintf ( szFileName, "%s%s", __log_base__, szLogFile);
+  	snprintf ( szFileName, PATH_MAX, "%s%s", __log_base__, szLogFile);
 	szDir = strdup(szFileName);
 
 	MakeDirs(dirname(szDir));
@@ -180,7 +185,7 @@ void CSingleLog::SetLogFile( const char* szLogFile)
 
 	setlinebuf(m_LOG.fpLog);
 
-	strcpy(m_LOG.szLogName, szLogFile);
+	strncpy(m_LOG.szLogName, szLogFile, strlen(szLogFile));
 
 	getcurtimestr(szCurTime, sizeof(szCurTime));
 
@@ -204,9 +209,9 @@ void CSingleLog::LogMsg( int nLevel, int nCode, const char* szFmt, va_list* args
 	time(&tNow);
 	AdjustFileName( tNow);
 
-	sprintf(szLogMsg, "%.6d[%s] | ", nCode, time2str(&tNow));
-	vsprintf(szLogMsg + strlen(szLogMsg), szFmt, *args);
-	sprintf(szLogMsg + strlen(szLogMsg), "\n");
+	snprintf(szLogMsg, 4096, "%.6d[%s] | ", nCode, time2str(&tNow));
+	vsnprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), szFmt, *args);
+	snprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), "\n");
 
 	if (m_LOG.fpLog && (m_LOG.nLogDevs & (LOG_DEV_FILE_APPEND | LOG_DEV_FILE_NEW)))
 	{
@@ -232,9 +237,9 @@ void CSingleLog::LogMsg( int nLevel, char* pCODE, const char* szFmt, ...)
 
 	va_start(args, szFmt);
 	
-	sprintf (szLogMsg, "[%s] | ", time2str(&tNow));
-	vsprintf(szLogMsg + strlen(szLogMsg), szFmt, args);
-	sprintf (szLogMsg + strlen(szLogMsg), "\n");
+	snprintf (szLogMsg, 4096, "[%s] | ", time2str(&tNow));
+	vsnprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), szFmt, args);
+	snprintf (szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), "\n");
 
 	if (m_LOG.fpLog && (m_LOG.nLogDevs & (LOG_DEV_FILE_APPEND | LOG_DEV_FILE_NEW)))
 	{
@@ -262,9 +267,9 @@ void CSingleLog::LogMsgM( int nLevel, int nCode, const char* szFmt, va_list* arg
 	AdjustFileName( tvNow.tv_sec);
 
 	// %d -> %lu modify by jameshans
-	sprintf(szLogMsg, "%.6d[%s.%06lu] | ", nCode, time2str(&(tvNow.tv_sec) ), tvNow.tv_usec);
-	vsprintf(szLogMsg + strlen(szLogMsg), szFmt, *args);
-	sprintf(szLogMsg + strlen(szLogMsg), "\n");
+	snprintf(szLogMsg, 4096, "%.6d[%s.%06lu] | ", nCode, time2str(&(tvNow.tv_sec) ), tvNow.tv_usec);
+	vsnprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), szFmt, *args);
+	snprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), "\n");
 
 	if (m_LOG.fpLog && (m_LOG.nLogDevs & (LOG_DEV_FILE_APPEND | LOG_DEV_FILE_NEW)))
 	{
@@ -292,9 +297,9 @@ void CSingleLog::LogMsgM( int nLevel, int nCode, const char* szFmt, ...)
 	va_start(args, szFmt);
 
 	// %d -> %lu modify by jameshans
-	sprintf(szLogMsg, "%.6d[%s.%06lu] | ", nCode, time2str(&(tvNow.tv_sec) ), tvNow.tv_usec);
-	vsprintf(szLogMsg + strlen(szLogMsg), szFmt, args);
-	sprintf(szLogMsg + strlen(szLogMsg), "\n");
+	snprintf(szLogMsg, 4096, "%.6d[%s.%06lu] | ", nCode, time2str(&(tvNow.tv_sec) ), tvNow.tv_usec);
+	vsnprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), szFmt, args);
+	snprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), "\n");
 
 	if (m_LOG.fpLog && (m_LOG.nLogDevs & (LOG_DEV_FILE_APPEND | LOG_DEV_FILE_NEW)))
 	{
@@ -363,7 +368,11 @@ int CSingleLog::MakeDirs(const char* szPath)
     szBase = basename(szBasec);
     
     if (strcmp(szBase, ".") == 0 || strcmp(szBase, "..") == 0)
-        goto bye;
+	{
+		free(szDirc);
+		free(szBasec);
+		return 0;
+	}
 
     if (strcmp(szDir, ".") != 0 && strcmp(szDir, "/") != 0)
         MakeDirs(szDir);

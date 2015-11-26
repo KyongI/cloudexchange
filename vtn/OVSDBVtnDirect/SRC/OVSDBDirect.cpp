@@ -8,6 +8,18 @@ COVSDBDirect::COVSDBDirect()
 {
 	m_unDbCnt = 0;
 	m_pcPrint = NULL;
+	m_pcKeystoneInfo_ = NULL;
+
+	for ( int i = 0; i < 10 ; i++ )
+	{
+		m_pcDbConnect_[i] = NULL;
+	}
+
+	m_nRet = 0;
+	memset(m_szHost, 0x00, sizeof(m_szHost));
+	memset(m_szUser, 0x00, sizeof(m_szUser));
+	memset(m_szPass, 0x00, sizeof(m_szPass));
+	memset(m_szDb, 0x00, sizeof(m_szDb));
 }
 
 COVSDBDirect::~COVSDBDirect()
@@ -110,7 +122,6 @@ void COVSDBDirect::Usage(char *s)
 int COVSDBDirect::Run(int argc, char** argv)
 {
 	char	 cOption;
-	char	*dbname;
 #if 0
 	char cFileName[80];
 	FILE *pFop;
@@ -125,7 +136,6 @@ int COVSDBDirect::Run(int argc, char** argv)
 				Usage(argv[0]);
 				return ITF_OK;
 			case 'd':
-				dbname = optarg;
 				if (strcmp(optarg, "neutron") == 0)
 				{
 					for(int i = 0; i < m_unDbCnt ; i++)

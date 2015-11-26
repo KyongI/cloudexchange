@@ -10,9 +10,10 @@
 CWrap::CWrap(char *proc)
 {
 	memset(m_strProc, 0x00, sizeof(m_strProc));
-	sprintf(m_strProc, "%s", proc);
+	snprintf(m_strProc, 20, "%s", proc);
 	bRun = true;
 	m_pLog = NULL;
+	m_pstConfig = NULL;
 }
 
 /*	Destructor
@@ -21,9 +22,10 @@ CWrap::CWrap(char *proc)
  */
 CWrap::~CWrap()
 {
-	if(m_pLog);
+	if(m_pLog)
 		delete m_pLog;
-
+	if(m_pstConfig)
+		delete m_pstConfig;
 
 }
 
@@ -35,7 +37,7 @@ int CWrap::Initialize()
 {	
 	char strLogPath[DEF_BUFFER_256];
 	memset(strLogPath, 0x00, sizeof(strLogPath));
-	sprintf(strLogPath, "./");
+	snprintf(strLogPath, DEF_BUFFER_256, "./");
 	
 	m_pLog = new CSingleLog();
 	
@@ -83,12 +85,13 @@ CONFIG* CWrap::InitConfig()
 	char strCfgPath[DEF_BUFFER_256];
 	
 	memset(strCfgPath, 0x00, sizeof(strCfgPath));
-	sprintf(strCfgPath, "./OVS_CONFIG.cfg");
+	snprintf(strCfgPath, DEF_BUFFER_256, "./OVS_CONFIG.cfg");
 
 	fp = fopen(strCfgPath, "r");
 	if(fp == NULL)
 	{
 		m_pLog->LogMsg(0, (char*)NULL, "Error, Config File Open Failed (%s)", strCfgPath);
+		delete cfg;
 		return NULL;
 	}
 
@@ -174,7 +177,7 @@ CONFIG* CWrap::InitConfig()
 
 	}
 
-
+	fclose(fp);
 	return cfg;
 }
 

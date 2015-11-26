@@ -1,21 +1,34 @@
 #include "KeystoneInfo.hpp"
 
+/**
+	Constructor
+*/
 CKeystoneInfo::CKeystoneInfo()
 {
-
+	m_pcDbConnect_ = NULL;
+	m_pResult = NULL;
 }
 
+/**
+	Distructor
+*/
 CKeystoneInfo::~CKeystoneInfo()
 {
 
 }
 
-int CKeystoneInfo::Init(DbConnect* pcDbConnect) 
+/**
+	Init CKeystoneInfo Class 
+*/
+uint32_t CKeystoneInfo::Init(DbConnect* pcDbConnect) 
 {
 	m_pcDbConnect_ = pcDbConnect;
 	return ITF_OK;
 }
 
+/**
+	Convert Key Stone ID to UUID
+*/
 char *CKeystoneInfo::ConvertIDToUUID(char *a_strID)
 {
 	static char	 strBuff[UUID_LEN];	
@@ -49,51 +62,71 @@ char *CKeystoneInfo::ConvertIDToUUID(char *a_strID)
 	return strBuff;
 }
 
+/**
+	Convert UUID To VTN Key
+*/
 char *CKeystoneInfo::ConvertUUIDToVTNKey(char *a_uuid)
 {
 	static char	 strBuff[UUID_LEN];
 	char		*p_from = a_uuid;
+	char		*p_start = p_from;
 	char		*p_to = strBuff;
 	char		 tempStr[KEYSTONE_ID_LEN];
 	char		*itemList[10];
-	int			 itemCount=0;
+	uint16_t			 unStrLen=0;
 
 	memset(strBuff,  0x00, sizeof(strBuff));
 	memset(tempStr,  0x00, sizeof(tempStr));
 	memset(itemList, 0x00, sizeof(itemList));
 
-	itemList[itemCount] = strtok(p_from, "-");
-	while((itemList[++itemCount] = strtok(NULL, "-")));
-
-	for(int i=0; i<itemCount; i++)
+	while( (*p_from) != 0x00)
 	{
-		strcat(p_to, itemList[i]);
+		if( (*p_from) == '-' ) 
+		{
+			unStrLen = p_from - p_start;
+			strncpy(p_to, p_start, unStrLen );
+			p_start =  (p_from + 1 );
+			p_to += ( unStrLen );
+		}
+
+		p_from++;
+
 	}
+	
+	unStrLen = p_from - p_start;
+	strncpy(p_to, p_start, unStrLen );
+	p_start =  (p_from + 1 );
+	
+	p_to = strBuff;
 
 	strncpy(tempStr, p_to, UUID_VERSION_POS);
-//	printf(" tempStr1: %s\n", tempStr);
-	strcat(tempStr, &p_to[13]);
-//	printf(" tempStr2: %s\n", tempStr);
+	strncpy( (tempStr+UUID_VERSION_POS) , &p_to[13], strlen(p_to) - 13 );
 	strncpy(p_to, tempStr, KEYSTONE_ID_LEN);
+	p_to[KEYSTONE_ID_LEN] = 0x00;
 
 	return strBuff;
 }
 
-int CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
-                                   char *_tbName,
-                                   bool _vmode)
+/**
+	Get Endpoint Table Data From Keystone
+*/
+uint32_t CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
+									char *_tbName,
+									bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
-	int		count=0;
-	int		nRowCount; 
-	int		fields;
+	uint32_t		count = 0;
+	uint32_t		nRowCount; 
+#ifdef _PRINT_ALLROWS
+	uint32_t		fields;
+#endif
 	char	query[1024];
-	char	uuid[UUID_LEN+1];
+	char	uuid[ UUID_LEN + 1 ];
 	KeystoneEndpoint	nEndp;
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "select * from %s", _tbName);
+	snprintf(query, 1024, "select * from %s", _tbName);
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char *)query);
 	if (nRowCount == ITF_ERROR)
@@ -108,20 +141,22 @@ int CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
 	}
 
 	m_pResult = m_pcDbConnect_->GetDBRes();
+#ifdef _PRINT_ALLROWS
 	fields    = mysql_num_fields(m_pResult);
+#endif
 
 	while((row = mysql_fetch_row(m_pResult)))
 	{
 		memset(&nEndp, 0x00, sizeof(KeystoneEndpoint));
 
 #ifdef _PRINT_ALLROWS
-		for(int cnt = 0 ; cnt < fields ; ++cnt)
+		for (int cnt = 0 ; cnt < fields ; ++cnt)
 		{
 			printf(" %s ||", row[cnt]);
 		}
 		printf("\n");
 #endif
-		unsigned int rowIdx = 0;
+		uint32_t rowIdx = 0;
 
 		strncpy(nEndp.id,        row[rowIdx++], ID_SIZE_K);
 		rowIdx++;
@@ -139,7 +174,7 @@ int CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
 		else
 		{
 			memset(uuid, 0x00, sizeof(uuid));
-			sprintf(uuid, "%s", ConvertIDToUUID(nEndp.id));
+			snprintf(uuid, UUID_LEN + 1 , "%s", ConvertIDToUUID(nEndp.id));
 
 			printf(" %2d:", count++);
 			printf(" [KEYSTONE ID] "CYAN"%s "RESET"-->", nEndp.id );
@@ -151,28 +186,37 @@ int CKeystoneInfo::GetEndpointInfo(std::vector<KeystoneEndpoint> &_vecEndp,
 	}
 
 	if (_vmode == false)
+	{
 		printf(" IDs are changed into UUID\n\n");
+	}
 	else
+	{
 		printf("\n");
+	}
 
 	return ITF_OK; 
 }
 
-int CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
-                                  char *_tbName,
-                                  bool _vmode)
+/**
+	Get Project Table Data From Keystone
+*/
+uint32_t CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
+										char *_tbName,
+										bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
-	int		count=0;
-	int		nRowCount;
-	int		fields;
+	uint32_t		count=0;
+	uint32_t		nRowCount;
+#ifdef _PRINT_ALLROWS
+	uint32_t		fields;
+#endif
 	char	query[1024];
-	char	uuid[UUID_LEN+1];
+	char	uuid[ UUID_LEN + 1 ];
 	KeystoneProject	nProj;
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "select * from %s", _tbName);
+	snprintf(query, 1024, "select * from %s", _tbName);
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
 	if (nRowCount == ITF_ERROR)
@@ -187,20 +231,22 @@ int CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
 	}
 
 	m_pResult = m_pcDbConnect_->GetDBRes();
+#ifdef _PRINT_ALLROWS
 	fields    = mysql_num_fields(m_pResult);
+#endif
 
 	while((row = mysql_fetch_row(m_pResult)))
 	{
 		memset(&nProj, 0x00, sizeof(KeystoneProject));
 
 #ifdef _PRINT_ALLROWS
-		for(int cnt = 0 ; cnt < fields ; ++cnt)
+		for (int cnt = 0 ; cnt < fields ; ++cnt)
 		{
 			printf(" %s ||", row[cnt]);
 		}
 		printf("\n");
 #endif
-		unsigned int rowIdx = 0;
+		uint32_t rowIdx = 0;
 
 		strncpy(nProj.id,   row[rowIdx++], ID_SIZE_K);
 
@@ -215,7 +261,7 @@ int CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
 		else
 		{
 			memset(uuid, 0x00, sizeof(uuid));
-			sprintf(uuid, "%s", ConvertIDToUUID(nProj.id));
+			snprintf(uuid, UUID_LEN + 1, "%s", ConvertIDToUUID(nProj.id));
 
 			printf(" %2d:", count++);
 			printf(" [KEYSTONE ID] "CYAN"%s "RESET"-->", nProj.id );
@@ -227,28 +273,34 @@ int CKeystoneInfo::GetProjectInfo(std::vector<KeystoneProject> &_vecProj,
 	}
 
 	if (_vmode == false)
+	{
 		printf(" IDs are changed into UUID\n\n");
+	}
 	else
+	{
 		printf("\n");
+	}
 
 	return ITF_OK;
 }
 
-int CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
-                                char *_tbName,
-                                bool _vmode)
+/**
+	Get token Table Data From Keystone
+*/
+uint32_t CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
+								char *_tbName,
+								bool _vmode)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
-	int		count=0;
-	int		nRowCount;
-	int		fields;
+	uint32_t		count=0;
+	uint32_t		nRowCount;
 	char	query[1024];
-	char	uuid[UUID_LEN+1];
+	char	uuid[UUID_LEN + 1];
 	KeystoneToken	nToken;
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "select * from %s", _tbName);
+	snprintf(query, 1024, "select * from %s", _tbName);
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
 	if (nRowCount == ITF_ERROR)
@@ -263,13 +315,12 @@ int CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
 	}
 
 	m_pResult = m_pcDbConnect_->GetDBRes();
-	fields    = mysql_num_fields(m_pResult);
 
 	while((row = mysql_fetch_row(m_pResult)))
 	{
 		memset(&nToken, 0x00, sizeof(KeystoneToken));
 
-		unsigned int rowIdx=0;
+		uint32_t rowIdx = 0;
 
 		strncpy(nToken.id,      row[rowIdx++], ID_SIZE_K);
 		rowIdx++;
@@ -287,7 +338,7 @@ int CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
 		else
 		{
 			memset(uuid, 0x00, sizeof(uuid));
-			sprintf(uuid, "%s", ConvertIDToUUID(nToken.id));
+			snprintf(uuid, UUID_LEN + 1, "%s", ConvertIDToUUID(nToken.id));
 
 			printf(" %3d:", count++);
 			printf(" [KEYSTONE ID] "CYAN"%s "RESET"-->", nToken.id );
@@ -299,23 +350,30 @@ int CKeystoneInfo::GetTokenInfo(std::vector<KeystoneToken> &_vecToken,
 	}
 
 	if (_vmode == false)
+	{
 		printf(" IDs are changed into UUID\n\n");
+	}
 	else
+	{
 		printf("\n");
+	}
 
 	return ITF_OK;
 }
 
-int CKeystoneInfo::GetDBInfo(char *_tbName)
+/**
+	Get Keystone DB Info
+*/
+uint32_t CKeystoneInfo::GetDBInfo(char *_tbName)
 {
 	printf("--- keystone::%s --------------------------------------------------\n", _tbName);
 
-	int		nRowCount;
-	int		fields;
+	uint32_t		nRowCount;
+	uint32_t		fields;
 	char	query[1024];
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "select * from %s", _tbName);
+	snprintf(query, 1024, "select * from %s", _tbName);
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
 	if (nRowCount == ITF_ERROR)
@@ -345,16 +403,19 @@ int CKeystoneInfo::GetDBInfo(char *_tbName)
 	return ITF_OK;
 }
 
-int CKeystoneInfo::ShowTableInfo(void)
+/** 
+	Show Key stone Table Info
+*/
+uint32_t CKeystoneInfo::ShowTableInfo(void)
 {
 	printf("--- nova::table list --------------------------------------------------\n");
 
-	int     nRowCount;
-	int     fields;
+	uint32_t     nRowCount;
+	uint32_t     fields;
 	char    query[1024];
 
 	memset(query, 0x00, sizeof(query));
-	sprintf(query, "show tables");
+	snprintf(query, 1024, "show tables");
 
 	nRowCount = m_pcDbConnect_->ExecuteSQL((char*)query);
 	if (nRowCount == ITF_ERROR)
@@ -373,7 +434,7 @@ int CKeystoneInfo::ShowTableInfo(void)
 
 	while((row = mysql_fetch_row(m_pResult)))
 	{
-		for(int cnt = 0 ; cnt < fields ; ++cnt)
+		for (int cnt = 0 ; cnt < fields ; ++cnt)
 		{
 			printf(" %s ||", row[cnt]);
 		}

@@ -26,22 +26,22 @@ class CKeystoneInfo
 		 CKeystoneInfo();
 		~CKeystoneInfo();
 
-		int			 Init					(DbConnect* pcDbConnect);
+		uint32_t			 Init					(DbConnect* pcDbConnect);
 
 		char		*ConvertIDToUUID		(char *a_strID);
 		char		*ConvertUUIDToVTNKey	(char *a_uuid);
 
-		int			 GetEndpointInfo		(std::vector<KeystoneEndpoint> &_vecEndp, 
+		uint32_t			 GetEndpointInfo		(std::vector<KeystoneEndpoint> &_vecEndp, 
 											 char *_tbName,
 											 bool _vmode=true);
-		int			 GetProjectInfo			(std::vector<KeystoneProject> &_vecProj, 
+		uint32_t			 GetProjectInfo			(std::vector<KeystoneProject> &_vecProj, 
 											 char *_tbName,
 											 bool _vmode=true);
-		int			 GetTokenInfo			(std::vector<KeystoneToken> &_vecToken, 
+		uint32_t			 GetTokenInfo			(std::vector<KeystoneToken> &_vecToken, 
 											 char *_tbName,
 											 bool _vmode=true);
-		int			 GetDBInfo				(char *_tbName);
-		int			 ShowTableInfo			(void);
+		uint32_t			 GetDBInfo				(char *_tbName);
+		uint32_t			 ShowTableInfo			(void);
 
 	private:
 		DbConnect	*m_pcDbConnect_;

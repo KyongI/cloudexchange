@@ -2,16 +2,46 @@
 
 PrintUtil::PrintUtil()
 {
-
+	m_pcNeutronInfo = NULL;
+	m_pcNovaInfo = NULL;
+	m_pcKeystoneInfo = NULL;
 }
 
 PrintUtil::~PrintUtil()
 {
+	if(m_pcNeutronInfo)
+	{
+		delete m_pcNeutronInfo;
+	}
 
+	if(m_pcNovaInfo)
+	{
+		delete m_pcNovaInfo;
+	}
+
+	if(m_pcKeystoneInfo)
+	{
+		delete m_pcKeystoneInfo;
+	}
 }
 
 int PrintUtil::Initialize()
 {
+	if(m_pcNeutronInfo)
+	{
+		delete m_pcNeutronInfo;
+	}
+
+	if(m_pcNovaInfo)
+	{
+		delete m_pcNovaInfo;
+	}
+
+	if(m_pcKeystoneInfo)
+	{
+		delete m_pcKeystoneInfo;
+	}
+
 	m_pcNeutronInfo  = new CNeutronInfo();
 	m_pcNovaInfo     = new CNovaInfo();
 	m_pcKeystoneInfo = new CKeystoneInfo();
