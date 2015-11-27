@@ -15,6 +15,8 @@ import org.opendaylight.controller.sal.core.Node;
 import org.opendaylight.controller.sal.utils.Status;
 import org.opendaylight.ovsdb.lib.notation.Row;
 import org.opendaylight.ovsdb.lib.schema.GenericTableSchema;
+import org.opendaylight.ovsdb.lib.table.internal.Table;
+import org.opendaylight.ovsdb.plugin.OVSDBConfigService;
 import org.opendaylight.ovsdb.plugin.api.StatusWithUuid;
 import org.opendaylight.ovsdb.plugin.impl.ConfigurationServiceImpl;
 
@@ -69,9 +71,10 @@ public class CEDbConfigService {
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(tableName)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
+		}
+		if (Util.isEmpty(tableName)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -80,7 +83,8 @@ public class CEDbConfigService {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBCONFIG_INVALID_TABLENAME_PARAMETER);
-		} else if (Util.isEmpty(parentUuid)) {
+		}
+		if (Util.isEmpty(parentUuid)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -89,15 +93,16 @@ public class CEDbConfigService {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBCONFIG_INVALID_PARENTUUID_PARAMETER);
-		}else if (Util.isEmpty(row)) {
+		}
+		if (Util.isEmpty(row)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_ROW_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_ROW_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_ROW_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -116,8 +121,7 @@ public class CEDbConfigService {
 		}
 		
 		try {
-			if(ovsdbConfigService != null)
-				statusuid = ovsdbConfigService.insertRow(node, tableName, parentUuid, row);
+			statusuid = ovsdbConfigService.insertRow(node, tableName, parentUuid, row);
 		} catch (Exception e) {
 			//log
 			log.setType(LogType.ERROR);
@@ -125,7 +129,8 @@ public class CEDbConfigService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_INSERTROW, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_INSERTROW, e.getMessage());
+			
 		}
 		
 		log.setType(LogType.INFO);
@@ -183,9 +188,10 @@ public class CEDbConfigService {
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(tableName)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
+		} 	
+		if (Util.isEmpty(tableName)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -194,7 +200,8 @@ public class CEDbConfigService {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBCONFIG_INVALID_TABLENAME_PARAMETER);
-		} else if (Util.isEmpty(parentUuid)) {
+		} 	
+		if (Util.isEmpty(parentUuid)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -203,7 +210,8 @@ public class CEDbConfigService {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBCONFIG_INVALID_PARENTUUID_PARAMETER);
-		} else if (Util.isEmpty(rowUuid)) {
+		} 	
+		if (Util.isEmpty(rowUuid)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -212,15 +220,16 @@ public class CEDbConfigService {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBCONFIG_INVALID_ROWUUID_PARAMETER);
-		} else if (Util.isEmpty(row)) {
+		} 	
+		if (Util.isEmpty(row)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_ROW_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_ROW_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_ROW_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -238,8 +247,7 @@ public class CEDbConfigService {
 		}
 		
 		try {
-			if(ovsdbConfigService != null)
-				status = ovsdbConfigService.updateRow(node, tableName, parentUuid, rowUuid, row);
+			status = ovsdbConfigService.updateRow(node, tableName, parentUuid, rowUuid, row);
 		} catch (Exception e) {
 			//log
 			log.setType(LogType.ERROR);
@@ -247,7 +255,7 @@ public class CEDbConfigService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_UPDATEROW, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_UPDATEROW, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -299,9 +307,10 @@ public class CEDbConfigService {
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(tableName)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
+		} 	
+		if (Util.isEmpty(tableName)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -310,7 +319,8 @@ public class CEDbConfigService {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBCONFIG_INVALID_TABLENAME_PARAMETER);
-		} else if (Util.isEmpty(rowUuid)) {
+		} 
+		if (Util.isEmpty(rowUuid)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -336,8 +346,7 @@ public class CEDbConfigService {
 		}
 		
 		try {
-			if(ovsdbConfigService != null)
-				status = ovsdbConfigService.deleteRow(node, tableName, rowUuid);
+			status = ovsdbConfigService.deleteRow(node, tableName, rowUuid);
 		} catch (Exception e) {
 			//log
 			log.setType(LogType.ERROR);
@@ -345,7 +354,7 @@ public class CEDbConfigService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_DELETEROW, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_DELETEROW, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -399,9 +408,10 @@ public class CEDbConfigService {
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(tableName)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
+		} 	
+		if (Util.isEmpty(tableName)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -410,15 +420,16 @@ public class CEDbConfigService {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBCONFIG_INVALID_TABLENAME_PARAMETER);
-		} else if (Util.isEmpty(uuid)) {
+		} 
+		if (Util.isEmpty(uuid)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_UUID_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_UUID_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_UUID_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -436,8 +447,7 @@ public class CEDbConfigService {
 		}
 		
 		try {
-			if(ovsdbConfigService != null)
-				row = ovsdbConfigService.getRow(node, tableName, uuid);
+			row = ovsdbConfigService.getRow(node, tableName, uuid);
 		} catch (Exception e) {
 			//log
 			log.setType(LogType.ERROR);
@@ -445,7 +455,7 @@ public class CEDbConfigService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_GETROW, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_GETROW, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -496,9 +506,10 @@ public class CEDbConfigService {
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(tableName)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
+		} 	
+		if (Util.isEmpty(tableName)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -524,8 +535,7 @@ public class CEDbConfigService {
 		}
 		
 		try {
-			if(ovsdbConfigService != null)
-				concurrentMap = ovsdbConfigService.getRows(node, tableName);
+			concurrentMap = ovsdbConfigService.getRows(node, tableName);
 		} catch (Exception e) {
 			//log
 			log.setType(LogType.ERROR);
@@ -533,7 +543,7 @@ public class CEDbConfigService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_GETROWS, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_GETROWS, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -581,8 +591,8 @@ public class CEDbConfigService {
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -600,8 +610,7 @@ public class CEDbConfigService {
 		}
 				
 		try {
-			if(ovsdbConfigService != null)
-				list = ovsdbConfigService.getTables(node);
+			list = ovsdbConfigService.getTables(node);
 		} catch (Exception e) {
 			//log
 			log.setType(LogType.ERROR);
@@ -609,7 +618,7 @@ public class CEDbConfigService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_GETTABLES, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_GETTABLES, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -664,9 +673,11 @@ public class CEDbConfigService {
 			log.setMsg(CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(bridgeUUID)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBCONFIG_INVALID_NODE_PARAMETER);
+		} 	
+		
+		if (Util.isEmpty(bridgeUUID)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -692,12 +703,7 @@ public class CEDbConfigService {
 		}
 		
 		try {
-			if(ovsdbConfigService != null)
-				ceBoolean = ovsdbConfigService.setOFController(node, bridgeUUID);
-		} catch (InterruptedException e) {
-			throw e;
-		} catch (ExecutionException e) {
-			throw e;
+			ceBoolean = ovsdbConfigService.setOFController(node, bridgeUUID);
 		} catch (Exception e) {
 			//log
 			log.setType(LogType.ERROR);
@@ -705,7 +711,7 @@ public class CEDbConfigService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_SETOFCONTROLLER, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CEDBCONFIGSERVICE_CE_SETOFCONTROLLER, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);

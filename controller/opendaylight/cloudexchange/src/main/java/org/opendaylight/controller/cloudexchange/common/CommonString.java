@@ -69,4 +69,8 @@ public class CommonString {
 	 * CloudExchange String
 	 * */
 	public final static String ERR_GETINSTANCE_CLOUDEXCHANGE = "error getinstance cloudexchange class";
+	
+	public void checkClass(){
+		//check Class
+	}
 }

@@ -2,6 +2,7 @@ package org.opendaylight.controller.cloudexchange.log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import org.opendaylight.controller.cloudexchange.CloudExchange;
 import org.opendaylight.controller.cloudexchange.common.Util;
@@ -23,14 +24,14 @@ public class Logger {
 		if(!CloudExchange.getInstance().isDebug()) return;
 		
 		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss",Locale.ENGLISH);
 		
 		String time = dateFormat.format(calendar.getTime());
 		
-		System.out.print("["+time+"]");
+		Util.print("["+time+"]");
 		if(!Util.isEmpty(className)) 
-			System.out.print(">>>>>> "+className+" >>>>>>");
-		System.out.print("\n");
+			Util.print(">>>>>> "+className+" >>>>>>");
+		Util.print("\n");
 	}
 	
 	/** 
@@ -44,14 +45,14 @@ public class Logger {
 		if(!CloudExchange.getInstance().isDebug()) return;
 		
 		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss",Locale.ENGLISH);
 		
 		String time = dateFormat.format(calendar.getTime());
 		
-		System.out.print("["+time+"]");
+		Util.print("["+time+"]");
 		if(!Util.isEmpty(className)) 
-			System.out.print("<<<<<< "+className+" <<<<<<");
-		System.out.print("\n");
+			Util.print("<<<<<< "+className+" <<<<<<");
+		Util.print("\n");
 	}
 	
 	/** 
@@ -66,14 +67,14 @@ public class Logger {
 		if(!CloudExchange.getInstance().isDebug()) return;
 		
 		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss",Locale.ENGLISH);
 		
 		String time = dateFormat.format(calendar.getTime());
 		
-		System.out.print("["+time+"]");
+		Util.print("["+time+"]");
 		if(!Util.isEmpty(className) && !Util.isEmpty(functionName)) 
-			System.out.print("["+className+"] >>>>>> "+functionName+" >>>>>> ");
-		System.out.print("\n");
+			Util.print("["+className+"] >>>>>> "+functionName+" >>>>>> ");
+		Util.print("\n");
 	}
 	
 	/** 
@@ -88,14 +89,14 @@ public class Logger {
 		if(!CloudExchange.getInstance().isDebug()) return;
 		
 		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss",Locale.ENGLISH);
 		
 		String time = dateFormat.format(calendar.getTime());
 		
-		System.out.print("["+time+"]");
+		Util.print("["+time+"]");
 		if(!Util.isEmpty(className) && !Util.isEmpty(functionName)) 
-			System.out.print("["+className+"] <<<<<< "+functionName+" <<<<<< ");
-		System.out.print("\n");
+			Util.print("["+className+"] <<<<<< "+functionName+" <<<<<< ");
+		Util.print("\n");
 	}
 	
 	/** 
@@ -163,7 +164,7 @@ public class Logger {
 	*/ 
 	public static void log(Log log){
 		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss",Locale.ENGLISH);
 		
 		String time = dateFormat.format(calendar.getTime());
 		int code = log.getCode();
@@ -172,12 +173,12 @@ public class Logger {
 		String functionName = log.getFunctionName();
 		LogType type = log.getType();
 		
-		System.out.print("["+time+"]");
-		System.out.print("["+type+"]");
+		Util.print("["+time+"]");
+		Util.print("["+type+"]");
 		if(!Util.isEmpty(className) && !Util.isEmpty(functionName)) 
-			System.out.print("["+className+":"+functionName+"]");
-		System.out.print(" ("+code+")");
-		System.out.print(msg);
-		System.out.print("\n");
+			Util.print("["+className+":"+functionName+"]");
+		Util.print(" ("+code+")");
+		Util.print(msg);
+		Util.print("\n");
 	}
 }

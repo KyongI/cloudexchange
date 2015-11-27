@@ -103,4 +103,26 @@ public class Util {
 		if(m == null) return true;
 		return false;
 	}
+	
+	/** 
+	* @Title: print 
+	* @Description: TODO out buffer print
+	* @param @param s
+	* @return void
+	* @throws 
+	*/ 
+	public static void print(String s){
+		System.out.print(s); //NOPMD
+	}
+	
+	/** 
+	* @Title: println 
+	* @Description: TODO out buffer print
+	* @param @param s
+	* @return void
+	* @throws 
+	*/ 
+	public static void println(String s){
+		System.out.println(s); //NOPMD
+	}
 }

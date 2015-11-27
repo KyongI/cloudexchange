@@ -19,6 +19,12 @@ public class testCEConnectionService implements testService{
 		}
 		
 		try {
+			cecs.CE_connect(null, null);
+		} catch (CloudExchangeException e) {
+			e.printStackTrace();
+		}
+		
+		try {
 			cecs.CE_getConnection(null);
 		} catch (CloudExchangeException e) {
 			e.printStackTrace();

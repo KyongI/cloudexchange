@@ -23,7 +23,7 @@ public class Activator extends ComponentActivatorAbstractBase {
 	 *
 	 */
 	public void init() {
-
+		//for init
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Activator extends ComponentActivatorAbstractBase {
 	 *
 	 */
 	public void destroy() {
-
+		//for destory
 	}
 
 	/**

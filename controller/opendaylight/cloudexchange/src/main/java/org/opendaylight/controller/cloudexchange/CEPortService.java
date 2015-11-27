@@ -23,7 +23,7 @@ public class CEPortService {
 	///////////////////////////// /////////////////////////////
 	///////////////////////////// //////////////////////////
 
-	private INeutronPortCRUD neutronPortService = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
+	private final INeutronPortCRUD neutronPortService = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
 	private static final String CLASS_NAME = "CEPortService";
 
 	/**
@@ -86,7 +86,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_PORTEXISTS, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_PORTEXISTS, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -162,7 +162,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_PORTEXISTS, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_PORTEXISTS, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -209,7 +209,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_GETALLPORTS, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_GETALLPORTS, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -257,8 +257,8 @@ public class CEPortService {
 			log.setMsg(CommonString.ERR_PORTSRV_INVALID_NEUTRONPORT_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_PORTSRV_INVALID_NEUTRONPORT_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_PORTSRV_INVALID_NEUTRONPORT_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -284,7 +284,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_ADDPORT, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_ADDPORT, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -359,7 +359,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_REMOVEPORT, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_REMOVEPORT, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -417,8 +417,8 @@ public class CEPortService {
 			log.setMsg(CommonString.ERR_PORTSRV_INVALID_NEUTRONPORT_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_PORTSRV_INVALID_NEUTRONPORT_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_PORTSRV_INVALID_NEUTRONPORT_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -444,7 +444,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_UPDATEPORT, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_UPDATEPORT, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -519,7 +519,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_MACINUSE, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_MACINUSE, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -594,7 +594,7 @@ public class CEPortService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_GETGATEWAYPORT, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_NEUTRONPORTSERVICE_GETGATEWAYPORT, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);

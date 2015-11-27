@@ -56,8 +56,8 @@ public class CEConnectionService {
 			log.setMsg(CommonString.ERR_CONNSRV_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_CONNSRV_INVALID_NODE_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_CONNSRV_INVALID_NODE_PARAMETER);
 		} 
 		
 		log.setType(LogType.INFO);
@@ -75,7 +75,7 @@ public class CEConnectionService {
 		}		
 
 		try {
-			if(connectionServiceInternal != null) 
+			if(connectionServiceInternal != null)
 				result = connectionServiceInternal.getConnection(node);
 		} catch (Exception e) {
 			// log
@@ -84,7 +84,7 @@ public class CEConnectionService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CONNECTIONSERVICEINTERNAL_GETCONNECTION, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CONNECTIONSERVICEINTERNAL_GETCONNECTION, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -122,7 +122,7 @@ public class CEConnectionService {
 		}
 
 		try {
-			if(connectionServiceInternal != null) 
+			if(connectionServiceInternal != null)
 				result = connectionServiceInternal.getNodes();
 		} catch (Exception e) {
 			// log
@@ -131,7 +131,7 @@ public class CEConnectionService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CONNECTIONSERVICEINTERNAL_GETNODES, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CONNECTIONSERVICEINTERNAL_GETNODES, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -181,15 +181,16 @@ public class CEConnectionService {
 			
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_CONNSRV_INVALID_IDENTIFIER_PARAMETER);
-		} else if(Util.isEmpty(params)){
+		} 	
+		if(Util.isEmpty(params)){
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_CONNSRV_INVALID_PARAMS_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_CONNSRV_INVALID_PARAMS_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_CONNSRV_INVALID_PARAMS_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -208,7 +209,7 @@ public class CEConnectionService {
 		
 		
 		try {
-			if(connectionServiceInternal != null) 
+			if(connectionServiceInternal != null)
 				result = connectionServiceInternal.connect(identifier, params);
 		} catch (Exception e) {
 			// log
@@ -217,7 +218,7 @@ public class CEConnectionService {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_CONNECTIONSERVICEINTERNAL_CONNECT, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_CONNECTIONSERVICEINTERNAL_CONNECT, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);

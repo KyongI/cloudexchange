@@ -40,7 +40,21 @@ public class testCEPortService implements testService{
 		}
 		
 		try {
+			cps.CE_getGatewayPort(null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
 			cps.CE_getPort("uuid");
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			cps.CE_getPort(null);
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,7 +68,21 @@ public class testCEPortService implements testService{
 		}
 		
 		try {
+			cps.CE_macInUse(null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
 			cps.CE_portExists("uuid");
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			cps.CE_portExists(null);
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,7 +96,21 @@ public class testCEPortService implements testService{
 		}
 		
 		try {
+			cps.CE_removePort(null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
 			cps.CE_updatePort("uuid", null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			cps.CE_updatePort(null, null);
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

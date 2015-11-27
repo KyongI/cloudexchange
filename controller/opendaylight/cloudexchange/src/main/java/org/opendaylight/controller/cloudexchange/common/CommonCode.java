@@ -41,7 +41,9 @@ public class CommonCode {
 	public final static int ERR_NEUTRONPORTSERVICE_MACINUSE	 		  = -406;
 	public final static int ERR_NEUTRONPORTSERVICE_GETGATEWAYPORT	  = -407;
 	
-	
+	public void checkClass(){
+		//check Class
+	}
 	
 	
 	

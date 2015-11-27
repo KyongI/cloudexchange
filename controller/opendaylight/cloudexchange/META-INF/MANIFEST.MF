@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1448364206381
-Build-Jdk: 1.7.0_85
-Built-By: stack
+Bnd-LastModified: 1448340947009
+Build-Jdk: 1.7.0_79
+Built-By: 영준
 Bundle-Activator: org.opendaylight.controller.cloudexchange.Activator
 Bundle-ManifestVersion: 2
 Bundle-Name: cloudexchange

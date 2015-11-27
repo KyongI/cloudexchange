@@ -58,18 +58,22 @@ public class CEDbInventoryListener {
 			log.setMsg(CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(address)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
+		}
+		
+		if (Util.isEmpty(address)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_DBLST_INVALID_INETADDRESS_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_INETADDRESS_PARAMETER);
-		} else if (port < 0) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_INETADDRESS_PARAMETER);
+		} 
+		
+		if (port < 0) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -95,7 +99,7 @@ public class CEDbInventoryListener {
 		}
 
 		try {
-			if(ovsdbInventoryListener != null) 
+			if(ovsdbInventoryListener != null)
 				ovsdbInventoryListener.nodeAdded(node, address, port);
 		} catch (Exception e) {
 			// log
@@ -104,7 +108,7 @@ public class CEDbInventoryListener {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_NODEADDED, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_NODEADDED, e.getMessage());
 		}
         log.setType(LogType.INFO);
 		log.setCode(CommonCode.SERVICE_END);
@@ -146,8 +150,8 @@ public class CEDbInventoryListener {
 			log.setMsg(CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -165,7 +169,7 @@ public class CEDbInventoryListener {
 		}
 
 		try {
-			if(ovsdbInventoryListener != null) 
+			if(ovsdbInventoryListener != null)
 				ovsdbInventoryListener.nodeRemoved(node);
 		} catch (Exception e) {
 			// log
@@ -174,7 +178,7 @@ public class CEDbInventoryListener {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_NODEREMOVED, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_NODEREMOVED, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -230,9 +234,10 @@ public class CEDbInventoryListener {
 			log.setMsg(CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(tableName)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
+		} 	
+		if (Util.isEmpty(tableName)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -241,7 +246,8 @@ public class CEDbInventoryListener {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBLST_INVALID_TABLENAME_PARAMETER);
-		} else if (Util.isEmpty(uuid)) {
+		} 	
+		if (Util.isEmpty(uuid)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -250,24 +256,26 @@ public class CEDbInventoryListener {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBLST_INVALID_UUID_PARAMETER);
-		} else if (Util.isEmpty(old)) {
+		} 
+		if (Util.isEmpty(old)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_DBLST_INVALID_OLD_ROW_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_OLD_ROW_PARAMETER);
-		} else if (Util.isEmpty(row)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_OLD_ROW_PARAMETER);
+		} 
+		if (Util.isEmpty(row)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_DBLST_INVALID_NEW_ROW_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_NEW_ROW_PARAMETER);
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_NEW_ROW_PARAMETER);
 		}
 		
 		log.setType(LogType.INFO);
@@ -285,7 +293,7 @@ public class CEDbInventoryListener {
 		}
 
 		try {
-			if(ovsdbInventoryListener != null) 
+			if(ovsdbInventoryListener != null)
 				ovsdbInventoryListener.rowUpdated(node, tableName, uuid, old, row);
 		} catch (Exception e) {
 			// log
@@ -294,7 +302,7 @@ public class CEDbInventoryListener {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_ROWUPDATED, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_ROWUPDATED, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);
@@ -345,9 +353,10 @@ public class CEDbInventoryListener {
 			log.setMsg(CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
 			Logger.printLog(log);
 			
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
-		} else if (Util.isEmpty(tableName)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_NODE_PARAMETER);
+		} 	
+		if (Util.isEmpty(tableName)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -356,7 +365,8 @@ public class CEDbInventoryListener {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBLST_INVALID_TABLENAME_PARAMETER);
-		} else if (Util.isEmpty(uuid)) {
+		} 	
+		if (Util.isEmpty(uuid)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -365,16 +375,18 @@ public class CEDbInventoryListener {
 
 			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
 					CommonString.ERR_DBLST_INVALID_UUID_PARAMETER);
-		} else if (Util.isEmpty(row)) {
+		} 
+		if (Util.isEmpty(row)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
 			log.setMsg(CommonString.ERR_DBLST_INVALID_ROW_PARAMETER);
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
-					CommonString.ERR_DBLST_INVALID_ROW_PARAMETER);
-		} else if (Util.isEmpty(context)) {
+			//throw new CloudExchangeException(CommonCode.ERR_INVLIDE_PARAMETER,
+			//		CommonString.ERR_DBLST_INVALID_ROW_PARAMETER);
+		} 
+		if (Util.isEmpty(context)) {
 			// log
 			log.setType(LogType.ERROR);
 			log.setCode(CommonCode.ERR_INVLIDE_PARAMETER);
@@ -400,7 +412,7 @@ public class CEDbInventoryListener {
 		}
 		
 		try {
-			if(ovsdbInventoryListener != null) 
+			if(ovsdbInventoryListener != null)
 				ovsdbInventoryListener.rowRemoved(node, tableName, uuid, row, context);
 		} catch (Exception e) {
 			// log
@@ -409,7 +421,7 @@ public class CEDbInventoryListener {
 			log.setMsg(e.getMessage());
 			Logger.printLog(log);
 
-			throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_ROWREMOVED, e.getMessage());
+			//throw new CloudExchangeException(CommonCode.ERR_OVSDBINVENTORYLISTENER_ROWREMOVED, e.getMessage());
 		}
 		
 		log.setType(LogType.INFO);

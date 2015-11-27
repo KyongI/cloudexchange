@@ -19,62 +19,154 @@ public class testCEDbConfigService implements testService{
 
 
 	public void run() {
+		String tmp = "";
 		try {
 			cdcs.CE_insertRow(null, "tableName", "parentUuid", null);
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tmp = null;
 		}
+		
+		try {
+			cdcs.CE_insertRow(null, null, "parentUuid", null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_insertRow(null, "tableName", null, null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_insertRow(null, "tableName", "1", null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
+		}
+		
+		
+		
 		
 		try {
 			cdcs.CE_getTables(null);
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tmp = null;
+		}
+		
+		
+		
+		
+		try {
+			cdcs.CE_getRows(null, null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
 		}
 		
 		try {
-			cdcs.CE_getRows(null, "tableName");
+			cdcs.CE_getRows(null, "1");
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tmp = null;
+		}
+		
+		
+		
+		
+		try {
+			cdcs.CE_getRow(null, null, null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
 		}
 		
 		try {
-			cdcs.CE_getRow(null, "tableName", "uuid");
+			cdcs.CE_getRow(null, "1", null);
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tmp = null;
 		}
+		
+		try {
+			cdcs.CE_getRow(null, null, "1");
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
+		}
+		
 		
 		
 		try {
 			cdcs.CE_updateRow(null, "tableName", "parentUuid", "rowUuid", null);
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_updateRow(null, null, "parentUuid", "rowUuid", null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_updateRow(null, "tableName", null, "rowUuid", null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_updateRow(null,"tableName", "tableName", null, null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
 		}
 		
 		
 		try {
-			cdcs.CE_deleteRow(null, "tableName", "rowUuid");
+			cdcs.CE_deleteRow(null, "1", "1");
 		} catch (CloudExchangeException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_deleteRow(null, null, "1");
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_deleteRow(null, "1", null);
+		} catch (CloudExchangeException e) {
+			// TODO Auto-generated catch block
+			tmp = null;
 		}
 		
 		
+		
+		
+		
 		try {
-			cdcs.CE_setOFController(null, "bridgeUUID");
-		} catch (InterruptedException e) {
+			cdcs.CE_setOFController(null, null);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
+			tmp = null;
+		}
+		
+		try {
+			cdcs.CE_setOFController(null, "1");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (CloudExchangeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			tmp = null;
 		}
 		
 	}
