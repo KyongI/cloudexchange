@@ -43,6 +43,7 @@ int CWrap::Initialize()
 	
 	if(m_pLog == NULL || !(m_pLog->Initialize(m_strProc, 0, (char*)strLogPath)) )
 	{
+		m_pLog->LogMsg(0, (char*)NULL, "ERROR, CSingleLog Init Failed");
 		printf("CSingleLog Init Failed\n");
 		return -1;
 	}
@@ -52,7 +53,7 @@ int CWrap::Initialize()
 
 	if(m_pstConfig == NULL)
 	{
-		m_pLog->LogMsg(0, (char*)NULL, "Error, Config Load Failed");
+		m_pLog->LogMsg(0, (char*)NULL, "ERROR, Config Load Failed");
 		return -1;
 	}
 
@@ -90,7 +91,7 @@ CONFIG* CWrap::InitConfig()
 	fp = fopen(strCfgPath, "r");
 	if(fp == NULL)
 	{
-		m_pLog->LogMsg(0, (char*)NULL, "Error, Config File Open Failed (%s)", strCfgPath);
+		m_pLog->LogMsg(0, (char*)NULL, "ERROR, Config File Open Failed (%s)", strCfgPath);
 		delete cfg;
 		return NULL;
 	}
@@ -116,7 +117,7 @@ CONFIG* CWrap::InitConfig()
 			nCfgNum = atoi( &(buff[6]) );
 			if(nCfgNum >= DEF_MAX_CONFIG)
 			{
-				m_pLog->LogMsg(0, (char*)NULL, "Error, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
+				m_pLog->LogMsg(0, (char*)NULL, "ERROR, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
 				continue;
 			}
 
@@ -130,14 +131,14 @@ CONFIG* CWrap::InitConfig()
 			}
 			
 			sprintf(cfg->vm_config[nCfgNum-1].ip, "%s", p);
-			m_pLog->LogMsg(0, (char*)NULL, "Info, cfg->vm_config[%d].ip (%s) ", nCfgNum, cfg->vm_config[nCfgNum].ip);
+			m_pLog->LogMsg(0, (char*)NULL, "INFO, cfg->vm_config[%d].ip (%s) ", nCfgNum, cfg->vm_config[nCfgNum-1].ip);
 		}
 		else if( strncmp(buff, (char*)"VM_ID_", strlen( (char*)"VM_ID_" ) ) == 0)
 		{
 			nCfgNum = atoi( &(buff[6]) );
 			if(nCfgNum >= DEF_MAX_CONFIG)
 			{
-				m_pLog->LogMsg(0, (char*)NULL, "Error, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
+				m_pLog->LogMsg(0, (char*)NULL, "ERROR, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
 				continue;
 			}
 
@@ -151,14 +152,14 @@ CONFIG* CWrap::InitConfig()
 			}
 			
 			sprintf(cfg->vm_config[nCfgNum-1].id, "%s", p);
-			m_pLog->LogMsg(0, (char*)NULL, "Info, cfg->vm_config[%d].id (%s) ", nCfgNum, cfg->vm_config[nCfgNum].id);
+			m_pLog->LogMsg(0, (char*)NULL, "INFO, cfg->vm_config[%d].id (%s) ", nCfgNum, cfg->vm_config[nCfgNum-1].id);
 		}
 		else if( strncmp(buff, (char*)"VM_PW_", strlen( (char*)"VM_PW_" ) ) == 0)
 		{
 			nCfgNum = atoi( &(buff[6]) );
 			if(nCfgNum >= DEF_MAX_CONFIG)
 			{
-				m_pLog->LogMsg(0, (char*)NULL, "Error, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
+				m_pLog->LogMsg(0, (char*)NULL, "ERROR, Max Config Count Over (%s) Max %d", buff, DEF_MAX_CONFIG);
 				continue;
 			}
 
@@ -172,7 +173,7 @@ CONFIG* CWrap::InitConfig()
 			}
 			
 			sprintf(cfg->vm_config[nCfgNum-1].pw, "%s", p);
-			m_pLog->LogMsg(0, (char*)NULL, "Info, cfg->vm_config[%d].pw (%s) ", nCfgNum, cfg->vm_config[nCfgNum].pw);
+			m_pLog->LogMsg(0, (char*)NULL, "INFO, cfg->vm_config[%d].pw (%s) ", nCfgNum, cfg->vm_config[nCfgNum-1].pw);
 		}
 
 	}

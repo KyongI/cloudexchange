@@ -60,7 +60,7 @@ int COVSDBDirect::Init(CONFIG *a_stConf_)
 		if (ret != ITF_OK)
 		{
 			g_pcLog->LogMsg(0, (char*)NULL, 
-							" DB Connect Failure : IP [%s] User [%s] Pw [%s]\n\n", 
+							"INFO, DB Connect Failure : IP [%s] User [%s] Pw [%s]", 
 							a_stConf_->vm_config[i].ip,
 							a_stConf_->vm_config[i].id,
 							a_stConf_->vm_config[i].pw);
@@ -69,7 +69,7 @@ int COVSDBDirect::Init(CONFIG *a_stConf_)
 		else	
 		{
 			g_pcLog->LogMsg(0, (char*)NULL, 
-							" DB Connect Success : IP [%s] User [%s] Pw [%s]\n\n", 
+							"INFO, DB Connect Success : IP [%s] User [%s] Pw [%s]", 
 							a_stConf_->vm_config[i].ip,
 							a_stConf_->vm_config[i].id, 
 							a_stConf_->vm_config[i].pw);
@@ -132,33 +132,45 @@ int COVSDBDirect::Run(int argc, char** argv)
 	int  nPrintFlag = 0;
 #endif
 
-	while ((cOption = getopt(argc, argv, "had:t:k:i:")) != -1 ){
-		switch(cOption){
+	while ((cOption = getopt(argc, argv, "had:t:k:i:")) != -1 )
+	{
+		switch(cOption)
+		{
 			case 'h':
 				Usage(argv[0]);
+				g_pcLog->LogMsg(0, (char*)NULL, "NOTI, Option [h]: Display help");
 				return ITF_OK;
 			case 'a':
 				ShowAllInfo();
+				g_pcLog->LogMsg(0, (char*)NULL, "NOTI, Option [a]: Display all table information");
 				return ITF_OK;
 			case 'd':
 				ShowDBInfo(optarg);
+				g_pcLog->LogMsg(0, (char*)NULL, 
+						"NOTI, Option [d]: Display all table from [%s] DB", optarg);
 				return ITF_OK;
 			case 't':
 				ShowTableInfo(optarg);
+				g_pcLog->LogMsg(0, (char*)NULL, 
+						"NOTI, Option [t]: Display %s table ", optarg);
 				return ITF_OK;
 			case 'k':
 				ShowKeyInfo(optarg);
+				g_pcLog->LogMsg(0, (char*)NULL, 
+						"NOTI, Option [k]: Display key info of %s table ", optarg);
 				return ITF_OK;
 			case 'i':
 				ShowDBTableList(optarg);
+				g_pcLog->LogMsg(0, (char*)NULL, 
+						"NOTI, Option [i]: Display table list from [%s] DB", optarg);
 				return ITF_OK;
 			case '?':
-				printf("Unknown option: %c\n", optopt);
+				g_pcLog->LogMsg(0, (char*)NULL, "WARN, Unknown option: %c", optopt);
 				Usage(argv[0]);
-				return ITF_OK;
+				return ITF_ERROR;
 			default :
 				Usage(argv[0]);
-				exit(0);
+				return ITF_ERROR;
 		}
 	}
 
@@ -394,8 +406,12 @@ int main(int argc, char *argv[])
 
 	if( clsOVSDB->Init(g_stConfig) == ITF_ERROR )
 	{
-		g_pcLog->LogMsg(0, (char*)NULL, "Error, Viewer Init() Error");
-		exit(ITF_EXIT_ABNORMAL);
+		g_pcLog->LogMsg(0, (char*)NULL, "ERROR, Viewer Init() Error");
+
+		delete clsOVSDB;
+		delete g_pcWrap;
+
+		return ITF_ERROR;
 	}
 
 #if 0
@@ -404,9 +420,15 @@ int main(int argc, char *argv[])
 	g_cPrint->PrintInstance();
 #endif
 	if (clsOVSDB->Run(argc, argv) != ITF_OK) 
-		exit(ITF_EXIT_ABNORMAL);
-	else 
-		exit(ITF_EXIT_NORMAL);
+	{
+		g_pcLog->LogMsg(0, (char*)NULL, "ERROR, Viewer Run() Error");
+		delete clsOVSDB;
+		delete g_pcWrap;
+
+		return ITF_ERROR;	
+	}
+
+	g_pcLog->LogMsg(0, (char*)NULL, "NOTI, Viewer exit successfully");
 
 	delete clsOVSDB;
 	delete g_pcWrap;
