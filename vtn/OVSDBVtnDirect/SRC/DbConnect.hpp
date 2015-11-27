@@ -34,13 +34,9 @@ class DbConnect
 		int			 ExecuteSQL(char *query);
 		int			 RealConnect();
 		int			 Disconnect();
-		int			 Commit();
-		int			 Rollback();
 		int			 Ping();
 		int			 SelectDB(char *_dbname);
 		MYSQL_RES	*GetDBRes();
-		const char	*GetError();
-		int			 GetErrorNo();
 
 };
 

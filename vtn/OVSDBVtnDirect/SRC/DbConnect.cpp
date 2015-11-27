@@ -59,16 +59,6 @@ int DbConnect::Disconnect()
 	return ITF_OK;
 }
 
-int DbConnect::Commit()
-{
-	return mysql_commit(&mysql) ;
-}
-
-int DbConnect::Rollback()
-{
-	return mysql_rollback(&mysql) ;
-}
-
 int DbConnect::Ping()
 {
 	int	retry=0;
@@ -122,7 +112,7 @@ int DbConnect::ConnectDB()
 	{
 		printf(" Query failed: set name 'euckr'\n");
 		printf("  - Error No [%d]\n  - Error Msg [%s]\n", 
-				GetErrorNo(), GetError());
+				mysql_errno(&mysql), mysql_error(&mysql));
 		mysql_close(&mysql);
 		return ITF_ERROR;
 	}
@@ -148,7 +138,7 @@ int DbConnect::ExecuteSQL(char *query)
 	{
 		printf(" Query failed: %s\n", query);
 		printf("  - Error No [%d] \n  - Error Msg [%s]\n", 
-				GetErrorNo(), GetError());
+				mysql_errno(&mysql), mysql_error(&mysql));
 		mysql_close(&mysql);
 		return ITF_ERROR;
 	}
@@ -196,14 +186,4 @@ int DbConnect::SelectDB(char *_dbname)
 MYSQL_RES* DbConnect::GetDBRes()
 {
 	return result;
-}
-
-const char *DbConnect::GetError()
-{
-	return mysql_error(&mysql);
-}
-
-int DbConnect::GetErrorNo()
-{
-	return mysql_errno(&mysql);
 }

@@ -54,16 +54,11 @@ class CSingleLog
 	void 		 CalcDiffEpochFromLocal	() ;
 
 	char		*GetLogPath			( void );
-	char		*GetLogBase			( void );
-	FILE		*GetLogFile			( void );
-	int			 GetLogLevel		( void );
 
-	log_templete	*GetLogPtr		( void );
 
 	void			 AdjustFileName	(time_t tNow);
 
 	void			 InitLog		(log_templete* pLog);
-	void			 CloseLog		(log_templete* pLog);
 
 	void			 SetLogFile		(const char* szLogFile);
 	void			 SetLogDev		(int nLogDevs);
@@ -72,7 +67,6 @@ class CSingleLog
 	void			 SetLogBase		(char* szLogBase);
 	char			*time2str		(time_t* pT);
 	int				 MakeDirs		(const char* szPath);
-	void			 HexDump		(unsigned char* pData, int nSize, FILE* fpWrite);
 	char			*getcurtimestr	(char* szBuf, int nLen);
 	void			 __time2str__	(time_t* ptime, char* szTime, int nBufLen);
 
@@ -80,16 +74,12 @@ class CSingleLog
 
 	public:
 	// 싱글톤 패턴 - 메모리에 하나 정의-구현을 위한 함수 선언
-	static	CSingleLog	*instance();
 	CSingleLog ();
 
 	bool			 Initialize		(char*, unsigned long long, char* );
 
 	void			 LogMsg			( int nLevel, char* pCODE, const char* szFmt, ...);
 	void			 LogMsg			( int nLevel, int nCode, const char* szFmt, va_list* args );
-	void			 LogMsgM		( int nLevel, int nCode, const char*szFmt, ...);
-	void			 LogMsgM		( int nLevel, int nCode, const char*szFmt, va_list* args );
-	void			 LogHexMsg		( int nLevel, const char* pBuf, int nLen);
 
 };
 #endif

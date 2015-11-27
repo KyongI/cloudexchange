@@ -30,6 +30,9 @@ COVSDBDirect::~COVSDBDirect()
 			delete m_pcDbConnect_[i];
 		}
 	}
+
+	if(m_pcPrint)
+		delete m_pcPrint;
 }
 
 int COVSDBDirect::Init(CONFIG *a_stConf_)
@@ -374,7 +377,7 @@ void COVSDBDirect::ShowDBTableList(char *_dbname)
 
 int main(int argc, char *argv[])
 {
-	COVSDBDirect clsOVSDB;
+	COVSDBDirect *clsOVSDB;
 	CONFIG*		g_stConfig = NULL;
 
 	g_pcWrap = NULL;
@@ -387,7 +390,9 @@ int main(int argc, char *argv[])
 
 	g_stConfig = g_pcWrap->GetConfig();
 
-	if( clsOVSDB.Init(g_stConfig) == ITF_ERROR )
+	clsOVSDB = new COVSDBDirect();
+
+	if( clsOVSDB->Init(g_stConfig) == ITF_ERROR )
 	{
 		g_pcLog->LogMsg(0, (char*)NULL, "Error, Viewer Init() Error");
 		exit(ITF_EXIT_ABNORMAL);
@@ -398,11 +403,14 @@ int main(int argc, char *argv[])
 	g_cPrint = new PrintUtil();
 	g_cPrint->PrintInstance();
 #endif
-	if (clsOVSDB.Run(argc, argv) != ITF_OK) 
+	if (clsOVSDB->Run(argc, argv) != ITF_OK) 
 		exit(ITF_EXIT_ABNORMAL);
 	else 
 		exit(ITF_EXIT_NORMAL);
 
+	delete clsOVSDB;
+	delete g_pcWrap;
+	
 	return ITF_OK;
 }
 
