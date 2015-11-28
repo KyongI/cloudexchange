@@ -53,9 +53,6 @@ class CSingleLog
 
 	void 		 CalcDiffEpochFromLocal	() ;
 
-	char		*GetLogPath			( void );
-
-
 	void			 AdjustFileName	(time_t tNow);
 
 	void			 InitLog		(log_templete* pLog);
@@ -79,7 +76,6 @@ class CSingleLog
 	bool			 Initialize		(char*, unsigned long long, char* );
 
 	void			 LogMsg			( int nLevel, char* pCODE, const char* szFmt, ...);
-	void			 LogMsg			( int nLevel, int nCode, const char* szFmt, va_list* args );
 
 };
 #endif

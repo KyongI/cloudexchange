@@ -49,11 +49,6 @@ void CSingleLog::StartFile ( char* pBASE, char* pPROC, unsigned long long uID )
 	SetLogLevel ( m_nLevel );
 }
 
-char* CSingleLog::GetLogPath ( void )
-{
-	return ( m_LOG.szLogName );
-}
-
 void CSingleLog::AdjustFileName( time_t tNow)
 {
 	if ((m_LOG.nLogDevs & LOG_DEV_WITHDATE) && tNow - m_LOG.tDate >= ONEDAY)
@@ -154,31 +149,6 @@ void CSingleLog::SetLogFile( const char* szLogFile)
 
 
 //--[Logging Function]------------------------------------------------------------
-
-void CSingleLog::LogMsg( int nLevel, int nCode, const char* szFmt, va_list* args )
-{
-	time_t			tNow;
-	static	char	szLogMsg[4096];
-
-	if (nLevel > m_LOG.nLogLevel)
-		return;
-
-	time(&tNow);
-	AdjustFileName( tNow);
-
-	snprintf(szLogMsg, 4096, "%.6d[%s] | ", nCode, time2str(&tNow));
-	vsnprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), szFmt, *args);
-	snprintf(szLogMsg + strlen(szLogMsg), 4096 - strlen(szLogMsg), "\n");
-
-	if (m_LOG.fpLog && (m_LOG.nLogDevs & (LOG_DEV_FILE_APPEND | LOG_DEV_FILE_NEW)))
-	{
-		fputs(szLogMsg, m_LOG.fpLog);
-		fflush(m_LOG.fpLog);
-	}
-
-	if (m_LOG.nLogDevs & LOG_DEV_CONSOLE)
-		fputs(szLogMsg, stdout);
-}
 
 void CSingleLog::LogMsg( int nLevel, char* pCODE, const char* szFmt, ...)
 {
