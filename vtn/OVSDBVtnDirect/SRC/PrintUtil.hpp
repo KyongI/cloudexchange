@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#include "global.h"
 #include "DbConnect.hpp"
 #include "NeutronInfo.hpp"
 #include "NovaInfo.hpp"

@@ -32,7 +32,7 @@ class DbConnect
 		int			 SetDBString(char *Host, char *User, char *Passwd, char *Db);
 		int			 ConnectDB();
 		int			 ExecuteSQL(char *query);
-		int			 RealConnect();
+//		int			 RealConnect();
 		int			 Disconnect();
 		int			 Ping();
 		int			 SelectDB(char *_dbname);

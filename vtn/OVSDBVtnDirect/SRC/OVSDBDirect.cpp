@@ -25,14 +25,20 @@ COVSDBDirect::~COVSDBDirect()
 {
 	for (int i = 0; i < m_unDbCnt ; i++)
 	{
+		SAFE_DELETE(m_pcDbConnect_[i]);
+#if 0
 		if ( m_pcDbConnect_[i] != NULL) 
 		{
 			delete m_pcDbConnect_[i];
 		}
+#endif
 	}
 
+	SAFE_DELETE(m_pcPrint);
+#if 0
 	if(m_pcPrint)
 		delete m_pcPrint;
+#endif
 }
 
 int COVSDBDirect::Init(CONFIG *a_stConf_)
@@ -77,11 +83,13 @@ int COVSDBDirect::Init(CONFIG *a_stConf_)
 	}
 
 	m_pcPrint = new PrintUtil();
+	m_pcPrint->Initialize();
+#if 0
 	if (m_pcPrint != NULL)
 	{
 		m_pcPrint->Initialize();
 	}
-
+#endif
 	return ITF_OK;
 }
 

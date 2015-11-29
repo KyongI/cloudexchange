@@ -69,7 +69,7 @@ int DbConnect::Ping()
 	}
 
 	mysql_close(&mysql);
-
+#if 0
 	for (retry=0; retry<10; retry++)
 	{
 		if (RealConnect() == ITF_OK)
@@ -79,7 +79,7 @@ int DbConnect::Ping()
 		}
 		sleep(6);
 	}
-
+#endif
 	return ITF_ERROR;
 }
 
@@ -154,7 +154,7 @@ int DbConnect::ExecuteSQL(char *query)
 		return 0;
 	}
 }
-
+#if 0
 int DbConnect::RealConnect()
 {
 	if( mysql_real_connect(&mysql, 
@@ -170,7 +170,7 @@ int DbConnect::RealConnect()
 
 	return ITF_OK;
 }
-
+#endif
 int DbConnect::SelectDB(char *_dbname)
 {
 	if(mysql_select_db(&mysql, _dbname) == ITF_ERROR)

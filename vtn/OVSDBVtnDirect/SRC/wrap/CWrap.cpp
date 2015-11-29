@@ -69,11 +69,11 @@ CONFIG* CWrap::InitConfig()
 	int nCfgNum = 0;
 	//Config Pointer
 	CONFIG *cfg = new CONFIG;
-	if(cfg != NULL)
-	{
+//	if(cfg != NULL)
+//	{
 		memset(cfg->vm_config,  0x00, sizeof(VM_CONF) * DEF_MAX_CONFIG);
 		cfg->unDbCnt = 0;
-	}
+//	}
 
 	//Config File Pointer
 	FILE *fp;

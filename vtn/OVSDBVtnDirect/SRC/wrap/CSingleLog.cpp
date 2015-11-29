@@ -101,8 +101,8 @@ void CSingleLog::SetLogFile( const char* szLogFile)
 		m_LOG.fpLog = NULL;
 	}
 
-	if (!szLogFile)
-		return;
+//	if (!szLogFile)
+//		return;
 
 	memset ( szFileName, INULL, sizeof ( szFileName ));
 
@@ -205,7 +205,7 @@ int CSingleLog::MakeDirs(const char* szPath)
 
 	szDir = dirname(szDirc);
 	szBase = basename(szBasec);
-
+#if 0
 	if (strcmp(szBase, ".") == 0 || strcmp(szBase, "..") == 0)
 	{
 		free(szDirc);
@@ -215,7 +215,7 @@ int CSingleLog::MakeDirs(const char* szPath)
 
 	if (strcmp(szDir, ".") != 0 && strcmp(szDir, "/") != 0)
 		MakeDirs(szDir);
-
+#endif
 	mkdir(szPath, 0777);
 
 	free(szDirc);

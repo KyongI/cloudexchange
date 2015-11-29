@@ -9,6 +9,10 @@ PrintUtil::PrintUtil()
 
 PrintUtil::~PrintUtil()
 {
+	SAFE_DELETE(m_pcNeutronInfo);
+	SAFE_DELETE(m_pcNovaInfo);
+	SAFE_DELETE(m_pcKeystoneInfo);
+#if 0
 	if(m_pcNeutronInfo)
 	{
 		delete m_pcNeutronInfo;
@@ -23,10 +27,15 @@ PrintUtil::~PrintUtil()
 	{
 		delete m_pcKeystoneInfo;
 	}
+#endif
 }
 
 int PrintUtil::Initialize()
 {
+	SAFE_DELETE(m_pcNeutronInfo);
+	SAFE_DELETE(m_pcNovaInfo);
+	SAFE_DELETE(m_pcKeystoneInfo);
+#if 0
 	if(m_pcNeutronInfo)
 	{
 		delete m_pcNeutronInfo;
@@ -41,7 +50,7 @@ int PrintUtil::Initialize()
 	{
 		delete m_pcKeystoneInfo;
 	}
-
+#endif
 	m_pcNeutronInfo  = new CNeutronInfo();
 	m_pcNovaInfo     = new CNovaInfo();
 	m_pcKeystoneInfo = new CKeystoneInfo();

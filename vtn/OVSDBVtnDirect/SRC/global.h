@@ -4,6 +4,8 @@
 #pragma GCC diagnostic ignored "-Wunused-variable" 
 // Hides warning: 'packed' attribute ignored for field of type 'UINT8' [-Wattributes]
 
+#define SAFE_DELETE(p) { if (p) { delete p; } p = 0; }
+
 //-----------------------------------------------------------------------------
 //// Definitions for Return
 ////-----------------------------------------------------------------------------
