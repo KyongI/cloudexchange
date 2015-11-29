@@ -2,3 +2,4 @@ tags
 *.o
 UT_VI_OVSDB
 core.*
+OVS_LOG.*
